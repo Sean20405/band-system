@@ -94,3 +94,4 @@ band_style = db.Table(
     db.Column("band_id",sa.ForeignKey(bands.id), primary_key=True ),
     db.Column("style_id", sa.ForeignKey(style.id), primary_key=True)
 )
+
