@@ -59,8 +59,11 @@ def add_user():
     db.session.add(new_user)
     db.session.commit()
 
+@app.get('/band-sign-up')
+def getAccessUrl():
+    url = generateAccessURL('put_object')
 
-@app.post('/new-band')
+@app.post('/band-sign-up')
 def add_band():
     name = request.form.get('name')
     bio = request.form.get('bio')

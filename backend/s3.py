@@ -6,20 +6,34 @@ load_dotenv('.env')
 
 region = os.getenv('S3_REGION')
 bucket_name = os.getenv('S3_BUCKET_NAME')
-access_key_id = os.getenv('S3_ACCESS_KEY_ID')
-secret_access_key = os.getenv('S3_SECRET_ACCESS_KEY_ID')
+role_arn = os.getenv('S3_ROLE_ARN')
+role_session_name = os.getenv('S3_ROLE_SESSION_NAME')
+profile_name = os.getenv('PROFILE_NAME')
 
-s3 = boto3.client(
+sts_session = boto3.Session(profile_name=profile_name)
+
+sts = sts_session.client('sts')
+
+response = sts.assume_role(
+    RoleArn= role_arn,
+    RoleSessionName=role_session_name
+)
+
+
+s3_session = boto3.Session(
+    aws_access_key_id=response['Credentials']['AccessKeyId'],
+    aws_secret_access_key=response['Credentials']['SecretAccessKey'],
+    aws_session_token=response['Credentials']['SessionToken']
+)
+
+s3 = s3_session.client(
     's3',
     region_name=region,
-    aws_access_key_id=access_key_id,
-    aws_secret_access_key=secret_access_key
 )
 
 method_parameters = {
     "Bucket": bucket_name
 }
-
 
 def generateAccessURL(client_method, object_key=None, expiration=600):
     if object_key != None :
