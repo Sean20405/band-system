@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, jsonify, make_response
 from dotenv import load_dotenv
 import os
 from models import *
-from querys import *
+from backend.db_operatoin import *
 # from s3 import generateAccessURL
 
 load_dotenv('.env')
@@ -56,8 +56,6 @@ def add_user():
         },
         200
     )
- 
-    
     
 
 @app.put('/user')
@@ -72,51 +70,82 @@ def edit_user_info():
     bio = request.form.get('bio')
     ig = request.form.get('ig')
     fb = request.form.get('fb')
-    photo = request.form.get('photo')
+    photo = request.form.get('photo') 
 
     # return{
-    #     "1": user_id,
-    #     "2": instruments,
-    #     "3":regions,
-    #     "4":styles,
-    #     "5":prefered_time,
-    #     "6":bio,
-    #     "7":ig,
-    #     "8":fb,
-    #     "9":photo
+    #     "user_id": user_id,
+    #     "instruments": instruments,
+    #     "regions": regions,
+    #     "styles": styles,
+    #     "bio": bio
     # }
- 
 
-    updateInstruments(user_id, instruments)
-    updateRegions(user_id, regions)
-    updateStyles(user_id, styles)
+    updateUserInstruments(user_id, instruments)
+    updateUserRegions(user_id, regions)
+    updateUserStyles(user_id, styles)
     updateUser(user_id, bio, prefered_time, ig, fb, photo)
 
     db.session.commit()
-
-    
     
     return make_response("Success", 200)
 
 
-# @app.get('/band-sign-up')
-# def getAccessUrl():
-#     url = generateAccessURL('put_object')
 
 @app.post('/band-sign-up')
 def add_band():
+    id = request.form.get("id")
     name = request.form.get('name')
-    bio = request.form.get('bio')
-    practice_time = request.form.get('practice_time')
-    ig = request.form.get('ig')
-    fb = request.form.get('fb')
-
-    #need rest of the attributes
-    new_band = Band(name=name,
-                    bio=bio)
+    exist = bandExist(id)
+    if exist:
+        return "id is already used"
+    new_band = Band(id=id, name=name)
     db.session.add(new_band)
     db.session.commit()
+    return make_response(
+        {
+        "id": id,
+        "name": name
+        },
+        200
+    )
 
+
+@app.put('/band')
+def edit_band_info():
+    #/band?band_id=<band_id>
+    
+    band_id = request.args.get('band_id')
+    styles = request.form.getlist('style')
+    practice_time = request.form.get('practice_time')
+    bio = request.form.get('bio')
+    ig = request.form.get('ig')
+    fb = request.form.get('fb')
+    photo = request.form.get('photo') 
+
+    updateBandStyles(band_id, styles)
+    updateBand(band_id, bio, practice_time, ig, fb, photo)
+
+    db.session.commit()
+    
+    return make_response("Success", 200)
+
+
+def updateBand(band_id, bio, prefered_time, ig, fb, photo):
+    stmt = db.update(
+        Band
+    ).where(
+        Band.id == band_id
+    ).values(
+        bio = bio,
+        prefered_time = prefered_time,
+        ig = ig,
+        fb = fb,
+        photo = photo
+    )
+    
+    db.session.execute(stmt)
+    db.session.commit()
+    return
 
 
 if(__name__ == '__main__'):

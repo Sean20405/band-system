@@ -18,7 +18,6 @@ def get_user_by_id(user_id):
     )
     return db.session.scalar(user)
 
-
 def get_instrument_by_user(user_id):
     query = db.select(
         User_Instrument.c.instrument_id
@@ -46,30 +45,6 @@ def get_style_by_user(user_id):
 
     return db.session.scalars(query).all()
 
-def queryCompatibleMusician(instruments, regions, styles):
-    query = db.select( 
-        User.id,
-        User.name,
-        User.photo 
-    ).join(
-        User_Instrument,
-        User.id == User_Instrument.c.user_id
-    ).join(
-        User_Region,
-        User.id == User_Region.c.user_id
-    ).join(
-        User_Style,
-        User.id == User_Style.c.user_id
-    ).where(
-        User_Instrument.c.instrument_id.in_(instruments)
-    ).where(
-        User_Region.c.region_id.in_(regions)
-    ).where(
-        User_Style.c.style_id.in_(styles)
-    )
-    return db.session.scalars(query).all()
-
-
 def queryUserByString(search):
     query = db.select(
         User.id,
@@ -81,7 +56,9 @@ def queryUserByString(search):
     return db.session.scalars(query).all()
 
 
-def updateInstruments(user_id ,new_ids):
+def updateUserInstruments(user_id ,new_ids):
+    if len(new_ids) == 0:
+        return
     cur_ids = get_instrument_by_user(user_id)
     
     for i in cur_ids:
@@ -105,10 +82,13 @@ def updateInstruments(user_id ,new_ids):
             )
             db.session.execute(ins_stmt)
     db.session.commit()
+    return
 
     
 
-def updateRegions(user_id ,new_ids):
+def updateUserRegions(user_id ,new_ids):
+    if len(new_ids) == 0:
+        return
     cur_ids = get_region_by_user(user_id)
 
     for i in cur_ids:
@@ -132,10 +112,13 @@ def updateRegions(user_id ,new_ids):
             )
             db.session.execute(ins_stmt)
     db.session.commit()
+    return
 
 
 
-def updateStyles(user_id ,new_ids):
+def updateUserStyles(user_id ,new_ids):
+    if len(new_ids) == 0:
+        return
     cur_ids = get_style_by_user(user_id)
 
     for i in cur_ids:
@@ -159,6 +142,7 @@ def updateStyles(user_id ,new_ids):
             )
             db.session.execute(ins_stmt)
     db.session.commit()
+    return
 
 
 def updateUser(user_id, bio, prefered_time, ig, fb, photo):
@@ -176,7 +160,30 @@ def updateUser(user_id, bio, prefered_time, ig, fb, photo):
     
     db.session.execute(stmt)
     db.session.commit()
+    return
 
 
+def queryCompatibleMusician(instruments, regions, styles):
+    query = db.select( 
+        User.id,
+        User.name,
+        User.photo 
+    ).join(
+        User_Instrument,
+        User.id == User_Instrument.c.user_id
+    ).join(
+        User_Region,
+        User.id == User_Region.c.user_id
+    ).join(
+        User_Style,
+        User.id == User_Style.c.user_id
+    ).where(
+        User_Instrument.c.instrument_id.in_(instruments)
+    ).where(
+        User_Region.c.region_id.in_(regions)
+    ).where(
+        User_Style.c.style_id.in_(styles)
+    )
+    return db.session.scalars(query).all()
 
 
