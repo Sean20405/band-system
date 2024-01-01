@@ -66,8 +66,8 @@ def edit_user_info():
     
     user_id = request.args.get('user_id')
     instruments = request.form.getlist('instrument')
-    regions = request.form.get('region')
-    styles = request.form.get('style')
+    regions = request.form.getlist('region')
+    styles = request.form.getlist('style')
     prefered_time = request.form.get('prefered_time')
     bio = request.form.get('bio')
     ig = request.form.get('ig')

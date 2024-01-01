@@ -32,16 +32,16 @@ def get_region_by_user(user_id):
     query = db.select(
         User_Region.c.region_id
     ).where(
-        User_Instrument.c.user_id == user_id
+        User_Region.c.user_id == user_id
     )
 
     return db.session.scalars(query).all()
 
 def get_style_by_user(user_id):
     query = db.select(
-        User_Region.c.style_id
+        User_Style.c.style_id
     ).where(
-        User_Instrument.c.user_id == user_id
+        User_Style.c.user_id == user_id
     )
 
     return db.session.scalars(query).all()
@@ -109,15 +109,14 @@ def updateInstruments(user_id ,new_ids):
     
 
 def updateRegions(user_id ,new_ids):
-    cur = get_region_by_user(user_id)
-    cur_ids = [i.c.region_id for i in cur]
+    cur_ids = get_region_by_user(user_id)
 
     for i in cur_ids:
         if i not in new_ids:
             del_stmt = db.delete(
                 User_Region
             ).where(
-                User_Region.user_id == user_id
+                User_Region.c.user_id == user_id
             ).where(
                 User_Region.c.region_id == i
             )
@@ -135,16 +134,16 @@ def updateRegions(user_id ,new_ids):
     db.session.commit()
 
 
+
 def updateStyles(user_id ,new_ids):
-    cur = get_style_by_user(user_id)
-    cur_ids = [i.c.style_id for i in cur]
+    cur_ids = get_style_by_user(user_id)
 
     for i in cur_ids:
         if i not in new_ids:
             del_stmt = db.delete(
                 User_Style
             ).where(
-                User_Style.user_id == user_id
+                User_Style.c.user_id == user_id
             ).where(
                 User_Style.c.style_id == i
             )
