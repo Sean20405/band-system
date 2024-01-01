@@ -7,25 +7,25 @@ db = SQLAlchemy()
 
 @dataclass
 class User(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    id: Mapped[str] = mapped_column(primary_key=True, nullable=False, unique=True)
     name: Mapped[str] = mapped_column(db.String, nullable=False)
-    prefered_time: Mapped[str] = mapped_column(db.String)
-    bio: Mapped[str] = mapped_column(db.Text)
-    photo: Mapped[str] = mapped_column(db.String)
-    ig: Mapped[str] = mapped_column(db.String)
-    fb: Mapped[str] = mapped_column(db.String)
-    email: Mapped[str] = mapped_column(db.String)
+    prefered_time: Mapped[str] = mapped_column(db.String, nullable=True)
+    bio: Mapped[str] = mapped_column(db.Text, nullable=True)
+    photo: Mapped[str] = mapped_column(db.String, nullable=True)
+    ig: Mapped[str] = mapped_column(db.String, nullable=True)
+    fb: Mapped[str] = mapped_column(db.String, nullable=True)
+    email: Mapped[str] = mapped_column(db.String, nullable=True)
 
 @dataclass
 class Band(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    id: Mapped[str] = mapped_column(primary_key=True, nullable=False, unique=True)
     name: Mapped[str] = mapped_column(db.String, nullable=False)
-    practice_time: Mapped[str] = mapped_column(db.String)
+    practice_time: Mapped[str] = mapped_column(db.String, nullable=True)
     bio: Mapped[str] = mapped_column(db.Text)
-    photo: Mapped[str] = mapped_column(db.String)
-    ig: Mapped[str] = mapped_column(db.String)
-    fb: Mapped[str] = mapped_column(db.String)
-    contact_window: Mapped[str] = mapped_column(db.String)
+    photo: Mapped[str] = mapped_column(db.String, nullable=True)
+    ig: Mapped[str] = mapped_column(db.String, nullable=True)
+    fb: Mapped[str] = mapped_column(db.String, nullable=True)
+    contact_window: Mapped[str] = mapped_column(db.String, nullable=True)
 
 @dataclass
 class Instrument(db.Model):
@@ -46,7 +46,8 @@ class Style(db.Model):
 User_Instrument = db.Table(
     'User_Instrument',
     db.Column("user_id", sa.ForeignKey(User.id), primary_key=True),
-    db.Column("instrument_id", sa.ForeignKey(Instrument.id), primary_key=True)
+    db.Column("instrument_id", sa.ForeignKey(Instrument.id), primary_key=True),
+    db.Column("experience", sa.Integer)
 )
 
 User_Region = db.Table(
@@ -72,4 +73,5 @@ Band_Style = db.Table(
     db.Column("band_id",sa.ForeignKey(Band.id), primary_key=True ),
     db.Column("style_id", sa.ForeignKey(Style.id), primary_key=True)
 )
+
 
