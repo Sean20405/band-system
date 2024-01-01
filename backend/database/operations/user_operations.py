@@ -1,4 +1,4 @@
-from models import *
+from backend.database.schema.models import *
 from sqlalchemy import select, delete, insert, update
 
 def userExist(id: str):

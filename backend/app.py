@@ -1,8 +1,8 @@
 from flask import Flask, request, redirect, jsonify, make_response
 from dotenv import load_dotenv
 import os
-from models import *
-from backend.db_operatoin import *
+from backend.database.schema.models import *
+from backend.database.db_operatoin import *
 # from s3 import generateAccessURL
 
 load_dotenv('.env')
