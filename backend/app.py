@@ -50,11 +50,19 @@ def add_user():
     )
 
 @app.get('/sign-in')
-def user_sign_in():
+def sign_in():
     role = request.form.get("role")
     id = request.form.get("id")
     password= request.form.get("password")
     #not done, need query
+    if role == 'band':
+        band = get_band_by_id(id)
+        return band.password
+        
+    elif role == 'user':
+        user = get_user_by_id(id)
+        return user.password
+
 
 @app.get('/user')
 def get_user():
