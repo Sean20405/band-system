@@ -1,8 +1,8 @@
 from flask import Flask, request, redirect, jsonify, make_response
 from dotenv import load_dotenv
 import os
-from backend.database.schema.models import *
-from backend.database.db_operatoin import *
+from database.schema.models import *
+from database.db_operatoin import *
 # from s3 import generateAccessURL
 
 load_dotenv('.env')
@@ -18,15 +18,8 @@ db.init_app(app)
 def home():
     return 'Welcome'
 
+
 @app.get('/')
-def search_user_by_name():
-    search = request.values.get(search)
-    users = jsonify(queryUserByString(search))
-    
-    return users
-
-
-@app.get('/find-musician')
 def find_musician():
     regions = request.form.get('region')
     styles = request.form.get('style')
@@ -35,32 +28,51 @@ def find_musician():
     
     return compatible_users
 
-# @app.get('/user-sign-up')
-# def getAccessUrl():
-#     url = generateAccessURL('put_object')
 
 @app.post('/user-sign-up')
 def add_user():
     id = request.form.get("id")
+    password = request.form.get("password")
     name = request.form.get('name')
     exist = userExist(id)
     if exist:
         return "id is already used"
-    new_user = User(id=id, name=name)
+    new_user = User(id=id, password=password, name=name)
     db.session.add(new_user)
     db.session.commit()
     return make_response(
         {
         "id": id,
+        "password": password,
         "name": name
         },
         200
     )
-    
 
-@app.put('/user')
+@app.get('/sign-in')
+def user_sign_in():
+    role = request.form.get("role")
+    id = request.form.get("id")
+    password= request.form.get("password")
+    #not done, need query
+
+@app.get('/user')
+def get_user():
+    user_id = request.args.get('user_id')
+    user = get_user_by_id(user_id)
+    return jsonify(user)
+
+
+@app.get('/user-edit')
+def get_cur_info():
+    user_id = request.args.get('user_id')
+    user = get_user_by_id(user_id)
+    return jsonify(user)
+
+
+@app.put('/user-edit')
 def edit_user_info():
-    #/user?user_id=<user_id>
+    #/user-edit?user_id=<user_id>
     
     user_id = request.args.get('user_id')
     instruments = request.form.getlist('instrument')
@@ -91,14 +103,16 @@ def edit_user_info():
 
 
 
+
 @app.post('/band-sign-up')
 def add_band():
     id = request.form.get("id")
+    password = request.form.get("password")
     name = request.form.get('name')
     exist = bandExist(id)
     if exist:
         return "id is already used"
-    new_band = Band(id=id, name=name)
+    new_band = Band(id=id, password=password ,name=name)
     db.session.add(new_band)
     db.session.commit()
     return make_response(
@@ -110,9 +124,26 @@ def add_band():
     )
 
 
-@app.put('/band')
+
+
+@app.get('/band')
+def get_band():
+    band_id = request.args.get('band_id')
+    band = get_band_by_id(band_id)
+    return jsonify(band)
+
+
+
+@app.get('/band-edit')
+def get_cur_info():
+    band_id = request.args.get('band_id')
+    band = get_band_by_id(band_id)
+    return jsonify(band)
+
+
+@app.put('/band-edit')
 def edit_band_info():
-    #/band?band_id=<band_id>
+    #/band-edit?band_id=<band_id>
     
     band_id = request.args.get('band_id')
     styles = request.form.getlist('style')
@@ -130,23 +161,7 @@ def edit_band_info():
     return make_response("Success", 200)
 
 
-def updateBand(band_id, bio, prefered_time, ig, fb, photo):
-    stmt = db.update(
-        Band
-    ).where(
-        Band.id == band_id
-    ).values(
-        bio = bio,
-        prefered_time = prefered_time,
-        ig = ig,
-        fb = fb,
-        photo = photo
-    )
-    
-    db.session.execute(stmt)
-    db.session.commit()
-    return
 
 
 if(__name__ == '__main__'):
-    app.run()
+    app.run(debug= True)

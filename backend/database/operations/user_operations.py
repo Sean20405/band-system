@@ -1,4 +1,4 @@
-from backend.database.schema.models import *
+from database.schema.models import *
 from sqlalchemy import select, delete, insert, update
 
 def userExist(id: str):
@@ -166,8 +166,7 @@ def updateUser(user_id, bio, prefered_time, ig, fb, photo):
 def queryCompatibleMusician(instruments, regions, styles):
     query = db.select( 
         User.id,
-        User.name,
-        User.photo 
+        User.name
     ).join(
         User_Instrument,
         User.id == User_Instrument.c.user_id

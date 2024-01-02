@@ -1,4 +1,4 @@
-from backend.database.schema.models import *
+from database.schema.models import *
 from sqlalchemy import select, delete, insert, update
 
 
@@ -10,6 +10,14 @@ def bandExist(id: str):
     )
     result = db.session.scalars(exist).all()
     return len(result) != 0
+
+def get_band_by_id(id):
+    band = db.select(
+        User
+    ).where(
+        User.id == id
+    )
+    return db.session.scalar(band)
 
 def get_style_by_band(band_id):
     query = db.select(

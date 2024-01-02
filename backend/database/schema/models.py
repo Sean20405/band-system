@@ -8,6 +8,7 @@ db = SQLAlchemy()
 @dataclass
 class User(db.Model):
     id: Mapped[str] = mapped_column(primary_key=True, nullable=False, unique=True)
+    password: Mapped[str] = mapped_column(db.String, nullable=False)
     name: Mapped[str] = mapped_column(db.String, nullable=False)
     prefered_time: Mapped[str] = mapped_column(db.String, nullable=True)
     bio: Mapped[str] = mapped_column(db.Text, nullable=True)
@@ -19,6 +20,7 @@ class User(db.Model):
 @dataclass
 class Band(db.Model):
     id: Mapped[str] = mapped_column(primary_key=True, nullable=False, unique=True)
+    password: Mapped[str] = mapped_column(db.String, nullable=False)
     name: Mapped[str] = mapped_column(db.String, nullable=False)
     practice_time: Mapped[str] = mapped_column(db.String, nullable=True)
     bio: Mapped[str] = mapped_column(db.Text)
