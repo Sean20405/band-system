@@ -1,5 +1,5 @@
 from database.schema.models import *
-from sqlalchemy import select, delete, insert, update
+
 
 def userExist(id: str):
     exist = db.select(
@@ -164,25 +164,62 @@ def updateUser(user_id, bio, prefered_time, ig, fb, photo):
 
 
 def queryCompatibleMusician(instruments, regions, styles):
-    query = db.select( 
-        User.id,
-        User.name
-    ).join(
-        User_Instrument,
-        User.id == User_Instrument.c.user_id
-    ).join(
-        User_Region,
-        User.id == User_Region.c.user_id
-    ).join(
-        User_Style,
-        User.id == User_Style.c.user_id
+
+    instruments = [int(i) for i in instruments]
+    regions = [int(i) for i in regions]
+    styles = [int(i) for i in styles]
+
+    instrument_count = db.select(
+        User_Instrument.c.user_id,
+        db.func.count().label('count')
     ).where(
         User_Instrument.c.instrument_id.in_(instruments)
+    ).group_by(
+        User_Instrument.c.user_id
+    ).cte()
+
+    region_count = db.select(
+        User_Region.c.user_id,
+        db.func.count().label('count')
     ).where(
         User_Region.c.region_id.in_(regions)
+    ).group_by(
+        User_Region.c.user_id
+    ).cte()
+
+    style_count = db.select(
+        User_Style.c.user_id,
+        db.func.count().label('count')
     ).where(
         User_Style.c.style_id.in_(styles)
+    ).group_by(
+        User_Style.c.user_id
+    ).cte()
+
+    subq = db.select(
+        User.id.label('user_id'),
+        User.name.label('name'),
+        (instrument_count.c.count + region_count.c.count + style_count.c.count).label('count')
+    ).where(
+        instrument_count.c.user_id == region_count.c.user_id
+    ).where(
+        instrument_count.c.user_id == style_count.c.user_id
+    ).subquary()
+
+    query = db.select(
+        subq.c.user_id,
+        subq.c.name
+    ).order_by(
+        subq.c.count
     )
+    
     return db.session.scalars(query).all()
+
+
+
+    
+                            
+
+
 
 

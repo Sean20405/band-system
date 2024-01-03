@@ -14,16 +14,20 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 db.init_app(app)
 
 
-@app.route('/')
-def home():
-    return 'Welcome'
-
+# @app.route('/')
+# def home():
+#     return 'Welcome'
 
 @app.get('/')
 def find_musician():
-    regions = request.form.get('region')
-    styles = request.form.get('style')
-    instruments = request.form.get('instruments')
+    regions = request.form.getlist('region')
+    styles = request.form.getlist('style')
+    instruments = request.form.getlist('instrument')
+    # return{
+    #     "region": regions,
+    #     "styles": styles,
+    #     "instruments": instruments
+    # }
     compatible_users = jsonify(queryCompatibleMusician(instruments, regions, styles))
     
     return compatible_users
@@ -72,7 +76,7 @@ def get_user():
 
 
 @app.get('/user-edit')
-def get_cur_info():
+def get_cur_user_info():
     user_id = request.args.get('user_id')
     user = get_user_by_id(user_id)
     return jsonify(user)
@@ -143,7 +147,7 @@ def get_band():
 
 
 @app.get('/band-edit')
-def get_cur_info():
+def get_cur_band_info():
     band_id = request.args.get('band_id')
     band = get_band_by_id(band_id)
     return jsonify(band)
