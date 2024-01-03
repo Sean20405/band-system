@@ -1,5 +1,6 @@
 import { useRef , useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
+import useFetch from "./useFetch";
 const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
@@ -14,10 +15,11 @@ const Login = () => {
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd])
-
-    const handlesubmit =async(e) => {
+   
+    const handleSubmit =async(e) => {
+        //const { data , error, isPending } = useFetch('http://localhost:8000/user/' + user);
         e.preventDefault();
-        console.log(user,pwd);
+        //console.log(data);
         setPwd('');
         setUser('');
         setSuccess(true);
@@ -39,7 +41,7 @@ const Login = () => {
             <div>
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <h1>Sign in</h1>
-                <form onSubmit={handlesubmit}>
+                <form onSubmit={handleSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input
                         type="text"
@@ -64,8 +66,7 @@ const Login = () => {
                 <p>
                     Need an Account?<br />
                     <span className="line">
-                        {/*put router link here*/}
-                        <a href="#">Sign Up</a>
+                        <Link to="/register">Sign Up</Link>
                     </span>
                 </p>
             </div>

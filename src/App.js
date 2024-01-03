@@ -5,6 +5,7 @@ import Create from './Create';
 import BlogDetails from './BlogDetails'
 import NotFound from './NotFound';
 import Login from './Login';
+import Register from './Register';
 function App() {
   return (
     <Router>
@@ -17,6 +18,9 @@ function App() {
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
             </Route>
             <Route path="/blogs/:id">
               <BlogDetails />
