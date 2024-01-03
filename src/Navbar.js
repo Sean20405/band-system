@@ -8,11 +8,11 @@ const Navbar = () => {
           <Link to="/search">Search</Link>
           <Link to="/about">About</Link>
           <Link to="/profile">Profile</Link>
-          <Link to="/create" style={{ 
+          <Link to="/login" style={{ 
             color: 'white', 
             backgroundColor: '#f1356d',
             borderRadius: '8px' 
-          }}>User Sign up</Link>
+          }}>Login</Link>
           <Link to="/create" style={{ 
             color: 'white', 
             backgroundColor: '#f1356d',
