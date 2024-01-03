@@ -17,18 +17,6 @@
       "body": "ww",
       "author": "mario",
       "id": 5
-    },
-    {
-      "title": "41234",
-      "body": "41234",
-      "author": "yoshi",
-      "id": 6
-    }
-  ],
-  "user" : [
-    {
-      "id": "howgin",
-      "password": "1234"
     }
   ]
 }
