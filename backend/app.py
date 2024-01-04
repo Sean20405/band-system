@@ -28,7 +28,7 @@ def find_musician():
     #     "styles": styles,
     #     "instruments": instruments
     # }
-    compatible_users = jsonify(queryCompatibleMusician(instruments, regions, styles))
+    compatible_users = queryCompatibleMusician(instruments, regions, styles)
     
     return compatible_users
 

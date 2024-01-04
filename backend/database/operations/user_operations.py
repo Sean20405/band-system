@@ -1,4 +1,5 @@
 from database.schema.models import *
+from sqlalchemy import desc
 
 
 def userExist(id: str):
@@ -171,7 +172,7 @@ def queryCompatibleMusician(instruments, regions, styles):
 
     instrument_count = db.select(
         User_Instrument.c.user_id,
-        db.func.count().label('count')
+        db.func.count(User_Instrument.c.instrument_id).label('count')
     ).where(
         User_Instrument.c.instrument_id.in_(instruments)
     ).group_by(
@@ -180,7 +181,7 @@ def queryCompatibleMusician(instruments, regions, styles):
 
     region_count = db.select(
         User_Region.c.user_id,
-        db.func.count().label('count')
+        db.func.count(User_Region.c.region_id).label('count')
     ).where(
         User_Region.c.region_id.in_(regions)
     ).group_by(
@@ -189,7 +190,7 @@ def queryCompatibleMusician(instruments, regions, styles):
 
     style_count = db.select(
         User_Style.c.user_id,
-        db.func.count().label('count')
+        db.func.count(User_Style.c.style_id).label('count')
     ).where(
         User_Style.c.style_id.in_(styles)
     ).group_by(
@@ -199,21 +200,29 @@ def queryCompatibleMusician(instruments, regions, styles):
     subq = db.select(
         User.id.label('user_id'),
         User.name.label('name'),
-        (instrument_count.c.count + region_count.c.count + style_count.c.count).label('count')
+        instrument_count.c.count.label('instrument_count'),
+        region_count.c.count.label('region_count'),
+        style_count.c.count.label('style_count')
+        # (instrument_count.c.count + region_count.c.count + style_count.c.count).label('compatibility')
+    ).where(
+        User.id == instrument_count.c.user_id
     ).where(
         instrument_count.c.user_id == region_count.c.user_id
     ).where(
         instrument_count.c.user_id == style_count.c.user_id
-    ).subquary()
-
-    query = db.select(
-        subq.c.user_id,
-        subq.c.name
-    ).order_by(
-        subq.c.count
     )
+    # .subquery()
+
+    # query = db.select(
+    #     subq.c.user_id,
+    #     subq.c.name,
+    #     subq.c.compatibility
+    # ).order_by(
+    #     desc(subq.c.compatibility)
+    # ).distinct()
     
-    return db.session.scalars(query).all()
+    result = db.session.execute(subq).all()
+    return [row._asdict() for row in result]
 
 
 
