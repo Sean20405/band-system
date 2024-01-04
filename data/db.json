@@ -21,55 +21,25 @@
   ],
   "user": [
     {
-      "id": "howgin",
-      "password": "1234"
+      "name": "1",
+      "password": "1",
+      "id": 1
     },
     {
-      "user": "1234",
-      "pwd": "1234",
-      "id": "ALOiWmM"
-    },
-    {
-      "user": "1234",
-      "pwd": "1234",
-      "id": "sbV-MVE"
-    },
-    {
-      "user": "1234",
-      "pwd": "1234",
-      "id": "bAJm5H7"
-    },
-    {
-      "user": "121234",
-      "pwd": "1234",
-      "id": "2_A0CSD"
-    },
-    {
-      "id": "1",
+      "id": "2",
       "password": "1"
     },
     {
-      "name": "1234",
-      "password": "1234",
-      "id": "elXUPCW"
-    },
-    {
-      "name": "1234",
-      "password": "1234",
-      "id": "LxUt0oR"
-    },
-    {
-      "name": "2",
-      "password": "2",
-      "id": "6Q5RAPL"
-    },
-    {
       "id": "123",
-      "password": "1231231231"
+      "password": "123"
     },
     {
-      "id": "how????",
-      "password": "e04"
+      "id": "1234",
+      "password": "1234"
+    },
+    {
+      "id": "howgin",
+      "password": "1qw2!QW@"
     }
   ]
 }

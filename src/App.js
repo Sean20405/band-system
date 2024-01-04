@@ -7,6 +7,7 @@ import NotFound from './NotFound';
 import Login from './Login';
 import Register from './Register';
 function App() {
+  
   return (
     <Router>
       <div className="App">
