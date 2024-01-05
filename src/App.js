@@ -27,11 +27,7 @@ function App() {
                 <Home />
               </Route>
               <Route path="/login">
-                {cookies.user ? (
-                  <WelcomePage user={cookies.user} />
-                ) : (
-                  <Login onLogin={handleLogin}/>
-                )}
+                  <Login />
               </Route>
               <Route path="/search">
                 <Search />
