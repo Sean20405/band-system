@@ -126,8 +126,6 @@ def add_user():
 def sign_in():
     role = request.form.get("role")
     id = request.form.get("id")
-    print(role)
-    print(id)
     if role == 'band':
         band = get_band_by_id(id)
         return band.password
@@ -214,13 +212,13 @@ def user_info():
         fb = request.form.get('fb')
 
         # Upload Photo
-        if ('photo' not in request.files):
-            resp = jsonify({
-                "message": "No photo input in the request",
-                "status": "Failed"
-            })
-            resp.status_code = 400
-            return resp
+        # if ('photo' not in request.files):
+        #     resp = jsonify({
+        #         "message": "No photo input in the request",
+        #         "status": "Failed"
+        #     })
+        #     resp.status_code = 400
+        #     return resp
         photo = request.files.get('photo') 
 
         filename = ""

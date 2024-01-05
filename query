@@ -1,0 +1,44 @@
+INSERT INTO instrument VALUES(1, 'Vocal');
+INSERT INTO instrument VALUES(2, 'Guitar');
+INSERT INTO instrument VALUES(3, 'Bass');
+INSERT INTO instrument VALUES(4, 'Drum');
+INSERT INTO instrument VALUES(5, 'KB');
+
+INSERT INTO region VALUES('KLU', 'Keelung City');
+INSERT INTO region VALUES('TPH', 'New Taipei City');
+INSERT INTO region VALUES('TPE', 'Taipei City');
+INSERT INTO region VALUES('KHH', 'Kaohsiung City');
+INSERT INTO region VALUES('TYC', 'Taoyuan City');
+
+
+INSERT INTO style VALUES(1, 'HipHop');
+INSERT INTO style VALUES(2, 'Jazz');
+INSERT INTO style VALUES(3, 'POP');
+Hsinchu County,HSH
+Hsinchu City,HSC
+Miaoli City,MAC
+Miaoli County,MAL
+Taichung City,TXG
+Changhua County,CWH
+Changhua City,CWS
+Nantou City,NTC
+Nantou County,NTO
+Yunlin County,YLH
+Chiayi County,CHY
+Chiayi City,CYI
+Tainan City,TNN
+Kaohsiung City,KHH
+Pingtung County,IUH
+Pingtung City,PTS
+Yilan County,ILN
+Yilan City,ILC
+Hualien County,HWA
+Hualien City,HWC
+Taitung City,TTC
+Taitung County,TTT
+Penghu County,PEH
+Green Island,GNI
+Orchid Island,KYD
+Kinmen County,KMN
+Matsu,MZW
+Lienchiang County,LNN
