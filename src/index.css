@@ -29,18 +29,17 @@
   color: #f1356d;
 }
 .content {
-  max-width: 600px;
   margin: 40px auto;
   padding: 20px;
 }
 
-/* blog previews / list */
-.blog-preview {
+/* search card */
+.search-card {
   padding: 10px 16px;
   margin: 20px 0;
   border-bottom: 1px solid #fafafa;
 }
-.blog-preview:hover {
+.search-card:hover {
   box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
 .blog-preview h2 {
@@ -70,22 +69,22 @@
   cursor: pointer;
 }
 
-/* create new blog form */
+/* Search */
 .search {
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
   text-align: center;
 }
 .search label {
   text-align: left;
-  display: block;
+  margin: 0px 0px 5px 20px;
 }
 .search h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 30px;
 }
-.search input, .search textarea, .search select {
+.search textarea, .search select {
   width: 100%;
   padding: 6px 10px;
   margin: 10px 0;
@@ -93,6 +92,13 @@
   box-sizing: border-box;
   display: block;
 }
+.search input{
+  padding: 6px 10px;
+  margin: 10px 0px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
 .search button {
   background: #f1356d;
   color: #fff;
