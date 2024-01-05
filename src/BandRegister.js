@@ -61,7 +61,7 @@ const BandRegister = () => {
         formData.append('id', user);  
         formData.append('password', pwd );
         formData.append('name', name );
-        fetch('https://9837-3-112-171-158.ngrok-free.app/band-sign-up', {
+        fetch('http://18.209.224.72:3000/band-sign-up', {
             method: 'POST',
             headers:{
                 "ngrok-skip-browser-warning": "69420",
@@ -75,7 +75,7 @@ const BandRegister = () => {
                 setErrMsg("id is already used");
             }
             else{
-                history.push('/');
+                history.push('/Bandlogin');
             }
         })
         .catch((error) => {
@@ -186,7 +186,7 @@ const BandRegister = () => {
                     <p>
                         Already registered?<br />
                         <span className="line">
-                            <Link to="/login">Sign In</Link>
+                            <Link to="/Bandlogin">Sign In</Link>
                         </span>
                     </p>
                 </section>

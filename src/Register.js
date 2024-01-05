@@ -61,7 +61,7 @@ const Register = () => {
         formData.append('id', user);  
         formData.append('password', pwd );
         formData.append('name', name );
-        fetch('https://9837-3-112-171-158.ngrok-free.app/user-sign-up', {
+        fetch('http://18.209.224.72:3000/user-sign-up', {
             method: 'POST',
             headers:{
                 "ngrok-skip-browser-warning": "69420",
@@ -75,7 +75,7 @@ const Register = () => {
                 setErrMsg("id is already used");
             }
             else{
-                history.push('/');
+                history.push('/login');
             }
         })
         .catch((error) => {
