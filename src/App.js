@@ -10,7 +10,14 @@ import Search from './Search';
 import SearchResult from './SearchResult';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import Test from './test';
+import { CookiesProvider, useCookies } from "react-cookie";
+import WelcomePage from './WelcomePage';
+import Profile from './Profile';
+import Logout from './Logout';
+import BandLogin from './BandLogin'
+import BandRegister from './BandRegister';
 function App() {
+  const url="https://9837-3-112-171-158.ngrok-free.app/"
   const [cookies, setCookie] = useCookies(["user"]);
   function handleLogin(user) {
     setCookie("user", user, { path: "/" });
@@ -19,14 +26,26 @@ function App() {
     <CookiesProvider>
       <Router>
         <div className="App">
-          <Navbar />
+          <Navbar  user={cookies.user}/>
           <div className="content">
             <Switch>
               <Route exact path="/">
                 <Home />
               </Route>
               <Route path="/login">
-                <Login />
+                  <Login onLogin={handleLogin} />
+              </Route>
+              <Route path="/Bandlogin">
+                  <BandLogin onLogin={handleLogin} />
+              </Route>
+              <Route path="/BandRegister">
+                  <BandRegister />
+              </Route>
+              <Route path="/Profile">
+                  <Profile  user={cookies.user}/>
+              </Route>
+              <Route path="/Logout">
+                  <Logout onLogin={handleLogin}/>
               </Route>
               <Route path="/search">
                 <Search />
