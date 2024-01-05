@@ -29,9 +29,10 @@ def find_musician():
     regions = request.form.getlist('region')
     styles = request.form.getlist('style')
     instruments = request.form.getlist('instrument')
-    compatible_users = queryCompatibleMusician(instruments, regions, styles)
-    
-    return compatible_users
+    resp = queryCompatibleMusician(instruments, regions, styles)
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    resp.status_code = 200
+    return resp
 
 ## API for User
 
@@ -81,14 +82,16 @@ def add_user():
     new_user = User(id=id, password=password, name=name)
     db.session.add(new_user)
     db.session.commit()
-    return make_response(
+    resp =  jsonify(
         {
         "id": id,
         "password": password,
         "name": name
         },
-        200
     )
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    resp.status_code = 200
+    return resp
 
 @app.route('/sign-in', methods = ['GET'])
 def sign_in():
