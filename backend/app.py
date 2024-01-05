@@ -31,6 +31,9 @@ def find_musician():
     regions = request.form.getlist('region')
     styles = request.form.getlist('style')
     instruments = request.form.getlist('instrument')
+    print(regions)
+    print(styles)
+    print(instruments)
     resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
     resp.headers.add('Access-Control-Allow-Origin', '*')
     resp.status_code = 200
@@ -105,10 +108,10 @@ def add_user():
     resp.status_code = 200
     return resp
 
-@app.route('/sign-in', methods = ['POST'])
+@app.route('/sign-in', methods = ['GET'])
 def sign_in():
-    role = request.form.getlist("role")
-    id = request.form.getlist("id")
+    role = request.args.get("role")
+    id = request.args.get("id")
     print(role)
     print(id)
     if role == 'band':
