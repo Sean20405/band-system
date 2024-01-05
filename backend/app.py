@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 from database.schema.models import *
 from database.db_operatoin import *
+from flask_cors import CORS
 # from s3 import generateAccessURL
 
 load_dotenv('.env')
@@ -10,6 +11,7 @@ DB_URI: str = os.getenv('SQLALCHEMY_DATABASE_URI')
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
+CORS(app)
 
 db.init_app(app)
 
