@@ -75,7 +75,7 @@ const BandRegister = () => {
                 setErrMsg("id is already used");
             }
             else{
-                history.push('/');
+                history.push('/Bandlogin');
             }
         })
         .catch((error) => {
@@ -186,7 +186,7 @@ const BandRegister = () => {
                     <p>
                         Already registered?<br />
                         <span className="line">
-                            <Link to="/login">Sign In</Link>
+                            <Link to="/Bandlogin">Sign In</Link>
                         </span>
                     </p>
                 </section>
