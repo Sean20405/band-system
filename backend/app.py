@@ -53,10 +53,10 @@ def show_image(file_name):
 def getcookie():
     name = request.cookies.get('userID')
     check = False
-
+    print(name)
     if (name is not ""):
        check = True
-       
+
     resp =  jsonify({
         "check": check
     })
