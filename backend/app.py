@@ -29,7 +29,7 @@ def find_musician():
     regions = request.form.getlist('region')
     styles = request.form.getlist('style')
     instruments = request.form.getlist('instrument')
-    resp = queryCompatibleMusician(instruments, regions, styles)
+    resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
     resp.headers.add('Access-Control-Allow-Origin', '*')
     resp.status_code = 200
     return resp
