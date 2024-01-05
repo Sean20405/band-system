@@ -61,7 +61,7 @@ const Register = () => {
         formData.append('id', user);  
         formData.append('password', pwd );
         formData.append('name', name );
-        fetch('https://0217-3-112-171-158.ngrok-free.app/user-sign-up', {
+        fetch('https://9837-3-112-171-158.ngrok-free.app/user-sign-up', {
             method: 'POST',
             headers:{
                 "ngrok-skip-browser-warning": "69420",
@@ -182,8 +182,6 @@ const Register = () => {
                             Must match the first password input field.
                         </p>
                         <button>Sign Up</button>
-                        <br /><br />
-                        <button>Test Sign Up</button>
                     </form>
                     <p>
                         Already registered?<br />
