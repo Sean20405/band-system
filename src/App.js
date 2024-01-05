@@ -8,21 +8,20 @@ import Login from './Login';
 import Register from './Register';
 import Search from './Search';
 import SearchResult from './SearchResult';
+import { CookiesProvider, useCookies } from 'react-cookie';
 import Test from './test';
-import { CookiesProvider, useCookies } from "react-cookie";
 import WelcomePage from './WelcomePage';
 import Profile from './Profile';
 import Logout from './Logout';
 import BandLogin from './BandLogin'
 import BandRegister from './BandRegister';
 function App() {
-  const url="https://9837-3-112-171-158.ngrok-free.app/"
+  const url="http://18.209.224.72:3000/"
   const [cookies, setCookie] = useCookies(["user"]);
   function handleLogin(user) {
     setCookie("user", user, { path: "/" });
   }
   return (
-    
     <CookiesProvider>
       <Router>
         <div className="App">
@@ -58,6 +57,9 @@ function App() {
               </Route>
               <Route path="/blogs/:id">
                 <BlogDetails />
+              </Route>
+              <Route path="/test">
+                <Test />
               </Route>
               <Route path="*">
                 <NotFound />
