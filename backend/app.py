@@ -24,7 +24,7 @@ db.init_app(app)
 def allow_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENTIONS
 
-@app.get('/')
+@app.route('/', methods = ['GET'])
 def find_musician():
     regions = request.form.getlist('region')
     styles = request.form.getlist('style')

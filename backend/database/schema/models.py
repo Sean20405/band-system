@@ -36,7 +36,7 @@ class Instrument(db.Model):
 
 @dataclass   
 class Region(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[str] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(db.String, nullable=False)
 
 @dataclass
