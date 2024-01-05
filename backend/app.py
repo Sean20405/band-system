@@ -97,7 +97,7 @@ def edit_user_info():
     ig = request.form.get('ig')
     fb = request.form.get('fb')
     photo = request.form.get('photo') 
-
+    email = request.form.get('email') 
     # return{
     #     "user_id": user_id,
     #     "instruments": instruments,
@@ -109,7 +109,7 @@ def edit_user_info():
     updateUserInstruments(user_id, instruments)
     updateUserRegions(user_id, regions)
     updateUserStyles(user_id, styles)
-    updateUser(user_id, bio, prefered_time, ig, fb, photo)
+    updateUser(user_id, bio, prefered_time, email, ig, fb, photo)
 
     db.session.commit()
     

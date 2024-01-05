@@ -146,7 +146,7 @@ def updateUserStyles(user_id ,new_ids):
     return
 
 
-def updateUser(user_id, bio, prefered_time, ig, fb, photo):
+def updateUser(user_id, bio, prefered_time, email, ig, fb, photo):
     stmt = db.update(
         User
     ).where(
@@ -156,7 +156,8 @@ def updateUser(user_id, bio, prefered_time, ig, fb, photo):
         prefered_time = prefered_time,
         ig = ig,
         fb = fb,
-        photo = photo
+        photo = photo,
+        email = email
     )
     
     db.session.execute(stmt)
