@@ -145,16 +145,20 @@ def get_user():
         })
         resp.status_code = 400
         return resp
+    
     user_id = request.args.get('user_id')
+    if not userExist(user_id):
+        resp = make_response("id not found")
+        resp.status_code = 404
+        return resp
     basic_info, instrument, region, style = get_user_by_id(user_id)
-    # return jsonify(basic_info)
-    name,prefered_time,bio,photo,ig,fb,email = basic_info['name'], basic_info['prefered_time'],\
-                                               basic_info['bio'], basic_info['photo'],\
-                                               basic_info['ig'], basic_info['fb'], basic_info['email']
-    # name,prefered_time,bio,photo,ig,fb,email = basic_info.name, basic_info.prefered_time,\
-    #                                            basic_info.bio, basic_info.photo,\
-    #                                            basic_info.ig, basic_info.fb, basic_info.email
-    resp = jsonify({
+   
+    name,prefered_time,bio,photo,ig,fb,email = basic_info.name, basic_info.prefered_time,\
+                                               basic_info.bio, basic_info.photo,\
+                                               basic_info.ig, basic_info.fb, basic_info.email
+
+    # return basic_info
+    resp = make_response({
         "name": name,
         "prefered_time": prefered_time,
         "bio": bio,
@@ -165,9 +169,8 @@ def get_user():
         "instrument": instrument,
         "region": region,
         "style": style
-    })
-
-    # resp =  jsonify(res)
+    }, 200)
+ 
     resp.headers.add('Access-Control-Allow-Origin', '*')
     resp.status_code = 200
     return resp
@@ -176,6 +179,10 @@ def get_user():
 @app.route('/user-edit', methods = ['GET', 'PUT'])
 def user_info():
     user_id = request.args.get('user_id')
+    if not userExist(user_id):
+        resp = make_response("id not found")
+        resp.status_code = 404
+        return resp
     if ('user_id' not in request.args):
         resp = jsonify({
             "message": "No user_id input in the request",
@@ -185,12 +192,12 @@ def user_info():
         return resp
     if (request.method == 'GET'):
         basic_info, instrument, region, style = get_user_by_id(user_id)
-        name,prefered_time,bio,photo,ig,fb,email = basic_info['name'], basic_info['prefered_time'],\
-                                               basic_info['bio'], basic_info['photo'],\
-                                               basic_info['ig'], basic_info['fb'], basic_info['email']
+        name,prefered_time,bio,photo,ig,fb,email = basic_info.name, basic_info.prefered_time,\
+                                               basic_info.bio, basic_info.photo,\
+                                               basic_info.ig, basic_info.fb, basic_info.email
 
         resp = make_response( 
-            jsonify({
+            {
                 "name": name,
                 "prefered_time": prefered_time,
                 "bio": bio,
@@ -201,7 +208,7 @@ def user_info():
                 "instrument": instrument,
                 "region": region,
                 "style": style
-            }), 200)
+            }, 200)
         resp.headers['Access-Control-Allow-Origin'] = '*'
  
         return resp
@@ -216,33 +223,29 @@ def user_info():
         bio = request.form.get('bio')
         ig = request.form.get('ig')
         fb = request.form.get('fb')
+        email = request.form.get('email')
+        
+        filename = ""
 
         # Upload Photo
-        if ('photo' not in request.files):
-            resp = jsonify({
-                "message": "No photo input in the request",
-                "status": "Failed"
-            })
-            resp.status_code = 400
-            return resp
-        photo = request.files.get('photo') 
-
-        filename = ""
-        if photo and allow_file(photo.filename):
-            filename = secure_filename(photo.filename)
-            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        else:
-            resp = jsonify({
-                "message": "File type is not allowed",
-                "status": "Failed"
-            })
-            return resp
+        if ('photo' in request.files):
+            
+            photo = request.files.get('photo') 
+            if photo and allow_file(photo.filename):
+                filename = secure_filename(photo.filename)
+                photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                resp = jsonify({
+                    "message": "File type is not allowed",
+                    "status": "Failed"
+                })
+                return resp
         
         # Update user's input to database
         updateUserInstruments(user_id, instruments)
         updateUserRegions(user_id, regions)
         updateUserStyles(user_id, styles)
-        updateUser(user_id, bio, prefered_time, ig, fb, filename)
+        updateUser(user_id, bio, prefered_time,email, ig, fb, filename) #
         db.session.commit()
 
         # Create message
@@ -281,13 +284,17 @@ def add_band():
 @app.route('/band')
 def get_band():
     band_id = request.args.get('band_id')
+    if not bandExist(band_id):
+        resp = make_response("id not found")
+        resp.status_code = 404
+        return resp
     basic_info, members, region, style = get_band_by_id(band_id)
-    name,practice_time,bio,photo,ig,fb,contact_window = basic_info['name'], basic_info['practice_time'],\
-                                               basic_info['bio'], basic_info['photo'],\
-                                               basic_info['ig'], basic_info['fb'], basic_info['contact_window']
+    name,practice_time,bio,photo,ig,fb,contact_window = basic_info.name, basic_info.practice_time,\
+                                               basic_info.bio, basic_info.photo,\
+                                               basic_info.ig, basic_info.fb, basic_info.contact_window
 
     resp = make_response( 
-        jsonify({
+        {
             "name": name,
             "practice_time": practice_time,
             "bio": bio,
@@ -298,7 +305,7 @@ def get_band():
             "members": members,
             "region": region,
             "style": style
-        }), 200)
+        }, 200)
     resp.headers['Access-Control-Allow-Origin'] = '*'
  
     return resp
@@ -309,12 +316,12 @@ def band_info():
     if (request.method == 'GET'):
         band_id = request.args.get('band_id')
         basic_info, members, region, style = get_band_by_id(band_id)
-        name,practice_time,bio,photo,ig,fb,contact_window = basic_info['name'], basic_info['practice_time'],\
-                                                basic_info['bio'], basic_info['photo'],\
-                                                basic_info['ig'], basic_info['fb'], basic_info['contact_window']
+        name,practice_time,bio,photo,ig,fb,contact_window = basic_info.name, basic_info.practice_time,\
+                                                basic_info.bio, basic_info.photo,\
+                                                basic_info.ig, basic_info.fb, basic_info.contact_window
 
         resp = make_response( 
-            jsonify({
+            {
                 "name": name,
                 "practice_time": practice_time,
                 "bio": bio,
@@ -325,7 +332,7 @@ def band_info():
                 "members": members,
                 "region": region,
                 "style": style
-            }), 200)
+            }, 200)
         resp.headers['Access-Control-Allow-Origin'] = '*'
         return resp
     
@@ -339,30 +346,25 @@ def band_info():
         contact_window = request.form.get('contact_window')
         members = request.form.getlist('members')
 
-        # Upload Photo
-        if ('photo' not in request.files):
-            resp = jsonify({
-                "message": "No photo input in the request",
-                "status": "Failed"
-            })
-            resp.status_code = 400
-            return resp
-        photo = request.files.get('photo') 
-
         filename = ""
-        if photo and allow_file(photo.filename):
-            filename = secure_filename(photo.filename)
-            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        else:
-            resp = jsonify({
-                "message": "File type is not allowed",
-                "status": "Failed"
-            })
-            return resp
+        # Upload Photo
+        if ('photo' in request.files):
+            photo = request.files.get('photo') 
+
+            
+            if photo and allow_file(photo.filename):
+                filename = secure_filename(photo.filename)
+                photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            else:
+                resp = jsonify({
+                    "message": "File type is not allowed",
+                    "status": "Failed"
+                })
+                return resp
 
         updateBandStyles(band_id, styles)
         updateBandMembers(members, band_id)
-        updateBand(band_id, bio, practice_time, ig, fb, photo,)
+        updateBand(band_id, bio, practice_time, ig, fb, filename, contact_window)
 
         db.session.commit()
         

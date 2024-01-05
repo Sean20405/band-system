@@ -31,14 +31,14 @@ def get_user_by_id(user_id):
         User.id == user_id
     )
     basic_info = db.session.scalar(basic_info_q)
-    basic_info = model_to_dict(basic_info)
+    # basic_info = model_to_dict(basic_info)
     instrument_q = db.select(
         User_Instrument.c.instrument_id
     ).where(
         User_Instrument.c.user_id == user_id
     )
 
-    instrument = db.session.scalars(instrument_q)
+    instrument = db.session.scalars(instrument_q).all()
 
     region_q = db.select(
         User_Region.c.region_id
@@ -46,7 +46,7 @@ def get_user_by_id(user_id):
         User_Region.c.user_id == user_id
     )
 
-    region = db.session.scalars(region_q)
+    region = db.session.scalars(region_q).all()
 
     style_q = db.select(
         User_Style.c.style_id
@@ -54,7 +54,7 @@ def get_user_by_id(user_id):
         User_Style.c.user_id == user_id
     )
 
-    style = db.session.scalars(style_q)
+    style = db.session.scalars(style_q).all()
 
     return basic_info, instrument, region, style
 

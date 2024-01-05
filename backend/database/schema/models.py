@@ -23,7 +23,7 @@ class Band(db.Model):
     password: Mapped[str] = mapped_column(db.String, nullable=False)
     name: Mapped[str] = mapped_column(db.VARCHAR, nullable=False)
     practice_time: Mapped[str] = mapped_column(db.String, nullable=True)
-    bio: Mapped[str] = mapped_column(db.VARCHAR)
+    bio: Mapped[str] = mapped_column(db.VARCHAR, nullable=True)
     photo: Mapped[str] = mapped_column(db.String, nullable=True)
     ig: Mapped[str] = mapped_column(db.String, nullable=True)
     fb: Mapped[str] = mapped_column(db.String, nullable=True)

@@ -20,6 +20,8 @@ def get_band_password(band_id):
     return db.session.scalar(password)
 
 def get_band_by_id(id):
+    
+
     basic_info_q = db.select(
         Band
     ).where(
@@ -33,7 +35,7 @@ def get_band_by_id(id):
         User_Band.c.band_id == id
     )
 
-    members = db.session.scalars(member_q)
+    members = db.session.scalars(member_q).all()
 
     region_q = db.select(
         Band_Region.c.region_id
@@ -41,7 +43,7 @@ def get_band_by_id(id):
         Band_Region.c.band_id == id
     )
 
-    region = db.session.scalars(region_q)
+    region = db.session.scalars(region_q).all()
 
     style_q = db.select(
         Band_Style.c.style_id
@@ -49,7 +51,7 @@ def get_band_by_id(id):
         Band_Style.c.band_id == id
     )
 
-    style = db.session.scalars(style_q)
+    style = db.session.scalars(style_q).all()
 
     return basic_info, members, region, style
 
@@ -63,6 +65,14 @@ def get_style_by_band(band_id):
 
     return db.session.scalars(query).all()
 
+def get_member_by_band(band_id):
+    query = db.select(
+        User_Band.c.user_id
+    ).where(
+        User_Band.c.band_id == band_id
+    )
+
+    return db.session.scalars(query).all()
 
 def updateBandStyles(band_id ,new_ids):
     if len(new_ids) == 0:
@@ -95,7 +105,7 @@ def updateBandStyles(band_id ,new_ids):
 def updateBandMembers(new_ids, band_id):
     if len(new_ids) == 0:
         return
-    cur_ids = get_style_by_band(band_id)
+    cur_ids = get_member_by_band(band_id)
 
     for i in cur_ids:
         if i not in new_ids:
