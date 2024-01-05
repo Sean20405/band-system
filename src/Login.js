@@ -27,8 +27,6 @@ const Login = ({ onLogin }) => {
                 setErrMsg('Unauthorized');
             }
             else if(info.password == pwd){
-                setPwd('');
-                setUser('');
                 setSuccess(true);
             }
             else {
@@ -56,7 +54,7 @@ const Login = ({ onLogin }) => {
         const id=user;
         const  newuser = { id , role };
 
-        await fetch('http://18.209.224.72:3000/sign-in',{
+        await fetch('http://18.209.224.72:5000/sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
