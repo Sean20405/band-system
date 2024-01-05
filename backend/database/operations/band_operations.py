@@ -148,7 +148,7 @@ def updateBand(band_id, bio, practice_time, ig, fb, photo, contact_window):
     db.session.commit()
     return
 
-def queryCompatibleBand(styles):
+def queryCompatibleBand(styles, regions):
     regions = [int(i) for i in regions]
     styles = [int(i) for i in styles]
 

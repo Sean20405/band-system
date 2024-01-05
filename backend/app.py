@@ -43,7 +43,7 @@ def find_target():
     # return resp
     role = request.form.get('role')
 
-    if(role == 'musician'):
+    if(role == 'user'):
         regions = request.form.getlist('region')
         styles = request.form.getlist('style')
         instruments = request.form.getlist('instrument')
@@ -165,7 +165,7 @@ def sign_in():
             return resp
         else:
             resp = jsonify({
-                "message": "Band doesn't not exist.",
+                "message": "Band doesn't exist.",
                 "status": "Failed"
             })
             resp.headers['Access-Control-Allow-Origin'] = '*'
@@ -412,6 +412,9 @@ def band_info():
         fb = request.form.get('fb')
         contact_window = request.form.get('contact_window')
         members = request.form.getlist('members')
+        for user in members:
+            if not userExist(user):
+                return f"member {user} doesn't exist"
 
         filename = ""
         # Upload Photo
