@@ -155,10 +155,10 @@ def sign_in():
         if exist:
             user_password = get_user_password(id)
             resp = make_response(
-            {
+                {   
                     "password": user_password
                 }
-        )
+            )
             resp.headers.add('Access-Control-Allow-Origin', '*')
             resp.set_cookie('userID', id)
             resp.status_code = 200

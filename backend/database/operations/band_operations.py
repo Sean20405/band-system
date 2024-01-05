@@ -178,11 +178,11 @@ def queryCompatibleBand(styles):
         
     ).join(
         region_count,
-        Band.id == region_count.c.user_id,
+        Band.id == region_count.c.band_id,
         full = True
     ).join(
         style_count,
-        Band.id == style_count.c.user_id,
+        Band.id == style_count.c.band_id,
         full = True
     ).where(
        (db.func.coalesce(region_count.c.count, 0) + db.func.coalesce(style_count.c.count, 0)) > 0
