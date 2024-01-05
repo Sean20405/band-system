@@ -107,10 +107,10 @@ def add_user():
 
 @app.route('/sign-in', methods = ['POST'])
 def sign_in():
-    role = request.form.get("role")
-    id = request.form.get("id")
-    # password = request.form.get("password")
-    # not done, need query
+    role = request.form.getlist("role")
+    id = request.form.getlist("id")
+    print(role)
+    print(id)
     if role == 'band':
         band = get_band_by_id(id)
         return band.password
