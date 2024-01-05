@@ -10,6 +10,7 @@ import Search from './Search';
 import SearchResult from './SearchResult';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import Test from './test';
+import Profile from './Profile';
 function App() {
   const [cookies, setCookie] = useCookies(["user"]);
   function handleLogin(user) {
@@ -43,7 +44,7 @@ function App() {
               <Route path="/test">
                 <Test />
               </Route>
-              <Route path="*">
+                            <Route path="*">
                 <NotFound />
               </Route>
             </Switch>
