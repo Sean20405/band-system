@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('//fonts.googleapis.com/earlyaccess/notosanstc.css');
 
 /* base styles */
 * {
   margin: 0;
-  font-family: "Quicksand";
+  font-family: "Noto Sans TC", "Quicksand";
   color: #333;
 }
 .navbar {
   padding: 20px;
   display: flex;
   align-items: center;
-  max-width: 900px;
   margin: 0 auto;
   border-bottom: 1px solid #f2f2f2;
 }
@@ -71,7 +71,7 @@
 
 /* Search */
 .search {
-  max-width: 500px;
+  max-width: 75%;
   margin: 0 auto;
   text-align: center;
 }
@@ -80,18 +80,14 @@
   margin: 0px 0px 5px 20px;
 }
 .search h2 {
-  font-size: 20px;
+  font-size: 30px;
   color: #f1356d;
   margin-bottom: 30px;
 }
-.search textarea, .search select {
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
+.search h4 {
+  text-align: left;
 }
+
 .search input{
   padding: 6px 10px;
   margin: 10px 0px;
@@ -106,4 +102,78 @@
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+}
+
+/* Checkbox */
+
+.container {
+  max-width: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 13px;
+  text-align: left;
+}
+
+ul.ks-cboxtags {
+  list-style: none;
+  padding: 20px 0px;
+}
+ul.ks-cboxtags li{
+  display: inline;
+  padding: 8px 8px 4px 0px;
+}
+ul.ks-cboxtags li label{
+  display: inline-block;
+  background-color: rgba(255, 255, 255, .9);
+  border: 2px solid rgba(65, 65, 65, 0.3);
+  color: #adadad;
+  border-radius: 25px;
+  white-space: nowrap;
+  margin: 3px 0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: all .2s;
+}
+
+ul.ks-cboxtags li label {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+ul.ks-cboxtags li label::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 12px;
+  padding: 2px 6px 2px 2px;
+  content: "\f067";
+  transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+  content: "\f00c";
+  transform: rotate(-360deg);
+  transition: transform .3s ease-in-out;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+  border: 2px solid #f1356d;
+  background-color: #e24b78;
+  color: #fff;
+  transition: all .2s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+display: absolute;
+}
+ul.ks-cboxtags li input[type="checkbox"] {
+position: absolute;
+opacity: 0;
 }

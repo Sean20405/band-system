@@ -8,6 +8,7 @@ import Login from './Login';
 import Register from './Register';
 import Search from './Search';
 import SearchResult from './SearchResult';
+import Test from './test';
 function App() {
   
   return (
@@ -33,6 +34,9 @@ function App() {
             </Route>
             <Route path="/blogs/:id">
               <BlogDetails />
+            </Route>
+            <Route path="/test">
+              <Test />
             </Route>
             <Route path="*">
               <NotFound />
