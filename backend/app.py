@@ -37,28 +37,28 @@ def find_target():
     #     "r":regions,
     #     "s":styles
     # }
-    resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
-    resp.headers.add('Access-Control-Allow-Origin', '*')
-    resp.status_code = 200
-    return resp
-    # role = request.form.get('role')
+    # resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
+    # resp.headers.add('Access-Control-Allow-Origin', '*')
+    # resp.status_code = 200
+    # return resp
+    role = request.form.get('role')
 
-    # if(role == 'musician'):
-    #     regions = request.form.getlist('region')
-    #     styles = request.form.getlist('style')
-    #     instruments = request.form.getlist('instrument')
-    #     resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
-    #     resp.headers.add('Access-Control-Allow-Origin', '*')
-    #     resp.status_code = 200
-    #     return resp
+    if(role == 'musician'):
+        regions = request.form.getlist('region')
+        styles = request.form.getlist('style')
+        instruments = request.form.getlist('instrument')
+        resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.status_code = 200
+        return resp
         
-    # elif(role == 'band'):
-    #     regions = request.form.getlist('region')
-    #     styles = request.form.getlist('style')
-    #     resp = jsonify(queryCompatibleBand( regions, styles))
-    #     resp.headers.add('Access-Control-Allow-Origin', '*')
-    #     resp.status_code = 200
-    #     return resp
+    elif(role == 'band'):
+        regions = request.form.getlist('region')
+        styles = request.form.getlist('style')
+        resp = jsonify(queryCompatibleBand( regions, styles))
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.status_code = 200
+        return resp
    
 
 @app.route('/image/<file_name>', methods = ['GET'])
@@ -150,16 +150,25 @@ def sign_in():
     role = request.form.get("role")
     id = request.form.get("id")
     if role == 'band':
-        band_password = get_band_password(id)
-        resp = make_response(
-            {
-                "password": band_password
-            }
-        )
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        resp.status_code = 200
-        return resp
-        
+
+        if bandExist(id): 
+            band_password = get_band_password(id)
+            resp = make_response(
+                {
+                    "password": band_password
+                }
+            )
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            resp.status_code = 200
+            return resp
+        else:
+            resp = jsonify({
+                "message": "Band doesn't not exist.",
+                "status": "Failed"
+            })
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            resp.status_code = 200
+            return resp
     elif role == 'user':
         exist = userExist(id)
         if exist:
@@ -175,7 +184,7 @@ def sign_in():
             return resp
         else:
             resp = jsonify({
-                "message": "User is not exist.",
+                "message": "User doesn't exist.",
                 "status": "Failed"
             })
             resp.headers['Access-Control-Allow-Origin'] = '*'
