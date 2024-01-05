@@ -209,7 +209,7 @@ def updateUser(user_id, bio, prefered_time, email, ig, fb, photo):
 def queryCompatibleMusician(instruments, regions, styles):
 
     instruments = [int(i) for i in instruments]
-    regions = [int(i) for i in regions]
+    regions = [str(i) for i in regions]
     styles = [int(i) for i in styles]
 
     instrument_count = db.select(

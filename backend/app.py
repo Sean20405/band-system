@@ -27,26 +27,38 @@ db.init_app(app)
 def allow_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENTIONS
 
-@app.route('/', methods = ['GET'])
+@app.route('/', methods = ['POST'])
 def find_target():
-    role = request.form.get('role')
+    regions = request.form.getlist('region')
+    styles = request.form.getlist('style')
+    instruments = request.form.getlist('instrument')
+    # return {
+    #     "i":instruments,
+    #     "r":regions,
+    #     "s":styles
+    # }
+    resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    resp.status_code = 200
+    return resp
+    # role = request.form.get('role')
 
-    if(role == 'musician'):
-        regions = request.form.getlist('region')
-        styles = request.form.getlist('style')
-        instruments = request.form.getlist('instrument')
-        resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        resp.status_code = 200
-        return resp
+    # if(role == 'musician'):
+    #     regions = request.form.getlist('region')
+    #     styles = request.form.getlist('style')
+    #     instruments = request.form.getlist('instrument')
+    #     resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
+    #     resp.headers.add('Access-Control-Allow-Origin', '*')
+    #     resp.status_code = 200
+    #     return resp
         
-    elif(role == 'band'):
-        regions = request.form.getlist('region')
-        styles = request.form.getlist('style')
-        resp = jsonify(queryCompatibleBand( regions, styles))
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        resp.status_code = 200
-        return resp
+    # elif(role == 'band'):
+    #     regions = request.form.getlist('region')
+    #     styles = request.form.getlist('style')
+    #     resp = jsonify(queryCompatibleBand( regions, styles))
+    #     resp.headers.add('Access-Control-Allow-Origin', '*')
+    #     resp.status_code = 200
+    #     return resp
    
 
 @app.route('/image/<file_name>', methods = ['GET'])
