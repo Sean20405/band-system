@@ -1,5 +1,5 @@
 import SearchCard from "./SearchCard";
-const SearchResult = ({ datas }) => {
+export function SearchResultUser({ datas }) {
   return(
     <div className='search-result' style={{ textAlign: "left" }}>
       { datas.map(data => (
@@ -9,4 +9,12 @@ const SearchResult = ({ datas }) => {
   );
 }
 
-export default SearchResult;
+export function SearchResultBand({ datas }) {
+  return(
+    <div className='search-result' style={{ textAlign: "left" }}>
+      { datas.map(data => (
+        <SearchCard id={data.band_id} name={data.name}/>
+      )) }
+    </div>
+  );
+}

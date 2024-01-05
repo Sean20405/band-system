@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import SearchResult from "./SearchResult";
+import { SearchResultUser, SearchResultBand }  from "./SearchResult";
 
 export function SearchMusician () {
   const [instrument, setInstrument] = useState([]);
@@ -138,7 +138,7 @@ export function SearchMusician () {
       </div>
       { hasResult && 
       (<div className="result" ref={ref}>
-        <SearchResult datas={searchData}></SearchResult>
+        <SearchResultUser datas={searchData}></SearchResultUser>
       </div>) }
   </div>
   
@@ -146,26 +146,12 @@ export function SearchMusician () {
 }
 
 export function SearchBand () {
-  const [instrument, setInstrument] = useState([]);
   const [region, setRegion] = useState([]);
   const [style, setStyle] = useState([]);
   const [isPending, setIsPending] = useState(false);
   const [hasResult, setHasResult] = useState(false);
   const [searchData, setSearchData] = useState([]);
   const ref = useRef(null);
-
-  const handleInstrumentChange = (e) => {
-    const value = parseInt(e.target.defaultValue);
-    if (e.target.checked) {
-      setInstrument(instrument => [...instrument, `${value}`]);
-      console.log('Add ' + value + ' successfully!');
-    }
-    else {
-      setInstrument(instrument.filter(item => item !== value));
-      console.log('Delete ' + value + ' successfully!');
-    }
-    console.log('Current selected: ' + instrument);
-  };
 
   const handleStyleChange = (e) => {
     const value = parseInt(e.target.defaultValue);
@@ -198,11 +184,10 @@ export function SearchBand () {
     setIsPending(true);
     
     const formData = new FormData();
-    instrument.forEach(item => { formData.append('instrument', item) });
     region.forEach(item => { formData.append('region', item) });
     style.forEach(item => { formData.append('style', item) });
     formData.append("role", "band");
-    console.log(formData.get("role"));
+    console.log(formData.getAll("region"));
     /* === GET url ===
     const params = new URLSearchParams({})
     instrument.forEach(item => { params.append("instrument", item) });
@@ -234,24 +219,11 @@ export function SearchBand () {
 
   const styles = ['J-rock', 'Metal', 'J-pop', 'Lo-Fi', 'Jazz', 'Post Rock', 'Math Rock', 'Acoustic', 'Softcore', 'Pop-Punk', 'Country', "Others"];
   const regions = [["KLU", "基隆市"], ["TPH", "新北市"], ["TPE", "臺北市"], ["TYC", "桃園市"], ["HSH", "新竹縣"], ["HSC", "新竹市"], ["MAL", "苗栗縣"], ["TXG", "臺中市"], ["CWH", "彰化縣"], ["NTO", "南投縣"], ["YLH", "雲林縣"], ["CHY", "嘉義縣"], ["CYI", "嘉義市"], ["TNN", "臺南市"], ["KHH", "高雄市"], ["IUH", "屏東縣"], ["ILN", "宜蘭縣"], ["HWA", "花蓮縣"], ["TTT", "臺東縣"], ["PEH", "澎湖縣"], ["GNI", "綠島"], ["KYD", "蘭嶼"], ["KMN", "金門縣"], ["LNN", "連江縣"]];
-  const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
   return (
     <div className="search">
       <div className="filter">
         <h2>Find a Band!</h2>
         <form onSubmit={handleSubmit}>
-          <div className="instrument">
-            <h4>Instrument:</h4>
-            <div className="container">
-              <ul className="ks-cboxtags">
-                {Instruments.map((style, index) => (
-                  <li><input type="checkbox" id={index} value={index} onChange={handleInstrumentChange}/><label for={index}>{style}</label></li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <br />
-          <br />
           <div className="region">
             <h4>Region:</h4>
             <div className="container">
@@ -282,7 +254,7 @@ export function SearchBand () {
       </div>
       { hasResult && 
       (<div className="result" ref={ref}>
-        <SearchResult datas={searchData}></SearchResult>
+        <SearchResultBand datas={searchData}></SearchResultBand>
       </div>) }
   </div>
   

@@ -7,7 +7,6 @@ import NotFound from './NotFound';
 import Login from './Login';
 import Register from './Register';
 import { SearchMusician, SearchBand } from './Search';
-import SearchResult from './SearchResult';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import Test from './test';
 import WelcomePage from './WelcomePage';
@@ -52,9 +51,7 @@ function App() {
               <Route path="/searchband">
                 <SearchBand />
               </Route>
-              <Route path="/searchresult">
-                <SearchResult />
-              </Route>
+
               <Route path="/register">
                 <Register />
               </Route>
