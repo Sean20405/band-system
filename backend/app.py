@@ -43,7 +43,7 @@ def find_target():
     # return resp
     role = request.form.get('role')
 
-    if(role == 'user'):
+    if(role == 'musician'):
         regions = request.form.getlist('region')
         styles = request.form.getlist('style')
         instruments = request.form.getlist('instrument')
