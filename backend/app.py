@@ -54,7 +54,7 @@ def getcookie():
     name = request.cookies.get('userID')
     check = False
     print(name)
-    if (name is not "None"):
+    if (name is not None):
        check = True
 
     resp =  jsonify({
