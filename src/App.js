@@ -6,6 +6,8 @@ import BlogDetails from './BlogDetails'
 import NotFound from './NotFound';
 import Login from './Login';
 import Register from './Register';
+import Search from './Search';
+import SearchResult from './SearchResult';
 function App() {
   return (
     <Router>
@@ -18,6 +20,12 @@ function App() {
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/search">
+              <Search />
+            </Route>
+            <Route path="/searchresult">
+              <SearchResult />
             </Route>
             <Route path="/register">
               <Register />
