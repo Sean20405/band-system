@@ -1,7 +1,7 @@
 import { useRef , useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-const Login = ({ onLogin }) => {
+const BandLogin = ({ onLogin }) => {
     const userRef = useRef();
     const errRef = useRef();
     const [user, setUser] = useState('');
@@ -9,7 +9,7 @@ const Login = ({ onLogin }) => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
     const [info, setInfo] = useState(null);
-    const [role, setRole] = useState("user");
+    const [role, setRole] = useState("band");
     const history=useHistory();
     //fetch('http://localhost:8000/user/')
     useEffect(() => {
@@ -23,7 +23,7 @@ const Login = ({ onLogin }) => {
     useEffect(()=>{
         if(info){
             console.log(info);
-            if(info.message == "User is not exist."){
+            if(info.message == "Band is not exist."){
                 setErrMsg('Unauthorized');
             }
             else if(info.password == pwd){
@@ -50,9 +50,9 @@ const Login = ({ onLogin }) => {
         //setSuccess(true);
         //setTimeout(() => {
         let formData = new FormData(); 
-        formData.append('role', 'user');   //append the values with key, value pair
+        formData.append('role', 'band');   //append the values with key, value pair
         formData.append('id', user );
-        
+        const role = "user";
         const id=user;
         const  newuser = { id , role };
 
@@ -93,11 +93,11 @@ const Login = ({ onLogin }) => {
              
             { success === false && (
             <div>
-                <h1>Sign in</h1>
+                <h1>Band Sign in</h1>
                 <br></br>
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="username">Bandname:</label>
                     <input
                         type="text"
                         id="username"
@@ -121,7 +121,7 @@ const Login = ({ onLogin }) => {
                 <p>
                     Need an Account?<br />
                     <span className="line">
-                        <Link to="/register">Sign Up</Link>
+                        <Link to="/BandRegister">Sign Up</Link>
                     </span>
                 </p>
             </div>
@@ -130,4 +130,4 @@ const Login = ({ onLogin }) => {
     );
 }
  
-export default Login;
+export default BandLogin;

@@ -12,7 +12,7 @@ const Navbar = ({user}) => {
             { !user ||user.user=="null" ? (
               <><button className="dropbtn">Login</button><div className="dropdown-content">
                   <Link to="/login">As User</Link>
-                  <Link to="/login">As Band</Link>
+                  <Link to="/BandLogin">As Band</Link>
                 </div></>
             ) : (
               <><button className="dropbtn">{user.user}</button><div className="dropdown-content">
