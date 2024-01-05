@@ -12,6 +12,7 @@ load_dotenv('.env')
 DB_URI: str = os.getenv('SQLALCHEMY_DATABASE_URI')
 UPLOAD_FOLDER: str = os.getenv('UPLOAD_FOLDER')
 ALLOWED_EXTENTIONS = set(['png', 'jpg', 'jpeg'])
+CORS_ALLOW_ALL_ORIGINS = True  # Not recommended for production
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
@@ -25,7 +26,7 @@ db.init_app(app)
 def allow_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENTIONS
 
-@app.route('/', methods = ['GET'])
+@app.route('/', methods = ['POST'])
 def find_musician():
     regions = request.form.getlist('region')
     styles = request.form.getlist('style')
