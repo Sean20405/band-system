@@ -104,7 +104,7 @@ def add_user():
     resp.status_code = 200
     return resp
 
-@app.route('/sign-in', methods = ['GET'])
+@app.route('/sign-in', methods = ['POST'])
 def sign_in():
     role = request.form.get("role")
     id = request.form.get("id")
@@ -113,7 +113,6 @@ def sign_in():
     if role == 'band':
         band = get_band_by_id(id)
         return band.password
-        
     elif role == 'user':
         user = get_user_by_id(id)
         resp = jsonify({
@@ -122,7 +121,6 @@ def sign_in():
         resp.headers.add('Access-Control-Allow-Origin', '*')
         resp.status_code = 200
         return resp
-    
     else:
         resp = jsonify({
             "message": "Role is not correct",
