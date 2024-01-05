@@ -57,7 +57,8 @@ export function SearchMusician () {
     instrument.forEach(item => { formData.append('instrument', item) });
     region.forEach(item => { formData.append('region', item) });
     style.forEach(item => { formData.append('style', item) });
-    formData.append("role", "user");
+    formData.append("role", "musician");
+    console.log(formData.get("role"));
     /* === GET url ===
     const params = new URLSearchParams({})
     instrument.forEach(item => { params.append("instrument", item) });
@@ -70,7 +71,7 @@ export function SearchMusician () {
     para = para.slice(0, -1);
     const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
-    fetch(`http://18.209.224.72:5000/`, {
+    fetch(`http://100.26.49.80:5000/`, {
       method: 'POST',
       headers: { 'ngrok-skip-browser-warning': 'true' },
       body: formData
@@ -214,7 +215,7 @@ export function SearchBand () {
     para = para.slice(0, -1);
     const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
-    fetch("http://18.209.224.72:5000/", {
+    fetch("http://100.26.49.80:5000/", {
       method: 'POST',
       headers: { 'ngrok-skip-browser-warning': 'true' },
       body: formData

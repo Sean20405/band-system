@@ -16,7 +16,7 @@ import Logout from './Logout';
 import BandLogin from './BandLogin'
 import BandRegister from './BandRegister';
 function App() {
-  const url="http://18.209.224.72:5000/"
+  const url="http://100.26.49.80:5000/"
   const [cookies, setCookie] = useCookies(["user"]);
   function handleLogin(user) {
     setCookie("user", user, { path: "/" });
