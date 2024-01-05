@@ -304,7 +304,6 @@ ul.ks-cboxtags li input[type="checkbox"] {
 .dropdown {
   float: right;
   overflow: hidden;
-  margin-left: 16px;
   text-decoration: none;
 }
 
@@ -314,7 +313,6 @@ ul.ks-cboxtags li input[type="checkbox"] {
   background:none;
   border:none;
   margin:0;
-  padding-bottom:5px;
   cursor: pointer;
 }
 

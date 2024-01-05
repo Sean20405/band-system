@@ -23,12 +23,10 @@ const BandLogin = ({ onLogin }) => {
     useEffect(()=>{
         if(info){
             console.log(info);
-            if(info.message == "Band is not exist."){
+            if(info.status == "Failed"){
                 setErrMsg('Unauthorized');
             }
             else if(info.password == pwd){
-                setPwd('');
-                setUser('');
                 setSuccess(true);
             }
             else {
