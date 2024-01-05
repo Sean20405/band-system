@@ -10,5 +10,6 @@ VALUES
 (6, 'Saxophone'),
 (7, 'Cello'),
 (8, 'Acoustic Guitar'),
-(9, 'Trumpet');
+(9, 'Trumpet'),
+(10, 'others');
 

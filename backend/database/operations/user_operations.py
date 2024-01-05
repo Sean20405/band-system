@@ -1,6 +1,8 @@
 from database.schema.models import *
 import sqlalchemy as sa
 
+def model_to_dict(object):
+    return {c.name: getattr(object, c.name) for c in object.__table__.columns}
 
 def userExist(id: str):
     exist = db.select(
@@ -11,13 +13,51 @@ def userExist(id: str):
     result = db.session.scalars(exist).all()
     return len(result) != 0
 
+def get_user_password(user_id):
+    password = db.select(
+        User.password
+    ).where(
+        User.id == user_id
+    )
+    return db.session.scalar(password)
+
 def get_user_by_id(user_id):
-    user = db.select(
+    if not userExist(user_id):
+        return 404
+
+    basic_info_q = db.select(
         User
     ).where(
         User.id == user_id
     )
-    return db.session.scalar(user)
+    basic_info = db.session.scalar(basic_info_q)
+    basic_info = model_to_dict(basic_info)
+    instrument_q = db.select(
+        User_Instrument.c.instrument_id
+    ).where(
+        User_Instrument.c.user_id == user_id
+    )
+
+    instrument = db.session.scalars(instrument_q)
+
+    region_q = db.select(
+        User_Region.c.region_id
+    ).where(
+        User_Region.c.user_id == user_id
+    )
+
+    region = db.session.scalars(region_q)
+
+    style_q = db.select(
+        User_Style.c.style_id
+    ).where(
+        User_Style.c.user_id == user_id
+    )
+
+    style = db.session.scalars(style_q)
+
+    return basic_info, instrument, region, style
+
 
 def get_instrument_by_user(user_id):
     query = db.select(
@@ -165,10 +205,6 @@ def updateUser(user_id, bio, prefered_time, email, ig, fb, photo):
     return
 
 
-def handleNone(var):
-    if var is sa.null():
-        return 0
-    return var
 
 def queryCompatibleMusician(instruments, regions, styles):
 
@@ -234,7 +270,6 @@ def queryCompatibleMusician(instruments, regions, styles):
 
     
                             
-
 
 
 

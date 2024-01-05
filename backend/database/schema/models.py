@@ -76,4 +76,10 @@ Band_Style = db.Table(
     db.Column("style_id", sa.ForeignKey(Style.id), primary_key=True)
 )
 
+Band_Region = db.Table(
+    'Band_Region',
+    db.Column("band_id",sa.ForeignKey(Band.id), primary_key=True ),
+    db.Column("region_id", sa.ForeignKey(Region.id), primary_key=True)
+)
+
 
