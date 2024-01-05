@@ -62,10 +62,15 @@
   padding: -20px;
 }
 
-.button-89 {
+.home-buttom {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
+  display: grid;
+}
+
+.button-89 {
+  
   transform: translate(-50%, -50%);
 
   --b: 4px;   /* border thickness */
