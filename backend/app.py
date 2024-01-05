@@ -52,11 +52,17 @@ def show_image(file_name):
 @app.route('/getcookie', methods = ['GET'])
 def getcookie():
     name = request.cookies.get('userID')
-    if (name is not ""):
-       return True
-    else:
-       return False
+    check = False
 
+    if (name is not ""):
+       check = True
+       
+    resp =  jsonify({
+        "check": check
+    })
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    resp.status_code = 200
+    return resp
 ## API for User
 
 @app.route('/upload', methods = ['POST'])
