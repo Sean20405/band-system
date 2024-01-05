@@ -61,7 +61,7 @@ const BandRegister = () => {
         formData.append('id', user);  
         formData.append('password', pwd );
         formData.append('name', name );
-        fetch('https://9837-3-112-171-158.ngrok-free.app/band-sign-up', {
+        fetch('http://127.0.0.1:5000/band-sign-up', {
             method: 'POST',
             headers:{
                 "ngrok-skip-browser-warning": "69420",

@@ -56,7 +56,7 @@ const BandLogin = ({ onLogin }) => {
         const id=user;
         const  newuser = { id , role };
 
-        await fetch('https://9837-3-112-171-158.ngrok-free.app/sign-in',{
+        await fetch('http://127.0.0.1:5000/sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
