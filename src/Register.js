@@ -75,7 +75,7 @@ const Register = () => {
                 setErrMsg("id is already used");
             }
             else{
-                history.push('/');
+                history.push('/login');
             }
         })
         .catch((error) => {

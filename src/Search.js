@@ -68,7 +68,7 @@ const Search = () => {
     para = para.slice(0, -1);
     const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
-    fetch('http://18.209.224.72:3000/', {
+    fetch(`http://18.209.224.72:3000/`, {
       method: 'POST',
       headers: { 'ngrok-skip-browser-warning': 'true' },
       body: formData
@@ -79,7 +79,7 @@ const Search = () => {
       console.log('Successfully search!');
       setIsPending(false);
       setHasResult(true);
-      ref.current?.scrollIntoView({ behavior: '' });
+      ref.current?.scrollIntoView({ behavior: 'smooth' });
     })
   }
 
