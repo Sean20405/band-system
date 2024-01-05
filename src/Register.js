@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
@@ -19,6 +21,8 @@ const Register = () => {
     const [matchPwd, setMatchPwd] = useState('');
     const [validMatch, setValidMatch] = useState(false);
     const [matchFocus, setMatchFocus] = useState(false);
+
+    const [name, setName] = useState('');
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
@@ -41,23 +45,45 @@ const Register = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
+    let headers = {
+        "Content-Type": "application/json",
+        "Server": "Werkzeug/3.0.1 Python/3.10.12",
+        "Ngrok-Trace-Id": "13cdac02cee0d08fbde597d21d40a987",
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        const id = user;
-        const password = pwd;
-        const  newuser = { id , password };
-        console.log(newuser);
-        fetch('http://localhost:8000/user/', {
+        if(!validName || !validPwd || !validMatch){
+            setErrMsg("Unable to Register")
+            return;
+        }
+        let formData = new FormData(); 
+        formData.append('id', user);  
+        formData.append('password', pwd );
+        formData.append('name', name );
+        fetch('https://0217-3-112-171-158.ngrok-free.app/user-sign-up', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newuser)
-        }).then(() => {
-            console.log('new blog added');
-            history.push('/');
+            headers:{
+                "ngrok-skip-browser-warning": "69420",
+            },
+            body: formData
+        }).then((response) => {
+            console.log(response.text);
+            return response.text(); 
+        }).then((data) => {
+            if(data=='id is already used'){
+                setErrMsg("id is already used");
+            }
+            else{
+                history.push('/');
+            }
+        })
+        .catch((error) => {
+            console.log(`Error: ${error.message}`);
         })
     }
     return ( 
-        <div className="create">
+        <div className="login">
             {success ? (
                 <section>
                     <h1>Success!</h1>
@@ -67,15 +93,32 @@ const Register = () => {
                 </section>
             ) : (
                 <section>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Register</h1>
+                    <br></br>
+                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
-                            Username:
+                            Name:
                         </label>
                         <input
                             type="text"
                             id="username"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            required
+                            onFocus={() => setUserFocus(true)}
+                            onBlur={() => setUserFocus(false)}
+                        />
+                        <label htmlFor="userid">
+                            UserID:
+                            <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
+                            <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"}  />
+                        </label>
+                        <input
+                            type="text"
+                            id="userid"
                             ref={userRef}
                             autoComplete="off"
                             onChange={(e) => setUser(e.target.value)}
@@ -86,15 +129,18 @@ const Register = () => {
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
-                        {userFocus && user && !validName && (<p>
+                        <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+                            <FontAwesomeIcon icon={faInfoCircle} />
                             4 to 24 characters.<br />
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
-                        </p>)}
+                        </p>
 
 
                         <label htmlFor="password">
                             Password:
+                            <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
+                            <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
                         </label>
                         <input
                             type="password"
@@ -107,15 +153,18 @@ const Register = () => {
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
-                        {pwdFocus && !validPwd && (<p>
+                        <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+                            <FontAwesomeIcon icon={faInfoCircle} />
                             8 to 24 characters.<br />
                             Must include uppercase and lowercase letters, a number and a special character.<br />
                             Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                        </p>)}
+                        </p>
 
 
                         <label htmlFor="confirm_pwd">
                             Confirm Password:
+                            <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
+                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
                         </label>
                         <input
                             type="password"
@@ -128,11 +177,11 @@ const Register = () => {
                             onFocus={() => setMatchFocus(true)}
                             onBlur={() => setMatchFocus(false)}
                         />
-                        {matchFocus && !validMatch && (<p>
+                        <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
+                            <FontAwesomeIcon icon={faInfoCircle} />
                             Must match the first password input field.
-                        </p>)}
-
-                        <button disabled={(!validName || !validPwd || !validMatch) ? true : false}>Sign Up</button>
+                        </p>
+                        <button>Sign Up</button>
                         <br /><br />
                         <button>Test Sign Up</button>
                     </form>

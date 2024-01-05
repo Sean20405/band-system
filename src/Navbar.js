@@ -8,16 +8,14 @@ const Navbar = () => {
           <Link to="/search">Search</Link>
           <Link to="/about">About</Link>
           <Link to="/profile">Profile</Link>
-          <Link to="/login" style={{ 
-            color: 'white', 
-            backgroundColor: '#f1356d',
-            borderRadius: '8px' 
-          }}>Login</Link>
-          <Link to="/create" style={{ 
-            color: 'white', 
-            backgroundColor: '#f1356d',
-            borderRadius: '8px' 
-          }}>Make Band</Link>
+          <div className="dropdown">
+            <button className="dropbtn" >Login</button>
+            <div className="dropdown-content">
+              <Link to="/login">As User</Link>
+              <Link to="/login">As Band</Link>
+            </div>
+          </div> 
+          <Link to="/create">Make Band</Link>
         </div>
       </nav>
     );
