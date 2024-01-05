@@ -44,7 +44,7 @@ function App() {
               <Route path="/test">
                 <Test />
               </Route>
-                            <Route path="*">
+              <Route path="*">
                 <NotFound />
               </Route>
             </Switch>
