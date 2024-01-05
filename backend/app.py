@@ -16,6 +16,7 @@ ALLOWED_EXTENTIONS = set(['png', 'jpg', 'jpeg'])
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 CORS(app)
 
@@ -143,7 +144,7 @@ def get_user():
             "email": user.email,
             "ig": user.ig,
             "fb": user.fb,
-            "photo_url": user.photo
+            "photo": user.photo
         }
     )
     resp.headers.add('Access-Control-Allow-Origin', '*')
