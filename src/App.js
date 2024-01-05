@@ -9,6 +9,7 @@ import Register from './Register';
 import Search from './Search';
 import SearchResult from './SearchResult';
 function App() {
+  
   return (
     <Router>
       <div className="App">

@@ -1,13 +1,16 @@
 import { useRef , useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
-import useFetch from "./useFetch";
+import { useHistory } from "react-router-dom";
 const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
-    const [errMsg, setErrMsg] = useState('');
+    const [errMsg, setErrMsg] = useState('1234');
     const [success, setSuccess] = useState(false);
+    const [info, setInfo] = useState(null);
+    const history=useHistory();
+    //fetch('http://localhost:8000/user/')
     useEffect(() => {
         userRef.current.focus();
     }, [])
@@ -15,14 +18,46 @@ const Login = () => {
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd])
-   
+
+    useEffect(()=>{
+        if(info){
+            if(info.password == pwd){
+                setPwd('');
+                setUser('');
+                setSuccess(true);
+            }
+            else {
+                setErrMsg('password incorrect');
+            };
+        }
+    },[info])
+
+    useEffect(()=>{
+        if(success){
+            history.push('/');
+        }
+    },[success])
+
     const handleSubmit =async(e) => {
-        //const { data , error, isPending } = useFetch('http://localhost:8000/user/' + user);
         e.preventDefault();
-        //console.log(data);
-        setPwd('');
-        setUser('');
-        setSuccess(true);
+        //setTimeout(() => {
+        await fetch('http://localhost:8000/user/' + user)
+        .then(res => {
+            if (!res.ok) {
+                throw Error('404');
+            } 
+            return res.json();
+        })
+        .then(data => {
+            setInfo(data);
+        })
+        .catch(err => {
+            console.log(err.message);
+            if (err.message === '404') {
+                setErrMsg('Unauthorized');
+            }
+        })
+        
     }
 
     return ( 
@@ -39,8 +74,8 @@ const Login = () => {
              
             { success === false && (
             <div>
-                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <h1>Sign in</h1>
+                {true && (<p>{errMsg}</p>) }
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input

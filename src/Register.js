@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
@@ -22,6 +23,7 @@ const Register = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
+    const history=useHistory();
     useEffect(() => {
         userRef.current.focus();
     }, [])
@@ -39,7 +41,7 @@ const Register = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
-    const HandleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const id = user;
         const password = pwd;
@@ -51,7 +53,7 @@ const Register = () => {
             body: JSON.stringify(newuser)
         }).then(() => {
             console.log('new blog added');
-            //history.push('/');
+            history.push('/');
         })
     }
     return ( 
@@ -67,7 +69,7 @@ const Register = () => {
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Register</h1>
-                    <form onSubmit={HandleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
                             Username:
                         </label>
