@@ -56,7 +56,7 @@ const Login = ({ onLogin }) => {
         const id=user;
         const  newuser = { id , role };
 
-        await fetch('https://9837-3-112-171-158.ngrok-free.app/sign-in',{
+        await fetch('http://18.209.224.72:3000/sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
