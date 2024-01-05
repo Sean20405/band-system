@@ -13,6 +13,24 @@ const Login = () => {
     //fetch('http://localhost:8000/user/')
     useEffect(() => {
         userRef.current.focus();
+        fetch('https://0217-3-112-171-158.ngrok-free.app/getcookie',{
+            method: "GET",
+            headers:{
+                "ngrok-skip-browser-warning": "69420"
+            }
+        })
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => {
+            console.log(err.message);
+            if (err.message === '404') {
+                setErrMsg('Unauthorized');
+            }
+        })
     }, [])
 
     useEffect(() => {
@@ -21,7 +39,11 @@ const Login = () => {
 
     useEffect(()=>{
         if(info){
-            if(info.password == pwd){
+            console.log(info);
+            if(info.message == "User is not exist."){
+                setErrMsg('Unauthorized');
+            }
+            else if(info.password == pwd){
                 setPwd('');
                 setUser('');
                 setSuccess(true);
@@ -34,6 +56,7 @@ const Login = () => {
 
     useEffect(()=>{
         if(success){
+            
             history.push('/');
         }
     },[success])
@@ -41,11 +64,20 @@ const Login = () => {
     const handleSubmit =async(e) => {
         e.preventDefault();
         //setTimeout(() => {
-        await fetch('http://localhost:8000/user/' + user)
+        let formData = new FormData(); 
+        formData.append('role', 'user');   //append the values with key, value pair
+        formData.append('id', user );
+        const role = "user";
+        const id=user;
+        const  newuser = { id , role };
+        await fetch('https://0217-3-112-171-158.ngrok-free.app/sign-in',{
+            method: "POST",
+            headers:{
+                "ngrok-skip-browser-warning": "69420"
+            },
+            body: formData
+        })
         .then(res => {
-            if (!res.ok) {
-                throw Error('404');
-            } 
             return res.json();
         })
         .then(data => {
@@ -61,7 +93,7 @@ const Login = () => {
     }
 
     return ( 
-        <div className='create'>
+        <div className="login">
             { success && (
                 <div>
                     <h1>You are logged in!</h1>
@@ -75,7 +107,8 @@ const Login = () => {
             { success === false && (
             <div>
                 <h1>Sign in</h1>
-                {true && (<p>{errMsg}</p>) }
+                <br></br>
+                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input

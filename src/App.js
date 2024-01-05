@@ -8,10 +8,18 @@ import Login from './Login';
 import Register from './Register';
 import Search from './Search';
 import SearchResult from './SearchResult';
+<<<<<<< HEAD
 import Test from './test';
+=======
+import { CookiesProvider, useCookies } from "react-cookie";
+>>>>>>> d3d273f1ba125c2e95b5ef455cac51c6b11402f6
 function App() {
-  
+  const [cookies, setCookie] = useCookies(["user"]);
+  function handleLogin(user) {
+    setCookie("user", user, { path: "/" });
+  }
   return (
+<<<<<<< HEAD
     <Router>
       <div className="App">
         <Navbar />
@@ -42,9 +50,41 @@ function App() {
               <NotFound />
             </Route>
           </Switch>
+=======
+    
+    <CookiesProvider>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="content">
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/search">
+                <Search />
+              </Route>
+              <Route path="/searchresult">
+                <SearchResult />
+              </Route>
+              <Route path="/register">
+                <Register />
+              </Route>
+              <Route path="/blogs/:id">
+                <BlogDetails />
+              </Route>
+              <Route path="*">
+                <NotFound />
+              </Route>
+            </Switch>
+          </div>
+>>>>>>> d3d273f1ba125c2e95b5ef455cac51c6b11402f6
         </div>
-      </div>
-    </Router>
+      </Router>
+    </CookiesProvider>
   );
 }
 

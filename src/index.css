@@ -5,7 +5,7 @@
 * {
   margin: 0;
   font-family: "Noto Sans TC", "Quicksand";
-  color: #333;
+  color: #333;  
 }
 .navbar {
   padding: 20px;
@@ -180,6 +180,37 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 
 /* Login */
+.login {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+.login label {
+  text-align: left;
+  display: block;
+}
+.login h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 30px;
+}
+.login input, .login textarea, .login select {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+.login button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 .login {
   max-width: 400px;
   margin: 0 auto;

@@ -40,6 +40,11 @@
     {
       "id": "howgin",
       "password": "1qw2!QW@"
+    },
+    {
+      "id": "userid",
+      "password": "password",
+      "name": "name"
     }
   ]
 }
