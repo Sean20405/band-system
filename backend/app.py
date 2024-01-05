@@ -108,8 +108,8 @@ def add_user():
 def sign_in():
     role = request.form.get("role")
     id = request.form.get("id")
-    password= request.form.get("password")
-    #not done, need query
+    # password = request.form.get("password")
+    # not done, need query
     if role == 'band':
         band = get_band_by_id(id)
         return band.password
