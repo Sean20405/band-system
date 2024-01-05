@@ -215,7 +215,6 @@ opacity: 0;
 .dropdown {
   float: right;
   overflow: hidden;
-  margin-left: 16px;
   text-decoration: none;
 }
 
@@ -225,7 +224,6 @@ opacity: 0;
   background:none;
   border:none;
   margin:0;
-  padding-bottom:5px;
   cursor: pointer;
 }
 
