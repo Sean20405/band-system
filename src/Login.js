@@ -13,24 +13,6 @@ const Login = () => {
     //fetch('http://localhost:8000/user/')
     useEffect(() => {
         userRef.current.focus();
-        fetch('https://0217-3-112-171-158.ngrok-free.app/getcookie',{
-            method: "GET",
-            headers:{
-                "ngrok-skip-browser-warning": "69420"
-            }
-        })
-        .then(res => {
-            return res.json();
-        })
-        .then(data => {
-            console.log(data);
-        })
-        .catch(err => {
-            console.log(err.message);
-            if (err.message === '404') {
-                setErrMsg('Unauthorized');
-            }
-        })
     }, [])
 
     useEffect(() => {
@@ -70,7 +52,7 @@ const Login = () => {
         const role = "user";
         const id=user;
         const  newuser = { id , role };
-        await fetch('https://0217-3-112-171-158.ngrok-free.app/sign-in',{
+        await fetch('https://9837-3-112-171-158.ngrok-free.app/sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
