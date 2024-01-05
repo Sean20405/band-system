@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify, make_response
+from flask import Flask, request, redirect, jsonify, make_response, send_file
 from flask_cors import CORS
 from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
@@ -33,6 +33,11 @@ def find_musician():
     resp.headers.add('Access-Control-Allow-Origin', '*')
     resp.status_code = 200
     return resp
+
+@app.route('/image/<file_name>', methods = ['GET'])
+def show_image(file_name):
+    image_path = "static/uploads" + file_name
+    return send_file(image_path, mimetype='image/png')
 
 ## API for User
 
@@ -124,7 +129,18 @@ def get_user():
         return resp
     user_id = request.args.get('user_id')
     user = get_user_by_id(user_id)
-    resp = jsonify(user)
+    resp = jsonify(
+        {
+            "id": user.id,
+            "name": user.name,
+            "prefered_time": user.prefered_time,
+            "bio": user.bio,
+            "email": user.email,
+            "ig": user.ig,
+            "fb": user.fb,
+            "photo_url": user.photo
+        }
+    )
     resp.headers.add('Access-Control-Allow-Origin', '*')
     resp.status_code = 201
     return resp
@@ -151,6 +167,7 @@ def user_info():
         styles = request.form.getlist('style')
         prefered_time = request.form.get('prefered_time')
         bio = request.form.get('bio')
+        email = request.form.get('email')
         ig = request.form.get('ig')
         fb = request.form.get('fb')
 
@@ -179,7 +196,7 @@ def user_info():
         updateUserInstruments(user_id, instruments)
         updateUserRegions(user_id, regions)
         updateUserStyles(user_id, styles)
-        updateUser(user_id, bio, prefered_time, ig, fb, filename)
+        updateUser(user_id, bio, prefered_time, email, ig, fb, filename)
         db.session.commit()
 
         # Create message
