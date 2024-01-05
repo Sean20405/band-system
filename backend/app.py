@@ -48,6 +48,14 @@ def show_image(file_name):
         return send_file(image_path, mimetype='image/jpg')
     elif file_name.endswith(".jpeg"):
         return send_file(image_path, mimetype='image/jpeg')
+    
+@app.route('/getcookie', methods = ['GET'])
+def getcookie():
+    name = request.cookies.get('userID')
+    if (name is not ""):
+       return True
+    else:
+       return False
 
 ## API for User
 
@@ -125,6 +133,7 @@ def sign_in():
                 "password": user.password
             })
             resp.headers.add('Access-Control-Allow-Origin', '*')
+            resp.set_cookie('userID', id)
             resp.status_code = 200
             return resp
         else:
