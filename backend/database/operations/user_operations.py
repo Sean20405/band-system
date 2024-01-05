@@ -197,8 +197,7 @@ def updateUser(user_id, bio, prefered_time, email, ig, fb, photo):
         email = email,
         ig = ig,
         fb = fb,
-        photo = photo,
-        email = email
+        photo = photo
     )
     
     db.session.execute(stmt)

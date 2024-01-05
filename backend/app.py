@@ -133,7 +133,7 @@ def add_user():
     return resp
 
 
-@app.route('/sign-in', methods = ['GET'])
+@app.route('/sign-in', methods = ['POST'])
 def sign_in():
     role = request.form.get("role")
     id = request.form.get("id")
