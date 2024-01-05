@@ -122,6 +122,15 @@ def sign_in():
         resp.headers.add('Access-Control-Allow-Origin', '*')
         resp.status_code = 200
         return resp
+    
+    else:
+        resp = jsonify({
+            "message": "Role is not correct",
+            "status": "Failed"
+        })
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.status_code = 400
+        return resp
 
 
 @app.route('/user', methods = ["GET"])
