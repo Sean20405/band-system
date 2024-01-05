@@ -118,13 +118,23 @@ def sign_in():
         band = get_band_by_id(id)
         return band.password
     elif role == 'user':
-        user = get_user_by_id(id)
-        resp = jsonify({
-            "password": user.password
-        })
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        resp.status_code = 200
-        return resp
+        exist = userExist(id)
+        if exist:
+            user = get_user_by_id(id)
+            resp = jsonify({
+                "password": user.password
+            })
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            resp.status_code = 200
+            return resp
+        else:
+            resp = jsonify({
+                "message": "User is not exist.",
+                "status": "Failed"
+            })
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            resp.status_code = 200
+            return resp
     else:
         resp = jsonify({
             "message": "Role is not correct",
