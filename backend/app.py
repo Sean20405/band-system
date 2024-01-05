@@ -105,7 +105,12 @@ def sign_in():
         
     elif role == 'user':
         user = get_user_by_id(id)
-        return user.password
+        resp = jsonify({
+            "password": user.password
+        })
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.status_code = 200
+        return resp
 
 
 @app.route('/user', methods = ["GET"])
