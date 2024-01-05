@@ -8,6 +8,7 @@ import Login from './Login';
 import Register from './Register';
 import Search from './Search';
 import SearchResult from './SearchResult';
+import Test from './test';
 import { CookiesProvider, useCookies } from "react-cookie";
 function App() {
   const [cookies, setCookie] = useCookies(["user"]);
