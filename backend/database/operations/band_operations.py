@@ -149,7 +149,7 @@ def updateBand(band_id, bio, practice_time, ig, fb, photo, contact_window):
     return
 
 def queryCompatibleBand(styles, regions):
-    regions = [int(i) for i in regions]
+    regions = [str(i) for i in regions]
     styles = [int(i) for i in styles]
 
     region_count = db.select(
