@@ -1,7 +1,7 @@
 import { useRef , useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-const Login = () => {
+const Login = ({ onLogin }) => {
     const userRef = useRef();
     const errRef = useRef();
     const [user, setUser] = useState('');
@@ -38,13 +38,15 @@ const Login = () => {
 
     useEffect(()=>{
         if(success){
-            
+            console.log(user);
+            onLogin({ user });
             history.push('/');
         }
     },[success])
 
     const handleSubmit =async(e) => {
         e.preventDefault();
+        setSuccess(true);
         //setTimeout(() => {
         let formData = new FormData(); 
         formData.append('role', 'user');   //append the values with key, value pair
@@ -52,6 +54,7 @@ const Login = () => {
         const role = "user";
         const id=user;
         const  newuser = { id , role };
+
         await fetch('https://9837-3-112-171-158.ngrok-free.app/sign-in',{
             method: "POST",
             headers:{
