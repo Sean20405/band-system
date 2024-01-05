@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, jsonify, make_response
+from flask import Flask, request, redirect, jsonify, make_response, send_file
 from flask_cors import CORS
 from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
@@ -13,12 +13,14 @@ load_dotenv('.env')
 DB_URI: str = os.getenv('SQLALCHEMY_DATABASE_URI')
 UPLOAD_FOLDER: str = os.getenv('UPLOAD_FOLDER')
 ALLOWED_EXTENTIONS = set(['png', 'jpg', 'jpeg'])
+CORS_ALLOW_ALL_ORIGINS = True  # Not recommended for production
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['CORS_HEADERS'] = 'Content-Type'
 
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
 
 db.init_app(app)
 
@@ -47,6 +49,30 @@ def find_target():
         return resp
    
 
+@app.route('/image/<file_name>', methods = ['GET'])
+def show_image(file_name):
+    image_path = "static/uploads/" + file_name
+    if file_name.endswith(".png"):
+        return send_file(image_path, mimetype='image/png')
+    elif file_name.endswith(".jpg"):
+        return send_file(image_path, mimetype='image/jpg')
+    elif file_name.endswith(".jpeg"):
+        return send_file(image_path, mimetype='image/jpeg')
+    
+@app.route('/getcookie', methods = ['GET'])
+def getcookie():
+    name = request.cookies.get('userID')
+    check = False
+    print(name)
+    if (name is not None):
+       check = True
+
+    resp =  jsonify({
+        "check": check
+    })
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    resp.status_code = 200
+    return resp
 ## API for User
 
 @app.route('/upload', methods = ['POST'])
@@ -125,14 +151,33 @@ def sign_in():
         return resp
         
     elif role == 'user':
-        user_password = get_user_password(id)
-        resp = make_response(
+        exist = userExist(id)
+        if exist:
+            user_password = get_user_password(id)
+            resp = make_response(
             {
-                "password": user_password
-            }
+                    "password": user_password
+                }
         )
-        resp.headers['Access-Control-Allow-Origin'] = '*'
-        resp.status_code = 200
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            resp.set_cookie('userID', id)
+            resp.status_code = 200
+            return resp
+        else:
+            resp = jsonify({
+                "message": "User is not exist.",
+                "status": "Failed"
+            })
+            resp.headers['Access-Control-Allow-Origin'] = '*'
+            resp.status_code = 200
+            return resp
+    else:
+        resp = jsonify({
+            "message": "Role is not correct",
+            "status": "Failed"
+        })
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.status_code = 400
         return resp
 
 
@@ -221,6 +266,7 @@ def user_info():
         styles = request.form.getlist('style')
         prefered_time = request.form.get('prefered_time')
         bio = request.form.get('bio')
+        email = request.form.get('email')
         ig = request.form.get('ig')
         fb = request.form.get('fb')
         email = request.form.get('email')
