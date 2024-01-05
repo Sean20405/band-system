@@ -23,7 +23,7 @@ const Login = ({ onLogin }) => {
     useEffect(()=>{
         if(info){
             console.log(info);
-            if(info.message == "User is not exist."){
+            if(info.status == "Failed"){
                 setErrMsg('Unauthorized');
             }
             else if(info.password == pwd){
@@ -47,7 +47,7 @@ const Login = ({ onLogin }) => {
 
     const handleSubmit =async(e) => {
         e.preventDefault();
-        setSuccess(true);
+        //setSuccess(true);
         //setTimeout(() => {
         let formData = new FormData(); 
         formData.append('role', 'user');   //append the values with key, value pair
