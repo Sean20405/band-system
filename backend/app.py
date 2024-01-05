@@ -108,10 +108,10 @@ def add_user():
     resp.status_code = 200
     return resp
 
-@app.route('/sign-in', methods = ['GET'])
+@app.route('/sign-in', methods = ['POST'])
 def sign_in():
-    role = request.args.get("role")
-    id = request.args.get("id")
+    role = request.form.get("role")
+    id = request.form.get("id")
     print(role)
     print(id)
     if role == 'band':
