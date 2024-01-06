@@ -64,7 +64,8 @@ def find_target():
 @app.route('/image/<file_name>', methods = ['GET'])
 def show_image(file_name):
     image_path = "static/uploads/" + file_name
-    type = file_name.split('.')[-1]
+    part = file_name.split('.')
+    type = part[-1]
     print(type)
     resp = send_file(image_path, mimetype='image/'+type)
     resp.headers.add('Access-Control-Allow-Origin', '*')
