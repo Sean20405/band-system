@@ -93,9 +93,7 @@ const Profile = ({user,url}) => {
 
 
     return(
-
         <div className="container emp-profile">
-            <form method="put">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -109,7 +107,7 @@ const Profile = ({user,url}) => {
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        info.name
+                                        {info.name}
                                     </h5>
                                     <h6>
                                         {info.instrument}
@@ -239,8 +237,7 @@ const Profile = ({user,url}) => {
                             </div> --> */}
                         </div>
                     </div>
-                </div>
-            </form>           
+                </div>           
         </div>
 
     ); 
