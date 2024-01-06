@@ -6,8 +6,7 @@ import BlogDetails from './BlogDetails'
 import NotFound from './NotFound';
 import Login from './Login';
 import Register from './Register';
-import Search from './Search';
-import SearchResult from './SearchResult';
+import { SearchMusician, SearchBand } from './Search';
 import { CookiesProvider, useCookies } from 'react-cookie';
 import Test from './test';
 import WelcomePage from './WelcomePage';
@@ -17,7 +16,7 @@ import BandLogin from './BandLogin'
 import BandRegister from './BandRegister';
 import Forget from './Forget';
 function App() {
-  const url="http://18.209.224.72:3000/"
+  const url="http://100.25.158.3:5000/"
   const [cookies, setCookie] = useCookies(["user"]);
   function handleLogin(user) {
     setCookie("user", user, { path: "/" });
@@ -50,12 +49,13 @@ function App() {
               <Route path="/Logout">
                   <Logout onLogin={handleLogin}/>
               </Route>
-              <Route path="/search">
-                <Search />
+              <Route path="/searchmusician">
+                <SearchMusician />
               </Route>
-              <Route path="/searchresult">
-                <SearchResult />
+              <Route path="/searchband">
+                <SearchBand />
               </Route>
+
               <Route path="/register">
                 <Register />
               </Route>
