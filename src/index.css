@@ -391,11 +391,6 @@ ul.ks-cboxtags li input[type="checkbox"] {
   display: inline-block;
 }
 
-.profile {
-  max-width: 75%;
-  margin: 0 auto;
-  text-align: center;
-}
 
 img.stretchy {
   width: 100%; /*Tells image to fit to width of parent container*/
@@ -405,4 +400,81 @@ img.stretchy {
 .photoContainer {
   width: 33%; 
   align-items: center;
+}
+
+.profile {
+  text-align:left;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  padding: 0.5rem;
+  position: relative;
+}
+
+.profile-main {
+  position: absolute;
+  top: 75px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color:  #a95b5d; /*D8D8EB  FFF8D7 FFF4C1*/
+}
+
+
+.profile-container {
+  max-width: 800px;
+  margin: 70px auto;
+  background-color: #ffffffc7;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 50px;
+}
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.user-name {
+  margin-top: 10px;
+  color: #333;
+}
+
+.user-id,
+.user-bio {
+  color: #777;
+}
+
+.profile-details {
+  margin-top: 20px;
+}
+
+.detail {
+  border-bottom: 1px solid #fff;
+  padding: 10px 0;
+}
+
+.detail strong {
+  display: inline-block;
+  width: 150px;
+  font-weight: bold;
+}
+
+.detail a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.detail a:hover {
+  text-decoration: underline;
 }

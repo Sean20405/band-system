@@ -46,7 +46,7 @@ const Profile = ({user}) => {
 
     const loadInitialPage = async () => {
         console.log("init");
-        const response = await fetch('http://127.0.0.1:5000/user?user_id=' + id, {
+        const response = await fetch('http://100.25.158.3:3000/user?user_id=' + id, {
             method: 'GET'
         });
         const data = await response.json();
@@ -58,7 +58,7 @@ const Profile = ({user}) => {
     
 
     const fetchPhoto = async(filename) => {
-        const res = await fetch('http://127.0.0.1:5000/image/' + filename ,{
+        const res = await fetch('http://100.25.158.3:3000/image/' + filename ,{
             method: 'GET',
         });
         const imageBlob = await res.blob();
@@ -71,6 +71,7 @@ const Profile = ({user}) => {
             <h1>{ formData.get("name") }'s Public profile</h1>
             <br></br>
             <div className="blog-preview" >
+                
                 <div>
                     <h2>ID:</h2>
                     <p>{ id }</p>
