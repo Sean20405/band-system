@@ -71,7 +71,7 @@ export function SearchMusician () {
     para = para.slice(0, -1);
     const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
-    fetch(`http://127.0.0.1:5000/`, {
+    fetch(`http://54.160.85.246:5000/`, {
       method: 'POST',
       headers: { 'ngrok-skip-browser-warning': 'true' },
       body: formData
@@ -200,7 +200,7 @@ export function SearchBand () {
     para = para.slice(0, -1);
     const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
-    fetch("http://127.0.0.1:5000/", {
+    fetch("http://54.160.85.246:5000/", {
       method: 'POST',
       headers: { 'ngrok-skip-browser-warning': 'true' },
       body: formData

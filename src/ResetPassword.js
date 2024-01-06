@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 const REGISTER_URL = '/register';
 const ResetPassword = ({forget_user,forget}) => {
     const userRef = useRef();
@@ -47,13 +47,13 @@ const ResetPassword = ({forget_user,forget}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(!validPwd || !validMatch){
-            setErrMsg("Unable to Register")
+            setErrMsg("Unabled Password")
             return;
         }
         let formData = new FormData(); 
         formData.append('id', forget_user.user);  
         formData.append('password', pwd );
-        fetch('http://100.25.158.3:5000/forget_password/' + forget_user.role, {
+        fetch('http://54.160.85.246:5000/forget_password/' + forget_user.role, {
             method: 'POST',
             headers:{
                 "ngrok-skip-browser-warning": "69420",
@@ -83,7 +83,7 @@ const ResetPassword = ({forget_user,forget}) => {
                 <section>
                     <h1>ResetPassword</h1>
                     <br></br>
-                    <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <div className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</div>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="password">
                             Password:
@@ -103,9 +103,8 @@ const ResetPassword = ({forget_user,forget}) => {
                         />
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            8 to 24 characters.<br />
-                            Must include uppercase and lowercase letters, a number and a special character.<br />
-                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                            8 to 24 characters.
+                            Must include uppercase and lowercase letters, a number 
                         </p>
 
 

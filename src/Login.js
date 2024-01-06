@@ -54,7 +54,7 @@ const Login = ({ onLogin }) => {
         const id=user;
         const  newuser = { id , role };
 
-        await fetch('http://127.0.0.1:5000/sign-in',{
+        await fetch('http://54.160.85.246:5000/sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
@@ -78,7 +78,7 @@ const Login = ({ onLogin }) => {
     }
 
     return ( 
-        <div className="login">
+        <div className="contain">
             { success && (
                 <div>
                     <h1>You are logged in!</h1>
@@ -90,10 +90,14 @@ const Login = ({ onLogin }) => {
             )} 
              
             { success === false && (
-            <div>
+            <>
+            <div className="top"></div>
+            <div className="bottom"></div>
+            <div className="center">
+            <div className="login">
                 <h1>Sign in</h1>
                 <br></br>
-                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                <div ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</div>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input
@@ -108,6 +112,9 @@ const Login = ({ onLogin }) => {
 
                     <label htmlFor="password">Password:</label>
                     
+                    <p>
+                        <Link to="/forget">Forget password</Link>
+                    </p>
                     <input
                         type="password"
                         id="password"
@@ -115,18 +122,16 @@ const Login = ({ onLogin }) => {
                         value={pwd}
                         required
                     />
-                    <p>
-                        <Link to="/forget">Forget password</Link>
-                    </p>
                     <button>Sign In</button>
                 </form>
-                <p>
+                <label>
                     Need an Account?<br />
-                    <span className="">
-                        <Link to="/register">Sign Up</Link>
-                    </span>
+                </label>
+                <p>
+                    <Link to="/register">Sign Up</Link>
                 </p>
-            </div>
+                </div>
+            </div></>
             )}
         </div>
     );

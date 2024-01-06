@@ -17,7 +17,7 @@ import BandRegister from './BandRegister';
 import Forget from './Forget';
 import ResetPassword from './ResetPassword'
 function App() {
-  const url="http://100.25.158.3:5000/"
+  const url="http://54.160.85.246:5000/"
   const [cookies, setCookie] = useCookies(["user","forget_user"]);
   function handleLogin(user) {
     setCookie("user", user, { path: "/" });

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 const REGISTER_URL = '/register';
 const BandRegister = () => {
     const userRef = useRef();
@@ -61,7 +61,7 @@ const BandRegister = () => {
         formData.append('id', user);  
         formData.append('password', pwd );
         formData.append('name', name );
-        fetch('http://127.0.0.1:5000/band-sign-up', {
+        fetch('http://54.160.85.246:5000/band-sign-up', {
             method: 'POST',
             headers:{
                 "ngrok-skip-browser-warning": "69420",
@@ -83,7 +83,7 @@ const BandRegister = () => {
         })
     }
     return ( 
-        <div className="login">
+        <div className="contain">
             {success ? (
                 <section>
                     <h1>Success!</h1>
@@ -92,10 +92,14 @@ const BandRegister = () => {
                     </p>
                 </section>
             ) : (
-                <section>
+                <>
+                <div className="top"></div>
+                <div className="bottom"></div>
+                <div className="center">
+                <div className="register">
                     <h1>Register</h1>
                     <br></br>
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                    <div ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</div>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
                             BandName:
@@ -131,9 +135,8 @@ const BandRegister = () => {
                         />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            4 to 24 characters.<br />
+                            4 to 24 characters.
                             Must begin with a letter.<br />
-                            Letters, numbers, underscores, hyphens allowed.
                         </p>
 
 
@@ -155,9 +158,8 @@ const BandRegister = () => {
                         />
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
-                            8 to 24 characters.<br />
-                            Must include uppercase and lowercase letters, a number and a special character.<br />
-                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                            8 to 24 characters.
+                            Must include uppercase and lowercase letters, a number .
                         </p>
 
 
@@ -183,13 +185,14 @@ const BandRegister = () => {
                         </p>
                         <button>Sign Up</button>
                     </form>
-                    <p>
+                    <label>
                         Already registered?<br />
-                        <span className="line">
+                    </label>
+                        <p className="Link">
                             <Link to="/Bandlogin">Sign In</Link>
-                        </span>
-                    </p>
-                </section>
+                        </p>
+                </div>
+            </div></>
             )}
         </div>
     );

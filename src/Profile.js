@@ -45,7 +45,7 @@ const Profile = ({user}) => {
 
     const loadInitialPage = async () => {
         console.log("init");
-        const response = await fetch('http://127.0.0.1:5000/user?user_id=' + id, {
+        const response = await fetch('http://54.160.85.246:5000/user?user_id=' + id, {
             method: 'GET',
             headers:{
                 "ngrok-skip-browser-warning": "69420",
