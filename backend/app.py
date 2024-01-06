@@ -65,17 +65,17 @@ def find_target():
 def show_image(file_name):
     image_path = "static/uploads/" + file_name
     if file_name.endswith(".png"):
-        return send_file(image_path, mimetype='image/png')
+        return send_file(image_path, mimetype='image/png').headers.add('Access-Control-Allow-Origin', '*')
     elif file_name.endswith(".PNG"):
-        return send_file(image_path, mimetype='image/PNG')
+        return send_file(image_path, mimetype='image/PNG').headers.add('Access-Control-Allow-Origin', '*')
     elif file_name.endswith(".jpg"):
-        return send_file(image_path, mimetype='image/jpg')
+        return send_file(image_path, mimetype='image/jpg').headers.add('Access-Control-Allow-Origin', '*')
     elif file_name.endswith(".JPG"):
-        return send_file(image_path, mimetype='image/JPG')
+        return send_file(image_path, mimetype='image/JPG').headers.add('Access-Control-Allow-Origin', '*')
     elif file_name.endswith(".jpeg"):
-        return send_file(image_path, mimetype='image/jpeg')
+        return send_file(image_path, mimetype='image/jpeg').headers.add('Access-Control-Allow-Origin', '*')
     elif file_name.endswith(".JPEG"):
-        return send_file(image_path, mimetype='image/JPEG')
+        return send_file(image_path, mimetype='image/JPEG').headers.add('Access-Control-Allow-Origin', '*')
     
 @app.route('/getcookie', methods = ['GET'])
 def getcookie():
