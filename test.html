@@ -1,109 +1,18 @@
-import { Link } from "react-router-dom";
-import useFetch from "./useFetch";
-import { useState, useEffect } from "react";
-import './profile.css'
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-const Profile = ({user,url}) => {
-    const id = user.user;
-    const role = user.role;
-    const [info, setInfo] = useState({});
-    const [errMsg, setErrMsg] = useState('1234');
-    const [name, setName] = useState(null);
-    const [prefered_time, setPrefered_time] = useState(null);
-    const [instrument, setInstrument] = useState(null);
-    const [style, setStyle] = useState(null);
-    const [region, setRegion] = useState(null);
-    const [ig, setIg] = useState(null);
-    const [fb, setFb] = useState(null);
-    const [photo, setPhoto] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [bio, setBio] = useState(null);
-
-    
-    let formData = new FormData(); 
-    formData.append('name', "Sheng_Shun_Chang");
-    formData.append('prefered_time', "midnight");
-    formData.append('bio', "love Amazing Show");
-    formData.append('photo', "Some random URL");
-    formData.append('ig', "vitolin_yucheng");
-    formData.append('fb', 'Kent_l');
-    formData.append('email', 'vitolin0416@gmail.com');
-    formData.append('instrument', 'violin');
-    formData.append('region', 'Taipei');
-    formData.append('style', 'rock paper scissor');
-
-    // const instrument_dict = {
-    //     1:"Electric Guitar", 
-    //     2: "KB", 
-    //     3:"Drums", 
-    //     4:"Bass", 
-    //     5:"Vocal", 
-    //     6:"Saxophone", 
-    //     7:"Cello", 
-    //     8:"Acoustic Guitar", 
-    //     9:"Trumpet", 
-    //     10:"Others"
-    // }
-
-    useEffect(()=>{
-        if(info){
-            fetchPhoto(info.photo);
-
-        }
-        else {
-            console.log("cannot fetch info");
-        }
-    },[info])
-
-    useEffect(() => {
-        loadInitialPage();
-    },[]);
-
-    const loadInitialPage = async () => {
-        console.log("init");
-        const response = await fetch(url + 'user?user_id=' + id, {
-            method: 'GET'
-        });
-        const data = await response.json();
-        console.log(data);
-        setInfo(data);
-        console.log(info);
-
-    }
-    
-
-    const fetchPhoto = async(filename) => {
-        if(!filename)
-        {
-            console.log("no filename");
-            return
-        }
-        
-        const res = await fetch('http://127.0.0.1:5000/image/' + filename ,{
-            // mode: "no-cors",
-            method: 'GET',
-        });
-        const imageBlob = await res.blob();
-        const photoURL = URL.createObjectURL(imageBlob);
-        console.log(photoURL)
-        await setPhoto(photoURL);
-        console.log(photo)
-    }
-
-
-
-    return(
-
-        <div className="container emp-profile">
-            <form method="put">
+<div class="container emp-profile">
+            <form method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src={photo} alt="profile"/>
-                            {/* <!-- <div class="file btn btn-lg btn-primary">
+                            <!-- <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
-                            </div> --> */}
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -118,9 +27,9 @@ const Profile = ({user,url}) => {
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
-                                {/* <!-- <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                </li> --> */}
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -147,7 +56,7 @@ const Profile = ({user,url}) => {
                                                 <label>User Id</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{id}</p>
+                                                <p>{info.user_id}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -185,11 +94,11 @@ const Profile = ({user,url}) => {
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label>Your Bio</label><br/>
-                                            <p>{info.bio}</p>
+                                            <p>Your detail description</p>
                                         </div>
                                     </div>
                             </div>
-                            {/* <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Experience</label>
@@ -236,14 +145,9 @@ const Profile = ({user,url}) => {
                                         <p>Your detail description</p>
                                     </div>
                                 </div>
-                            </div> --> */}
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </form>           
         </div>
-
-    ); 
-}
- 
-export default Profile;
