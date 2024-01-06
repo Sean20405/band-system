@@ -6,7 +6,7 @@ import './profile.css'
 const Profile = ({user,url}) => {
     const id = user.user;
     const role = user.role;
-    const [info, setInfo] = useState({});
+    const [info, setInfo] = useState(null);
     const [errMsg, setErrMsg] = useState('1234');
     const [name, setName] = useState(null);
     const [prefered_time, setPrefered_time] = useState(null);
@@ -32,23 +32,12 @@ const Profile = ({user,url}) => {
     formData.append('region', 'Taipei');
     formData.append('style', 'rock paper scissor');
 
-    // const instrument_dict = {
-    //     1:"Electric Guitar", 
-    //     2: "KB", 
-    //     3:"Drums", 
-    //     4:"Bass", 
-    //     5:"Vocal", 
-    //     6:"Saxophone", 
-    //     7:"Cello", 
-    //     8:"Acoustic Guitar", 
-    //     9:"Trumpet", 
-    //     10:"Others"
-    // }
+   
 
     useEffect(()=>{
         if(info){
+            console.log(info.photo);
             fetchPhoto(info.photo);
-
         }
         else {
             console.log("cannot fetch info");
@@ -73,24 +62,57 @@ const Profile = ({user,url}) => {
     
 
     const fetchPhoto = async(filename) => {
-        if(!filename)
+        
+        if(filename == "")
         {
-            console.log("no filename");
-            return
+            console.log("fetch")
+            filename = "default.jpg"
+
         }
         
-        const res = await fetch('http://127.0.0.1:5000/image/' + filename ,{
+        const res = await fetch(url + 'image/' + filename ,{
             // mode: "no-cors",
             method: 'GET',
         });
+        console.log(res.status)
         const imageBlob = await res.blob();
         const photoURL = URL.createObjectURL(imageBlob);
         console.log(photoURL)
-        await setPhoto(photoURL);
+        setPhoto(photoURL);
         console.log(photo)
+        
     }
 
+    const styles = ['J-rock', 'Metal', 'J-pop', 'Lo-Fi', 'Jazz', 'Post Rock', 'Math Rock', 'Acoustic', 'Softcore', 'Pop-Punk', 'Country', "Others"];
+    const regions = {
+        "KLU": "基隆市",
+        "TPH": "新北市", 
+        "TPE": "臺北市", 
+        "TYC": "桃園市", 
+        "HSH": "新竹縣", 
+        "HSC": "新竹市", 
+        "MAL": "苗栗縣", 
+        "TXG": "臺中市", 
+        "CWH": "彰化縣",
+        "NTO": "南投縣",
+        "YLH": "雲林縣", 
+        "CHY": "嘉義縣", 
+        "CYI": "嘉義市", 
+        "TNN": "臺南市", 
+        "KHH": "高雄市", 
+        "IUH": "屏東縣", 
+        "ILN": "宜蘭縣",
+        "HWA": "花蓮縣",
+        "TTT": "臺東縣", 
+        "PEH": "澎湖縣", 
+        "GNI": "綠島", 
+        "KYD": "蘭嶼", 
+        "KMN": "金門縣", 
+        "LNN": "連江縣"
+    };
+    const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
 
+    if(!info || !photo) return "loading";
 
     return(
         <div className="container emp-profile">
@@ -109,9 +131,7 @@ const Profile = ({user,url}) => {
                                     <h5>
                                         {info.name}
                                     </h5>
-                                    <h6>
-                                        {info.instrument}
-                                    </h6>
+
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -141,50 +161,59 @@ const Profile = ({user,url}) => {
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         
-                                        <div class="row">
+                                        <div class="row border mt-1 rounded">
                                             <div class="col-md-6">
-                                                <label>User Id</label>
+                                                <label className="mt-1">User Id</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{id}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Music Style</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{info.style}</p>
+                                                <p className="mt-1">{id}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row border mt-1 rounded">
                                             <div class="col-md-6">
-                                                <label>Region</label>
+                                                <label className="mt-1">Music Style</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{info.region}</p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Instrument</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{info.instrument}</p>
+                                                {info.style?.map((i, index) => (
+                                                        <p  className="mt-1" key={index}>{styles[i]}</p>
+                                                ))}
+                                                {/* <p className="mt-1">{info.style}</p> */}
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row border mt-1 rounded">
                                             <div class="col-md-6">
-                                                <label>Prefered Time</label>
+                                                <label className="mt-1 mb-2">Region</label>
                                             </div>
-                                            <div class="col-md-6">
-                                                <p>{info.prefered_time}</p>
+                                            <div class="col-md-6 mt-1 rounded">
+                                                {info.region?.map((i, index) => (
+                                                    <p className="mt-1" key={index}>{regions.get(i)}</p>
+                                                ))}
+                                                {/* <p>{info.region}</p> */}
                                             </div>
                                         </div>
-                                    <div class="row">
+                                        <div class="row border mt-1 rounded">
+                                            <div class="col-md-6">
+                                                <label  className="mt-1">Instrument</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {info.instrument?.map((i, index) => (
+                                                    <p  className="mt-1" key={index}>{Instruments[i]}</p>
+                                                ))}
+                                                {/* <p>{info.instrument}</p> */}
+                                            </div>
+                                        </div>
+                                        <div class="row border mt-1 rounded">
+                                            <div class="col-md-6">
+                                                <label  className="mt-1">Prefered Time</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p  className="mt-1">{info.prefered_time}</p>
+                                            </div>
+                                        </div>
+                                    <div class="row border mt-1 rounded">
                                         <div class="col-md-12">
-                                            <label>Your Bio</label><br/>
-                                            <p>{info.bio}</p>
+                                            <label className="mt-1">Your Bio</label><br/>
+                                            <p className="mt-1">{info.bio}</p>
                                         </div>
                                     </div>
                             </div>

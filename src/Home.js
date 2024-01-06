@@ -1,6 +1,6 @@
 import BlogList from "./bloglist";
 import useFetch from "./useFetch";
-import background from "./img/home_background.jpg"
+import background from "./img/home_background2.jpg"
 import { Link } from 'react-router-dom'
 
 const Home = () => { 
