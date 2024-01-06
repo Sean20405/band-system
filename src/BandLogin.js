@@ -23,12 +23,10 @@ const BandLogin = ({ onLogin }) => {
     useEffect(()=>{
         if(info){
             console.log(info);
-            if(info.message == "Band is not exist."){
+            if(info.status == "Failed"){
                 setErrMsg('Unauthorized');
             }
             else if(info.password == pwd){
-                setPwd('');
-                setUser('');
                 setSuccess(true);
             }
             else {
@@ -39,7 +37,7 @@ const BandLogin = ({ onLogin }) => {
 
     useEffect(()=>{
         if(success){
-            console.log(user);
+            console.log({ user , role });
             onLogin({ user , role });
             history.push('/');
         }
@@ -67,7 +65,7 @@ const BandLogin = ({ onLogin }) => {
             return res.json();
         })
         .then(data => {
-            console.log(data);
+            console.log(user);
             setInfo(data);
         })
         .catch(err => {
