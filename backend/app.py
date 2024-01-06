@@ -65,6 +65,7 @@ def find_target():
 def show_image(file_name):
     image_path = "static/uploads/" + file_name
     part = file_name.split('.')
+    print(file_name)
     print(part)
     type = part[1]
     print(type)
