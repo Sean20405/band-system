@@ -5,7 +5,6 @@ const Navbar = ({user}) => {
         <h1>樂團系統</h1>
         <div className="links">
           <Link to="/">Home</Link>
-          <Link to="/search">Search</Link>
           <Link to="/about">About</Link>
           
           <div className="dropdown">

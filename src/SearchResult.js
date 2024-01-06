@@ -1,20 +1,20 @@
 import SearchCard from "./SearchCard";
-const SearchResult = () => {
+export function SearchResultUser({ datas }) {
   return(
     <div className='search-result' style={{ textAlign: "left" }}>
-      <SearchCard id='01white2345' name='Sean'/>
-      <SearchCard id='1005_chueat' name='Chueat'/>
-      <SearchCard id='vitolin_yucheng' name='Vito'/>
-      <SearchCard id='kent_l_' name='Kent'/>
-      <SearchCard id='howgin1010' name='Howgin'/>
-      <SearchCard id='howgin1010' name='Howgin'/>
-      <SearchCard id='howgin1010' name='Howgin'/>
-      <SearchCard id='howgin1010' name='Howgin'/>
-      <SearchCard id='howgin1010' name='Howgin'/>
-      <SearchCard id='howgin1010' name='Howgin'/>
-      <SearchCard id='howgin1010' name='Howgin'/>
+      { datas.map(data => (
+        <SearchCard id={data.user_id} name={data.name}/>
+      )) }
     </div>
-  )
+  );
 }
 
-export default SearchResult;
+export function SearchResultBand({ datas }) {
+  return(
+    <div className='search-result' style={{ textAlign: "left" }}>
+      { datas.map(data => (
+        <SearchCard id={data.band_id} name={data.name}/>
+      )) }
+    </div>
+  );
+}

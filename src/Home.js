@@ -6,14 +6,16 @@ import { Link } from 'react-router-dom'
 const Home = () => { 
   return (
     <div className="homepage">
-      <img alt="thumb" src={background} width="100%" height="100%" sizes="70%"/>
-      <Link to="/search">
-        <button className="button-89">Search&emsp;Musician</button>
-      </Link>
-      
-
+      <img alt="thumb" src={background} width="100%" height="auto"/>
+      <div className="home-buttom">
+        <Link to="/searchmusician">
+          <button className="button-89">Search&emsp;Musician</button>
+        </Link>
+        <Link to="/searchband">
+          <button className="button-89">Search&emsp;Band</button>
+        </Link>
+      </div>
     </div>
-    
   );
 }
  
