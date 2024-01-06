@@ -107,6 +107,7 @@ const Login = ({ onLogin }) => {
                     />
 
                     <label htmlFor="password">Password:</label>
+                    
                     <input
                         type="password"
                         id="password"
@@ -114,11 +115,14 @@ const Login = ({ onLogin }) => {
                         value={pwd}
                         required
                     />
+                    <p>
+                        <Link to="/forget">Forget password</Link>
+                    </p>
                     <button>Sign In</button>
                 </form>
                 <p>
                     Need an Account?<br />
-                    <span className="line">
+                    <span className="">
                         <Link to="/register">Sign Up</Link>
                     </span>
                 </p>
