@@ -7,7 +7,8 @@ const Navbar = ({user}) => {
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           
-          <div className="dropdown">
+          <div  className="dropdown" >
+                                            
             { !user ||user.user=="null" ? (
               <><button className="dropbtn">Login</button><div className="dropdown-content">
                   <Link to="/login">As User</Link>
