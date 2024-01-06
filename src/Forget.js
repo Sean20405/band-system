@@ -30,7 +30,7 @@ const Forget = () => {
     const form = useRef();
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://100.25.158.3:5000/user?user_id=' + id,{
+        fetch('http://54.160.85.246:5000/user?user_id=' + id,{
             method: "Get",
             headers:{
                 "ngrok-skip-browser-warning": "69420"

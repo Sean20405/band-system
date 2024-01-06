@@ -1,8 +1,16 @@
-const SearchCard = ({id, name}) => {
+import tmpphoto from "./img/logo192.png";
+
+const SearchCard = ({id, name, filename}) => {
+  const pathname = "http://54.160.85.246:5000/img/" + filename;
   return (
     <div className="search-card">
-      <h4>{name}</h4>
-      <p>{id}</p>
+      <div className="photo">
+        <img src={tmpphoto} alt="profile"/>
+      </div>
+      <div className="name-id">
+        <h3>{name}</h3>
+        <p>{id}</p>
+      </div>
     </div>
   );
 }
