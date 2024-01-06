@@ -20,7 +20,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "PUT"]}})
 
 db.init_app(app)
 
