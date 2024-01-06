@@ -14,39 +14,36 @@ export function SearchMusician () {
     const value = parseInt(e.target.defaultValue);
     if (e.target.checked) {
       setInstrument(instrument => [...instrument, `${value}`]);
-      console.log('Add ' + value + ' successfully!');
+      console.log('Add ' + e.target.name + ' successfully!');
     }
     else {
       setInstrument(instrument.filter(item => item !== value));
-      console.log('Delete ' + value + ' successfully!');
+      console.log('Delete ' + e.target.name + ' successfully!');
     }
-    console.log('Current selected: ' + instrument);
   };
 
   const handleStyleChange = (e) => {
     const value = parseInt(e.target.defaultValue);
     if (e.target.checked) {
       setStyle(item => [...item, `${value}`]);
-      console.log('Add ' + value + ' successfully!');
+      console.log('Add ' + e.target.name + ' successfully!');
     }
     else {
       setStyle(style.filter(item => item !== value));
-      console.log('Delete ' + value + ' successfully!');
+      console.log('Delete ' + e.target.name + ' successfully!');
     }
-    console.log('Current selected: ' + style);
   };
 
   const handleRegionChange = (e) => {
     const value = e.target.defaultValue;
     if (e.target.checked) {
       setRegion(item => [...item, `${value}`]);
-      console.log('Add ' + value + ' successfully!');
+      console.log('Add ' + e.target.name + ' successfully!');
     }
     else {
       setRegion(region.filter(item => item !== value));
-      console.log('Delete ' + value + ' successfully!');
+      console.log('Delete ' + e.target.name + ' successfully!');
     }
-    console.log('Current selected: ' + region);
   };
 
   const handleSubmit = (e) => {
@@ -58,7 +55,7 @@ export function SearchMusician () {
     region.forEach(item => { formData.append('region', item) });
     style.forEach(item => { formData.append('style', item) });
     formData.append("role", "musician");
-    console.log(formData.get("role"));
+    //console.log(formData.getAll("style"));
     /* === GET url ===
     const params = new URLSearchParams({})
     instrument.forEach(item => { params.append("instrument", item) });
@@ -100,8 +97,8 @@ export function SearchMusician () {
             <h4>Instrument:</h4>
             <div className="container">
               <ul className="ks-cboxtags">
-                {Instruments.map((style, index) => (
-                  <li><input type="checkbox" id={index} value={index} onChange={handleInstrumentChange}/><label for={index}>{style}</label></li>
+                {Instruments.map((instrument, index) => (
+                  <li><input type="checkbox" id={index} value={index} name={instrument} onChange={handleInstrumentChange}/><label for={index}>{instrument}</label></li>
                 ))}
               </ul>
             </div>
@@ -113,7 +110,7 @@ export function SearchMusician () {
             <div className="container">
               <ul className="ks-cboxtags">
                 {regions.map((region, index) => (
-                  <li><input type="checkbox" id={10 + index} value={region[0]} onChange={handleRegionChange}/><label for={10 + index}>{region[1]}</label></li>
+                  <li><input type="checkbox" id={10 + index} value={region[0]} name={region[1]} onChange={handleRegionChange}/><label for={10 + index}>{region[1]}</label></li>
                 ))}
               </ul>
             </div>
@@ -125,7 +122,7 @@ export function SearchMusician () {
             <div className="container">
               <ul className="ks-cboxtags">
                 {styles.map((style, index) => (
-                  <li><input type="checkbox" id={34 + index} value={index} onChange={handleStyleChange}/><label for={34 + index}>{style}</label></li>
+                  <li><input type="checkbox" id={34 + index} value={index} name={style} onChange={handleStyleChange}/><label for={34 + index}>{style}</label></li>
                 ))}
               </ul>
             </div>
@@ -163,7 +160,6 @@ export function SearchBand () {
       setStyle(style.filter(item => item !== value));
       console.log('Delete ' + value + ' successfully!');
     }
-    console.log('Current selected: ' + style);
   };
 
   const handleRegionChange = (e) => {
@@ -176,7 +172,6 @@ export function SearchBand () {
       setRegion(region.filter(item => item !== value));
       console.log('Delete ' + value + ' successfully!');
     }
-    console.log('Current selected: ' + region);
   };
 
   const handleSubmit = (e) => {
@@ -187,7 +182,6 @@ export function SearchBand () {
     region.forEach(item => { formData.append('region', item) });
     style.forEach(item => { formData.append('style', item) });
     formData.append("role", "band");
-    console.log(formData.getAll("region"));
     /* === GET url ===
     const params = new URLSearchParams({})
     instrument.forEach(item => { params.append("instrument", item) });
@@ -229,7 +223,7 @@ export function SearchBand () {
             <div className="container">
               <ul className="ks-cboxtags">
                 {regions.map((region, index) => (
-                  <li><input type="checkbox" id={10 + index} value={region[0]} onChange={handleRegionChange}/><label for={10 + index}>{region[1]}</label></li>
+                  <li><input type="checkbox" id={10 + index} value={region[0]} name={region[1]} onChange={handleRegionChange}/><label for={10 + index}>{region[1]}</label></li>
                 ))}
               </ul>
             </div>
@@ -241,7 +235,7 @@ export function SearchBand () {
             <div className="container">
               <ul className="ks-cboxtags">
                 {styles.map((style, index) => (
-                  <li><input type="checkbox" id={34 + index} value={index} onChange={handleStyleChange}/><label for={34 + index}>{style}</label></li>
+                  <li><input type="checkbox" id={34 + index} value={index} name={style} onChange={handleStyleChange}/><label for={34 + index}>{style}</label></li>
                 ))}
               </ul>
             </div>
@@ -260,10 +254,3 @@ export function SearchBand () {
   
   );
 }
- 
-
-/*
-{Instruments.map((style, index) => (
-              <span style={{"white-space":"nowrap"}}><label><input type="checkbox" onChange={handleInstrumentChange} value={index}/>{style}</label></span>
-            ))}
-*/
