@@ -1,4 +1,12 @@
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faFacebook,
+    faInstagram
+  } from "@fortawesome/free-brands-svg-icons";
+
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+
 import useFetch from "./useFetch";
 import { useState, useEffect } from "react";
 import './profile.css'
@@ -151,9 +159,24 @@ const Profile = ({user,url}) => {
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>CONTACT</p>
-                            <a href="">{info.ig}</a><br/>
-                            <a href="">{info.fb}</a><br/>
-                            <a href="">{info.email}</a>
+                            <div className="mt-3">
+                                <div className="d-inline p-2"><a href="" ><FontAwesomeIcon icon={faInstagram} size="2x" /></a></div>
+                                <div className="d-inline p-2">{info.ig}</div>
+                                <br/>
+                            </div>
+
+                            <div className="mt-3">
+                                <div className="d-inline p-2"><a href="" ><FontAwesomeIcon icon={faFacebook} size="2x" /></a></div>
+                                <div className="d-inline p-2">{info.fb}</div>
+                                <br/>
+                            </div>
+                            
+                            <div className="mt-3">
+                                <a href="" className="d-inline p-2"><FontAwesomeIcon icon={faEnvelope} size="2x"/></a>
+                                <div className="d-inline p-2">{info.email}</div>
+                            </div>
+                            
+                            
 
                         </div>
                     </div>
