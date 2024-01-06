@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const Profile = ({user}) => {
     const id = user.user;
     const role = user.role;
-    const [info, setInfo] = useState(null);
+    const [info, setInfo] = useState({});
     const [errMsg, setErrMsg] = useState('1234');
     const [name, setName] = useState(null);
     const [prefered_time, setPrefered_time] = useState(null);
@@ -31,44 +31,35 @@ const Profile = ({user}) => {
     formData.append('style', 'rock paper scissor');
 
     useEffect(()=>{
-        console.log("hi");
         if(info){
-                  
+            console.log(info);
         }
         else {
-            console.log(info);
             console.log("cannot fetch info");
         }
     },[info])
 
-    useEffect(() =>{
-        console.log("init");
-        fetch('http://100.26.49.80:5000/user?user_id=' + id, {
-        method: 'GET',
-        headers:{
-            "ngrok-skip-browser-warning": "69420",
-        },
-        }).then((response) => {
-            return response.json(); 
-        }).then((data) => {
-            console.log(data);
-            setInfo(data);
-            console.log(info);
-            // setRegion(data.region);
-            // setName(data.name);
-            // setPrefered_time(data.prefered_time);
-            // setInstrument(data.instrument);
-            // setStyle(data.style);
-        })
-        .catch((error) => {
-            console.log(`Error: ${error.message}`);
-        })
-    },[])
+    useEffect(() => {
+        loadInitialPage();
+    },[]);
 
+    const loadInitialPage = async () => {
+        console.log("init");
+        const response = await fetch('http://127.0.0.1:5000/user?user_id=' + id, {
+            method: 'GET',
+            headers:{
+                "ngrok-skip-browser-warning": "69420",
+            }
+        });
+        const data = await response.json();
+        console.log(data);
+        setInfo(data);
+    }
+    
     
 
     return(
-        <div className="profile">
+        <div className="profile" >
             <h1>{ formData.get("name") }'s Public profile</h1>
             <br></br>
             <div className="blog-preview" >
