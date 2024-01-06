@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import useFetch from "./useFetch";
 import { useState, useEffect } from "react";
 
-const Profile = ({user}) => {
+const Profile = ({user,url}) => {
     const id = user.user;
     const role = user.role;
     const [info, setInfo] = useState({});
@@ -46,16 +46,8 @@ const Profile = ({user}) => {
 
     const loadInitialPage = async () => {
         console.log("init");
-<<<<<<< HEAD
-        const response = await fetch('http://54.160.85.246:5000/user?user_id=' + id, {
-            method: 'GET',
-            headers:{
-                "ngrok-skip-browser-warning": "69420",
-            }
-=======
-        const response = await fetch('http://127.0.0.1:5000/user?user_id=' + id, {
+        const response = await fetch(url + 'user?user_id=' + id, {
             method: 'GET'
->>>>>>> 7ec7e61049860209b6255acd3d72cfbaf93e31e5
         });
         const data = await response.json();
         console.log(data);
@@ -66,7 +58,7 @@ const Profile = ({user}) => {
     
 
     const fetchPhoto = async(filename) => {
-        const res = await fetch('http://127.0.0.1:5000/image/' + filename ,{
+        const res = await fetch(url + 'image/' + filename ,{
             method: 'GET',
         });
         const imageBlob = await res.blob();

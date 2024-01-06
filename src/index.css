@@ -16,12 +16,8 @@
   border-bottom: 1px solid #f2f2f2;
   position: sticky;
   top: 0;
-<<<<<<< HEAD
   z-index: 1;
   opacity: 1;
-=======
-  z-index: 100;
->>>>>>> 7ec7e61049860209b6255acd3d72cfbaf93e31e5
 }
 .navbar h1 {
   color: #f1356d;

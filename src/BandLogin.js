@@ -1,7 +1,7 @@
 import { useRef , useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-const BandLogin = ({ onLogin }) => {
+const BandLogin = ({ onLogin ,url }) => {
     const userRef = useRef();
     const errRef = useRef();
     const [user, setUser] = useState('');
@@ -54,7 +54,7 @@ const BandLogin = ({ onLogin }) => {
         const id=user;
         const  newuser = { id , role };
 
-        await fetch('http://54.160.85.246:5000/sign-in',{
+        await fetch(url + 'sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
