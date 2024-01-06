@@ -32,23 +32,12 @@ const Profile = ({user,url}) => {
     formData.append('region', 'Taipei');
     formData.append('style', 'rock paper scissor');
 
-    // const instrument_dict = {
-    //     1:"Electric Guitar", 
-    //     2: "KB", 
-    //     3:"Drums", 
-    //     4:"Bass", 
-    //     5:"Vocal", 
-    //     6:"Saxophone", 
-    //     7:"Cello", 
-    //     8:"Acoustic Guitar", 
-    //     9:"Trumpet", 
-    //     10:"Others"
-    // }
+   
 
     useEffect(()=>{
         if(info){
+            console.log(info.photo);
             fetchPhoto(info.photo);
-
         }
         else {
             console.log("cannot fetch info");
@@ -73,10 +62,9 @@ const Profile = ({user,url}) => {
     
 
     const fetchPhoto = async(filename) => {
-        if(!filename)
+        if(filename == "")
         {
-            console.log("no filename");
-            return
+            filename = "default.jpg"
         }
         
         const res = await fetch('http://127.0.0.1:5000/image/' + filename ,{
@@ -89,7 +77,34 @@ const Profile = ({user,url}) => {
         await setPhoto(photoURL);
         console.log(photo)
     }
-
+    const styles = ['J-rock', 'Metal', 'J-pop', 'Lo-Fi', 'Jazz', 'Post Rock', 'Math Rock', 'Acoustic', 'Softcore', 'Pop-Punk', 'Country', "Others"];
+    const regions = {
+        "KLU": "基隆市",
+        "TPH": "新北市", 
+        "TPE": "臺北市", 
+        "TYC": "桃園市", 
+        "HSH": "新竹縣", 
+        "HSC": "新竹市", 
+        "MAL": "苗栗縣", 
+        "TXG": "臺中市", 
+        "CWH": "彰化縣",
+        "NTO": "南投縣",
+        "YLH": "雲林縣", 
+        "CHY": "嘉義縣", 
+        "CYI": "嘉義市", 
+        "TNN": "臺南市", 
+        "KHH": "高雄市", 
+        "IUH": "屏東縣", 
+        "ILN": "宜蘭縣",
+        "HWA": "花蓮縣",
+        "TTT": "臺東縣", 
+        "PEH": "澎湖縣", 
+        "GNI": "綠島", 
+        "KYD": "蘭嶼", 
+        "KMN": "金門縣", 
+        "LNN": "連江縣"
+    };
+    const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
 
 
     return(
@@ -163,7 +178,10 @@ const Profile = ({user,url}) => {
                                                 <label>Region</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{info.region}</p>
+                                                {info.region.map((i, index) => (
+                                                    <ul key={index}>{regions.get(i)}</ul>
+                                                ))}
+                                                {/* <p>{info.region}</p> */}
                                             </div>
                                         </div>
                                         <div class="row">
@@ -171,7 +189,10 @@ const Profile = ({user,url}) => {
                                                 <label>Instrument</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{info.instrument}</p>
+                                                {info.instrument.map((i, index) => (
+                                                    <ul key={index}>{Instruments[i]}</ul>
+                                                ))}
+                                                {/* <p>{info.instrument}</p> */}
                                             </div>
                                         </div>
                                         <div class="row">
