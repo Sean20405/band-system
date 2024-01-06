@@ -56,19 +56,11 @@ def find_target():
 @app.route('/image/<file_name>', methods = ['GET'])
 def show_image(file_name):
     image_path = "static/uploads/" + file_name
-    if file_name.endswith(".png"):
-        return send_file(image_path, mimetype='image/png')
-    # .headers.add('Access-Control-Allow-Origin', '*')
-    elif file_name.endswith(".PNG"):
-        return send_file(image_path, mimetype='image/PNG')
-    elif file_name.endswith(".jpg"):
-        return send_file(image_path, mimetype='image/jpg')
-    elif file_name.endswith(".JPG"):
-        return send_file(image_path, mimetype='image/JPG')
-    elif file_name.endswith(".jpeg"):
-        return send_file(image_path, mimetype='image/jpeg')
-    elif file_name.endswith(".JPEG"):
-        return send_file(image_path, mimetype='image/JPEG')
+    part = file_name.split('.')
+    type = part[-1]
+    resp = send_file(image_path, mimetype='image/'+type)
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    return resp
     
 @app.route('/getcookie', methods = ['GET'])
 def getcookie():
@@ -310,7 +302,7 @@ def user_info():
     updateUserInstruments(user_id, instruments)
     updateUserRegions(user_id, regions)
     updateUserStyles(user_id, styles)
-    updateUser(user_id, bio, prefered_time,email, ig, fb, filename) #
+    updateUser(user_id, name, bio, prefered_time,email, ig, fb, filename) #
     db.session.commit()
 
     # Create message
