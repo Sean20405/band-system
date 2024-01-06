@@ -20,7 +20,6 @@ const Navbar = ({user}) => {
                 </div></>
             )}
           </div> 
-          <Link to="/create">Make Band</Link>
         </div>
       </nav>
     );

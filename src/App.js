@@ -40,36 +40,36 @@ function App() {
                 { !cookies.forget_user ||cookies.forget_user.user=="null" ? (
                   <NotFound />
                 ):(
-                  <ResetPassword forget_user={cookies.forget_user} forget={Forget_func}/>
+                  <ResetPassword forget_user={cookies.forget_user} forget={Forget_func} url={url}/>
                 )}
               </Route>
               <Route path="/login">
-                  <Login onLogin={handleLogin} />
+                  <Login onLogin={handleLogin} url={url}/>
               </Route>
               <Route path="/forget">
-                  <Forget forget={Forget_func}/>
+                  <Forget forget={Forget_func} url={url}/>
               </Route>
               <Route path="/Bandlogin">
-                  <BandLogin onLogin={handleLogin} />
+                  <BandLogin onLogin={handleLogin} url={url}/>
               </Route>
               <Route path="/BandRegister">
-                  <BandRegister />
+                  <BandRegister url={url}/>
               </Route>
               <Route path="/Profile">
-                  <Profile  user={cookies.user}/>
+                  <Profile  user={cookies.user} url={url}/>
               </Route>
               <Route path="/Logout">
-                  <Logout onLogin={handleLogin}/>
+                  <Logout onLogin={handleLogin} />
               </Route>
               <Route path="/searchmusician">
-                <SearchMusician />
+                <SearchMusician url={url}/>
               </Route>
               <Route path="/searchband">
-                <SearchBand />
+                <SearchBand url={url}/>
               </Route>
 
               <Route path="/register">
-                <Register />
+                <Register url={url}/>
               </Route>
               <Route path="/blogs/:id">
                 <BlogDetails />
