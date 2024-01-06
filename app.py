@@ -55,8 +55,6 @@ def find_target():
 
 @app.route('/image/<file_name>', methods = ['GET'])
 def show_image(file_name):
-    if file_name is None:
-        file_name = "default.jpg"
     image_path = "static/uploads/" + file_name
     part = file_name.split('.')
     type = part[-1]
