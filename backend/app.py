@@ -12,7 +12,7 @@ import json
 load_dotenv('.env')
 DB_URI: str = os.getenv('SQLALCHEMY_DATABASE_URI')
 UPLOAD_FOLDER: str = os.getenv('UPLOAD_FOLDER')
-ALLOWED_EXTENTIONS = set(['png', 'jpg', 'jpeg'])
+ALLOWED_EXTENTIONS = set(['png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG'])
 CORS_ALLOW_ALL_ORIGINS = True  # Not recommended for production
 
 app = Flask(__name__)
@@ -64,11 +64,11 @@ def find_target():
 @app.route('/image/<file_name>', methods = ['GET'])
 def show_image(file_name):
     image_path = "static/uploads/" + file_name
-    if file_name.endswith(".png"):
+    if file_name.endswith(".png" or ".PNG"):
         return send_file(image_path, mimetype='image/png')
-    elif file_name.endswith(".jpg"):
+    elif file_name.endswith(".jpg" or ".JPG"):
         return send_file(image_path, mimetype='image/jpg')
-    elif file_name.endswith(".jpeg"):
+    elif file_name.endswith(".jpeg" or ".JPEG"):
         return send_file(image_path, mimetype='image/jpeg')
     
 @app.route('/getcookie', methods = ['GET'])
