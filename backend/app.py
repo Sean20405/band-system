@@ -214,8 +214,11 @@ def get_user():
     
     user_id = request.args.get('user_id')
     if not userExist(user_id):
-        resp = make_response("id not found")
-        resp.status_code = 404
+        resp = jsonify({
+            "message": " user_id doesn't exist",
+            "status": "Failed"
+        })
+        resp.status_code = 400
         return resp
     basic_info, instrument, region, style = get_user_by_id(user_id)
    
