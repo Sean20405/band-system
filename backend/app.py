@@ -120,7 +120,29 @@ def upload_photo():
         resp.status_code = 201
         return resp
 
-
+@app.route('/forget_password/<role>', methods = ['POST'])
+def add_user(role):
+    id = request.form.get("id")
+    newpassword = request.form.get("password")
+    if (role == 'user'):
+        updateUserPassword(id, newpassword)
+    elif (role == 'band'):
+        updateBandPassword(id, newpassword)
+    else:
+        resp = jsonify({
+            "message": "role is not correct",
+            "status": "Failed"
+        })
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.status_code = 400
+        return resp
+    resp = jsonify({
+        "message": "Successfully update password",
+        "status": "Success"
+    })
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    resp.status_code = 200
+    return resp
 
 @app.route('/user-sign-up', methods = ['POST'])
 def add_user():

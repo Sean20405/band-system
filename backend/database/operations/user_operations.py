@@ -204,6 +204,18 @@ def updateUser(user_id, bio, prefered_time, email, ig, fb, photo):
     db.session.commit()
     return
 
+def updateUserPassword(user_id, password):
+    stmt = db.update(
+        User
+    ).where(
+        User.id == user_id
+    ).values(
+        password = password
+    )
+    
+    db.session.execute(stmt)
+    db.session.commit()
+    return
 
 
 def queryCompatibleMusician(instruments, regions, styles):

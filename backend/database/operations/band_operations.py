@@ -148,6 +148,19 @@ def updateBand(band_id, bio, practice_time, ig, fb, photo, contact_window):
     db.session.commit()
     return
 
+def updateBandPassword(band_id, password):
+    stmt = db.update(
+        Band
+    ).where(
+        Band.id == band_id
+    ).values(
+        password = password
+    )
+    
+    db.session.execute(stmt)
+    db.session.commit()
+    return
+
 def queryCompatibleBand(regions, styles):
     regions = [str(i) for i in regions]
     styles = [int(i) for i in styles]
