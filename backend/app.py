@@ -163,7 +163,7 @@ def sign_in():
             return resp
         else:
             resp = jsonify({
-                "message": "Band doesn't not exist.",
+                "message": "Band doesn't exist.",
                 "status": "Failed"
             })
             resp.headers['Access-Control-Allow-Origin'] = '*'
@@ -212,8 +212,11 @@ def get_user():
     
     user_id = request.args.get('user_id')
     if not userExist(user_id):
-        resp = make_response("id not found")
-        resp.status_code = 404
+        resp = jsonify({
+            "message": " user_id doesn't exist",
+            "status": "Failed"
+        })
+        resp.status_code = 400
         return resp
     basic_info, instrument, region, style = get_user_by_id(user_id)
    
@@ -410,6 +413,9 @@ def band_info():
         fb = request.form.get('fb')
         contact_window = request.form.get('contact_window')
         members = request.form.getlist('members')
+        for user in members:
+            if not userExist(user):
+                return f"member {user} doesn't exist"
 
         filename = ""
         # Upload Photo
