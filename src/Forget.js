@@ -2,19 +2,17 @@ import { useRef , useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import emailjs from '@emailjs/browser';
-const Forget = () => {
+const Forget = ({forget}) => {
 
     const [id, setId] = useState('');
     const [mail, setMail] = useState('');
     const [info, setInfo] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
-    const idRef = useRef();
-    const mailRef = useRef();
-
+    const form = useRef();
+    let temp = form.current;
     useEffect(()=>{
         if(info){
-            console.log(info);
             if(info.status == "Failed"){
                 setErrMsg('Unauthorized');
             }
@@ -22,12 +20,23 @@ const Forget = () => {
                 setSuccess(true);
             }
             else {
-                setErrMsg('mail incorrect');
+                setErrMsg('mail incorrect or not set');
             };
         }
     },[info])
 
-    const form = useRef();
+    useEffect(()=>{
+        if(success){
+            forget({ user: id , role : "user"});
+            emailjs.sendForm('service_band','template_ot2ru8f',temp,'K7JxayUwMKsXWf5YO')
+            .then((result) => {
+                console.log(result.text);
+            }, (error) => {
+                console.log(error.text);
+            });
+        }
+    },[success])
+
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch('http://54.160.85.246:5000/user?user_id=' + id,{
@@ -44,21 +53,29 @@ const Forget = () => {
             setInfo(data);
         })
         .catch(err => {
-            console.log(err.message);
+            console.log(err.status_code);
         })
-        emailjs.sendForm('service_band','template_ot2ru8f',form.current,'K7JxayUwMKsXWf5YO')
-        .then((result) => {
-            console.log(result.text);
-        }, (error) => {
-            console.log(error.text);
-        });
+        temp=form.current;
+        console.log(temp);
     }
-    return ( 
-        <div className="login">   
+    return (  
+        
+        <div className="login"> 
+            { success && (
+                <div>
+                    <h1>Check your Email</h1>
+                    <br />
+                    <p>
+                        <Link to="/">Go to Home</Link>
+                    </p>
+                </div>
+            )} 
+            { success === false && (  
+            <>
             <h1>Forget Password</h1>
             <p  className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <form ref={form} onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">UserID:</label>
                 <input
                     type="name"
                     id="username"
@@ -81,6 +98,8 @@ const Forget = () => {
                 />
                 <button>Sign In</button>
             </form>
+            </>
+            )}
         </div>
      );
 }

@@ -18,6 +18,7 @@ const Profile = ({user}) => {
     const [email, setEmail] = useState(null);
     const [bio, setBio] = useState(null);
 
+    
     let formData = new FormData(); 
     formData.append('name', "Sheng_Shun_Chang");
     formData.append('prefered_time', "midnight");
@@ -46,45 +47,93 @@ const Profile = ({user}) => {
     const loadInitialPage = async () => {
         console.log("init");
         const response = await fetch('http://127.0.0.1:5000/user?user_id=' + id, {
-            method: 'GET',
-            headers:{
-                "ngrok-skip-browser-warning": "69420",
-            }
+            method: 'GET'
         });
         const data = await response.json();
         console.log(data);
         setInfo(data);
+        fetchPhoto(info.photo);
+
     }
     
-    
+
+    const fetchPhoto = async(filename) => {
+        const res = await fetch('http://127.0.0.1:5000/image/' + filename ,{
+            method: 'GET',
+        });
+        const imageBlob = await res.blob();
+        const photoURL = URL.createObjectURL(imageBlob);
+        setPhoto(photoURL);
+    }
 
     return(
         <div className="profile" >
             <h1>{ formData.get("name") }'s Public profile</h1>
             <br></br>
             <div className="blog-preview" >
-                <h2>ID:</h2>
-                <p>{ id }</p><br></br>
-                <h2>Name:</h2>
-                <p>{ info.name }</p><br></br>
-                <h2>Prefered_time:</h2>
-                <p>{ info.prefered_time }</p><br></br>
-                <h2>Instument: </h2>
-                <p>{ info.instrument }</p> <br></br>
-                <h2>Style: </h2>
-                <p>{ info.style }</p> <br></br>
-                <h2>Region: </h2> 
-                <p>{ info.region }</p> <br></br>
-                <h2>Instagram: </h2> 
-                <p>@{ formData.get("ig")}</p> <br></br>
-                <h2>Facebook: </h2> 
-                <p>{ formData.get("fb")}</p> <br></br>
-                <h2>Email: </h2> 
-                <p>{ formData.get("email")}</p> <br></br>
-                <h2>Profile Picture: </h2> 
-                <p>{ formData.get("photo")}</p> <br></br>
-                <h2>Bio: </h2> 
-                <p>{ formData.get("bio")}</p> <br></br>
+                <div>
+                    <h2>ID:</h2>
+                    <p>{ id }</p>
+                    <br></br>
+                </div>
+                
+                <div>
+                    <h2>Profile Picture: </h2> 
+                    <div className="photoContainer">
+                        <img src={photo} alt="YCC" className="stretchy"/>
+                    </div>
+                    
+                    <p>{ }</p> <br></br>
+                </div>
+
+                <div>
+                    <h2>Name:</h2>
+                    <p>{ info.name }</p>
+                    <br></br>
+                </div>
+                
+                <div>
+                    <h2>Bio: </h2> 
+                    <p>{ formData.get("bio")}</p> <br></br>
+                </div>
+
+                <div>
+                    <h2>Prefered_time:</h2>
+                    <p>{ info.prefered_time }</p>
+                    <br></br>
+                </div>
+                
+                <div>
+                    <h2>Instument: </h2>
+                    <p>{ info.instrument }</p>
+                    <br></br>
+                </div>
+                
+                <div>
+                    <h2>Style: </h2>
+                    <p>{ info.style }</p>
+                    <br></br>
+                </div>
+                
+                <div>
+                    <h2>Region: </h2> 
+                    <p>{ info.region }</p> <br></br>
+                </div>
+                
+                <div>
+                    <h2>Instagram: </h2> 
+                    <p>@{ formData.get("ig")}</p> <br></br>
+                </div>
+                
+                <div>
+                    <h2>Facebook: </h2> 
+                    <p>{ formData.get("fb")}</p> <br></br>
+                </div>
+                <div>
+                    <h2>Email: </h2> 
+                    <p>{ formData.get("email")}</p> <br></br>
+                </div>
+                
             </div>
         </div>
 
