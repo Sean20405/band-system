@@ -32,7 +32,15 @@ def find_target():
     regions = request.form.getlist('region')
     styles = request.form.getlist('style')
     instruments = request.form.getlist('instrument')
-
+    # return {
+    #     "i":instruments,
+    #     "r":regions,
+    #     "s":styles
+    # }
+    # resp = jsonify(queryCompatibleMusician(instruments, regions, styles))
+    # resp.headers.add('Access-Control-Allow-Origin', '*')
+    # resp.status_code = 200
+    # return resp
     role = request.form.get('role')
 
     if(role == 'musician'):
@@ -56,19 +64,23 @@ def find_target():
 @app.route('/image/<file_name>', methods = ['GET'])
 def show_image(file_name):
     image_path = "static/uploads/" + file_name
-    if file_name.endswith(".png"):
-        return send_file(image_path, mimetype='image/png')
-    # .headers.add('Access-Control-Allow-Origin', '*')
-    elif file_name.endswith(".PNG"):
-        return send_file(image_path, mimetype='image/PNG')
-    elif file_name.endswith(".jpg"):
-        return send_file(image_path, mimetype='image/jpg')
-    elif file_name.endswith(".JPG"):
-        return send_file(image_path, mimetype='image/JPG')
-    elif file_name.endswith(".jpeg"):
-        return send_file(image_path, mimetype='image/jpeg')
-    elif file_name.endswith(".JPEG"):
-        return send_file(image_path, mimetype='image/JPEG')
+    part = file_name.split('.')
+    type = part[-1]
+    resp = send_file(image_path, mimetype='image/'+type)
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    return resp
+    # if file_name.endswith(".png"):
+    #     return send_file(image_path, mimetype='image/png').headers.add('Access-Control-Allow-Origin', '*')
+    # elif file_name.endswith(".PNG"):
+    #     return send_file(image_path, mimetype='image/PNG').headers.add('Access-Control-Allow-Origin', '*')
+    # elif file_name.endswith(".jpg"):
+    #     return send_file(image_path, mimetype='image/jpg').headers.add('Access-Control-Allow-Origin', '*')
+    # elif file_name.endswith(".JPG"):
+    #     return send_file(image_path, mimetype='image/JPG').headers.add('Access-Control-Allow-Origin', '*')
+    # elif file_name.endswith(".jpeg"):
+    #     return send_file(image_path, mimetype='image/jpeg').headers.add('Access-Control-Allow-Origin', '*')
+    # elif file_name.endswith(".JPEG"):
+    #     return send_file(image_path, mimetype='image/JPEG').headers.add('Access-Control-Allow-Origin', '*')
     
 @app.route('/getcookie', methods = ['GET'])
 def getcookie():
