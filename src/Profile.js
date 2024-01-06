@@ -32,9 +32,23 @@ const Profile = ({user,url}) => {
     formData.append('region', 'Taipei');
     formData.append('style', 'rock paper scissor');
 
+    // const instrument_dict = {
+    //     1:"Electric Guitar", 
+    //     2: "KB", 
+    //     3:"Drums", 
+    //     4:"Bass", 
+    //     5:"Vocal", 
+    //     6:"Saxophone", 
+    //     7:"Cello", 
+    //     8:"Acoustic Guitar", 
+    //     9:"Trumpet", 
+    //     10:"Others"
+    // }
+
     useEffect(()=>{
         if(info){
             fetchPhoto(info.photo);
+
         }
         else {
             console.log("cannot fetch info");
@@ -80,8 +94,8 @@ const Profile = ({user,url}) => {
 
     return(
 
-        <div class="container emp-profile">
-            <form method="post">
+        <div className="container emp-profile">
+            <form method="put">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -133,7 +147,7 @@ const Profile = ({user,url}) => {
                                                 <label>User Id</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{info.user_id}</p>
+                                                <p>{id}</p>
                                             </div>
                                         </div>
                                         <div class="row">
