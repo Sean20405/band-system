@@ -121,7 +121,7 @@ def upload_photo():
         return resp
 
 @app.route('/forget_password/<role>', methods = ['POST'])
-def add_user(role):
+def update_password(role):
     id = request.form.get("id")
     newpassword = request.form.get("password")
     if (role == 'user'):
@@ -130,7 +130,7 @@ def add_user(role):
         updateBandPassword(id, newpassword)
     else:
         resp = jsonify({
-            "message": "role is not correct",
+            "message": "Role is not correct",
             "status": "Failed"
         })
         resp.headers.add('Access-Control-Allow-Origin', '*')
