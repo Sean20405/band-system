@@ -186,12 +186,13 @@ def updateUserStyles(user_id ,new_ids):
     return
 
 
-def updateUser(user_id, bio, prefered_time, email, ig, fb, photo):
+def updateUser(user_id, name, bio, prefered_time, email, ig, fb, photo):
     stmt = db.update(
         User
     ).where(
         User.id == user_id
     ).values(
+        name = name,
         bio = bio,
         prefered_time = prefered_time,
         email = email,

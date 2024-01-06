@@ -302,7 +302,7 @@ def user_info():
     updateUserInstruments(user_id, instruments)
     updateUserRegions(user_id, regions)
     updateUserStyles(user_id, styles)
-    updateUser(user_id, bio, prefered_time,email, ig, fb, filename) #
+    updateUser(user_id, name, bio, prefered_time,email, ig, fb, filename) #
     db.session.commit()
 
     # Create message
