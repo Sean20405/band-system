@@ -113,7 +113,7 @@ const Profile = ({user,url}) => {
     const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
 
     if(!info || !photo) return "loading";
-
+    console.log(info.region)
     return(
         <div className="container emp-profile">
                 <div class="row">
@@ -185,8 +185,8 @@ const Profile = ({user,url}) => {
                                                 <label className="mt-1 mb-2">Region</label>
                                             </div>
                                             <div class="col-md-6 mt-1 rounded">
-                                                {info.region?.map((i, index) => (
-                                                    <p className="mt-1" key={index}>{regions.get(i)}</p>
+                                                {info.region.map((i, index) => (
+                                                    <p className="mt-1" key={index}>{regions[i]}</p>
                                                 ))}
                                                 {/* <p>{info.region}</p> */}
                                             </div>
