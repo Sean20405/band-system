@@ -175,7 +175,10 @@ const Profile = ({user,url}) => {
                                                 <label className="mt-1">Music Style</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p className="mt-1">{info.style}</p>
+                                                {info.style?.map((i, index) => (
+                                                        <p  className="mt-1" key={index}>{styles[i]}</p>
+                                                ))}
+                                                {/* <p className="mt-1">{info.style}</p> */}
                                             </div>
                                         </div>
                                         <div class="row border mt-1 rounded">
@@ -186,7 +189,7 @@ const Profile = ({user,url}) => {
                                                 {info.region?.map((i, index) => (
                                                     <p className="mt-1" key={index}>{regions.get(i)}</p>
                                                 ))}
-                                                <p>{info.region}</p>
+                                                {/* <p>{info.region}</p> */}
                                             </div>
                                         </div>
                                         <div class="row border mt-1 rounded">
@@ -197,7 +200,7 @@ const Profile = ({user,url}) => {
                                                 {info.instrument?.map((i, index) => (
                                                     <p  className="mt-1" key={index}>{Instruments[i]}</p>
                                                 ))}
-                                                <p>{info.instrument}</p>
+                                                {/* <p>{info.instrument}</p> */}
                                             </div>
                                         </div>
                                         <div class="row border mt-1 rounded">
