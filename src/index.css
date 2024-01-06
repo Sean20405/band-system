@@ -396,3 +396,13 @@ ul.ks-cboxtags li input[type="checkbox"] {
   margin: 0 auto;
   text-align: center;
 }
+
+img.stretchy {
+  width: 100%; /*Tells image to fit to width of parent container*/
+  align-items: center;
+}
+
+.photoContainer {
+  width: 33%; 
+  align-items: center;
+}
