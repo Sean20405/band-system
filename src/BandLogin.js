@@ -1,7 +1,7 @@
 import { useRef , useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-const BandLogin = ({ onLogin }) => {
+const BandLogin = ({ onLogin ,url }) => {
     const userRef = useRef();
     const errRef = useRef();
     const [user, setUser] = useState('');
@@ -37,7 +37,7 @@ const BandLogin = ({ onLogin }) => {
 
     useEffect(()=>{
         if(success){
-            console.log({ user , role });
+            console.log(user);
             onLogin({ user , role });
             history.push('/');
         }
@@ -54,7 +54,7 @@ const BandLogin = ({ onLogin }) => {
         const id=user;
         const  newuser = { id , role };
 
-        await fetch('http://127.0.0.1:5000/sign-in',{
+        await fetch(url + 'sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
@@ -65,7 +65,7 @@ const BandLogin = ({ onLogin }) => {
             return res.json();
         })
         .then(data => {
-            console.log(user);
+            console.log(data);
             setInfo(data);
         })
         .catch(err => {
@@ -78,7 +78,7 @@ const BandLogin = ({ onLogin }) => {
     }
 
     return ( 
-        <div className="login">
+        <div className="contain">
             { success && (
                 <div>
                     <h1>You are logged in!</h1>
@@ -90,10 +90,14 @@ const BandLogin = ({ onLogin }) => {
             )} 
              
             { success === false && (
-            <div>
+            <>
+            <div className="top"></div>
+            <div className="bottom"></div>
+            <div className="center">
+            <div className="login">
                 <h1>Band Sign in</h1>
                 <br></br>
-                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                <div ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</div>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="username">Bandname:</label>
                     <input
@@ -116,13 +120,14 @@ const BandLogin = ({ onLogin }) => {
                     />
                     <button>Sign In</button>
                 </form>
-                <p>
+                <label>
                     Need an Account?<br />
-                    <span className="line">
-                        <Link to="/BandRegister">Sign Up</Link>
-                    </span>
+                </label>
+                <p className="line">
+                    <Link to="/BandRegister">Sign Up</Link>
                 </p>
-            </div>
+                </div>
+            </div></>
             )}
         </div>
     );

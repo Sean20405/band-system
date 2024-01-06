@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { SearchResultUser, SearchResultBand }  from "./SearchResult";
 
-export function SearchMusician () {
+export function SearchMusician ({url}) {
   const [instrument, setInstrument] = useState([]);
   const [region, setRegion] = useState([]);
   const [style, setStyle] = useState([]);
@@ -68,7 +68,7 @@ export function SearchMusician () {
     para = para.slice(0, -1);
     const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
-    fetch("http://54.160.85.246:5000/", {
+    fetch( url , {
       method: 'POST',
       headers: { 'ngrok-skip-browser-warning': 'true' },
       body: formData
@@ -142,7 +142,7 @@ export function SearchMusician () {
   );
 }
 
-export function SearchBand () {
+export function SearchBand ({url}) {
   const [region, setRegion] = useState([]);
   const [style, setStyle] = useState([]);
   const [isPending, setIsPending] = useState(false);
@@ -194,7 +194,7 @@ export function SearchBand () {
     para = para.slice(0, -1);
     const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
-    fetch("http://54.160.85.246:5000/", {
+    fetch(url, {
       method: 'POST',
       headers: { 'ngrok-skip-browser-warning': 'true' },
       body: formData
