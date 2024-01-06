@@ -8,7 +8,7 @@ venv/
 ENV/
 
 # Environment variables
-.env
+
 
 # Instance folder
 instance/
