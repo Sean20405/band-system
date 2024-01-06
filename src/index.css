@@ -40,15 +40,6 @@
   padding: 20px;
 }
 
-/* search card */
-.search-card {
-  padding: 10px 16px;
-  margin: 20px 0;
-  border-bottom: 1px solid #fafafa;
-}
-.search-card:hover {
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
-}
 .blog-preview h2 {
   font-size: 20px;
   color: #f1356d;
@@ -193,15 +184,26 @@
   cursor: pointer;
 }
 
-.search-result {
+.search-detail {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  text-align: left;
+  width: 100%;
 }
 
+/* search card */
 .search-card {
   display: flex;
   width: 45%;
   gap: 20px;
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+
+.search-card:hover {
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
 }
 
 .search-card img {
@@ -212,6 +214,49 @@
 .search-card .name-id{
   padding: 4px;
   align-self: center;
+}
+
+/* Search Filter */
+.search-filter-container {
+  float: right;
+}
+.search-filter-container span {
+  margin: 0px 10px 0px 0px;
+  font-family: 'Noto Sans TC', 'FontAwesome';
+}
+
+.search-filter {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 30px;
+  width: 110px;
+  transition: border-color .1s ease-in-out,box-shadow .1s ease-in-out;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 0px 0px 0px 8px;
+  
+}
+
+.search-filter option {
+  text-align: left;
+  margin: 0px 0px 0px 4px;
+}
+
+.search-filter:hover {
+  border: 1px solid #999;
+}
+
+.search-filter:focus {
+  border: 1px solid #999;
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,.2);
+  outline: none;
+}
+
+/* remove default arrow in IE */
+select::-ms-expand {
+  display:none;
 }
 
 
