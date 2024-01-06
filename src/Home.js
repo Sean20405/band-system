@@ -6,7 +6,10 @@ import { Link } from 'react-router-dom'
 const Home = () => { 
   return (
     <div className="homepage">
-      <img alt="thumb" src={background} width="100%" height="auto"/>
+      <div className="background-container">
+        <img alt="thumb" src={background}/>
+      </div>
+      
       <div className="home-buttom">
         <Link to="/searchmusician">
           <button className="button-89">Search&emsp;Musician</button>

@@ -2,7 +2,7 @@ import { useRef , useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import emailjs from '@emailjs/browser';
-const Forget = ({forget}) => {
+const Forget = ({forget,url}) => {
 
     const [id, setId] = useState('');
     const [mail, setMail] = useState('');
@@ -39,7 +39,7 @@ const Forget = ({forget}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://100.25.158.3:5000/user?user_id=' + id,{
+        fetch( url+'user?user_id=' + id,{
             method: "Get",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
@@ -64,16 +64,12 @@ const Forget = ({forget}) => {
             { success && (
                 <div>
                     <h1>Check your Email</h1>
-                    <br />
-                    <p>
-                        <Link to="/">Go to Home</Link>
-                    </p>
                 </div>
             )} 
             { success === false && (  
             <>
             <h1>Forget Password</h1>
-            <p  className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+            <div  className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</div>
             <form ref={form} onSubmit={handleSubmit}>
                 <label htmlFor="username">UserID:</label>
                 <input

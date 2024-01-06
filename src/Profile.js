@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import useFetch from "./useFetch";
 import { useState, useEffect } from "react";
 
-const Profile = ({user}) => {
+const Profile = ({user,url}) => {
     const id = user.user;
     const role = user.role;
     const [info, setInfo] = useState({});
@@ -46,7 +46,7 @@ const Profile = ({user}) => {
 
     const loadInitialPage = async () => {
         console.log("init");
-        const response = await fetch('http://100.25.158.3:3000/user?user_id=' + id, {
+        const response = await fetch(url + 'user?user_id=' + id, {
             method: 'GET'
         });
         const data = await response.json();
@@ -58,7 +58,7 @@ const Profile = ({user}) => {
     
 
     const fetchPhoto = async(filename) => {
-        const res = await fetch('http://100.25.158.3:3000/image/' + filename ,{
+        const res = await fetch(url + 'image/' + filename ,{
             method: 'GET',
         });
         const imageBlob = await res.blob();
