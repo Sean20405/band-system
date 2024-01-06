@@ -20,7 +20,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST"]}})
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "PUT"]}})
 
 db.init_app(app)
 
@@ -264,7 +264,7 @@ def get_user():
     return resp
 
 
-@app.route('/user-edit', methods = ['GET', 'PUT'])
+@app.route('/user-edit', methods = ['PUT'])
 def user_info():
     user_id = request.args.get('user_id')
     if not userExist(user_id):
@@ -278,73 +278,49 @@ def user_info():
         })
         resp.status_code = 400
         return resp
-    if (request.method == 'GET'):
-        basic_info, instrument, region, style = get_user_by_id(user_id)
-        name,prefered_time,bio,photo,ig,fb,email = basic_info.name, basic_info.prefered_time,\
-                                               basic_info.bio, basic_info.photo,\
-                                               basic_info.ig, basic_info.fb, basic_info.email
 
-        resp = make_response( 
-            {
-                "name": name,
-                "prefered_time": prefered_time,
-                "bio": bio,
-                "photo": photo,
-                "ig": ig,
-                "fb": fb,
-                "email": email,
-                "instrument": instrument,
-                "region": region,
-                "style": style
-            }, 200)
-        resp.headers['Access-Control-Allow-Origin'] = '*'
- 
-        return resp
+    # User ID
+    instruments = request.form.getlist('instrument')
+    regions = request.form.getlist('region')
+    styles = request.form.getlist('style')
+    prefered_time = request.form.get('prefered_time')
+    bio = request.form.get('bio')
+    name = request.form.get('name')
+    ig = request.form.get('ig')
+    fb = request.form.get('fb')
+    email = request.form.get('email')
     
+    filename = ""
 
-    elif (request.method == 'PUT'):
-        # User ID
-        instruments = request.form.getlist('instrument')
-        regions = request.form.getlist('region')
-        styles = request.form.getlist('style')
-        prefered_time = request.form.get('prefered_time')
-        bio = request.form.get('bio')
-        email = request.form.get('email')
-        ig = request.form.get('ig')
-        fb = request.form.get('fb')
-        email = request.form.get('email')
+    # Upload Photo
+    if ('photo' in request.files):
         
-        filename = ""
+        photo = request.files.get('photo') 
+        if photo and allow_file(photo.filename):
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            resp = jsonify({
+                "message": "File type is not allowed",
+                "status": "Failed"
+            })
+            return resp
+    
+    # Update user's input to database
+    updateUserInstruments(user_id, instruments)
+    updateUserRegions(user_id, regions)
+    updateUserStyles(user_id, styles)
+    updateUser(user_id, bio, prefered_time,email, ig, fb, filename) #
+    db.session.commit()
 
-        # Upload Photo
-        if ('photo' in request.files):
-            
-            photo = request.files.get('photo') 
-            if photo and allow_file(photo.filename):
-                filename = secure_filename(photo.filename)
-                photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            else:
-                resp = jsonify({
-                    "message": "File type is not allowed",
-                    "status": "Failed"
-                })
-                return resp
-        
-        # Update user's input to database
-        updateUserInstruments(user_id, instruments)
-        updateUserRegions(user_id, regions)
-        updateUserStyles(user_id, styles)
-        updateUser(user_id, bio, prefered_time,email, ig, fb, filename) #
-        db.session.commit()
-
-        # Create message
-        resp = jsonify({
-            "message": "Successfully update all user's infromation",
-            "status": "Success"
-        })
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        resp.status_code = 201
-        return resp
+    # Create message
+    resp = jsonify({
+        "message": "Successfully update all user's infromation",
+        "status": "Success"
+    })
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    resp.status_code = 201
+    return resp
 
 
 # API for Band
