@@ -71,7 +71,11 @@ export function SearchMusician () {
     para = para.slice(0, -1);
     const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
+<<<<<<< HEAD
     fetch(`http://54.160.85.246:5000/`, {
+=======
+    fetch("http://54.160.85.246:5000/", {
+>>>>>>> 7ec7e61049860209b6255acd3d72cfbaf93e31e5
       method: 'POST',
       headers: { 'ngrok-skip-browser-warning': 'true' },
       body: formData

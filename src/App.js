@@ -18,7 +18,7 @@ import Forget from './Forget';
 import ResetPassword from './ResetPassword'
 function App() {
   const url="http://54.160.85.246:5000/"
-  const [cookies, setCookie] = useCookies(["user","forget_user"]);
+  const [cookies, setCookie] = useCookies(["user"]);
   function handleLogin(user) {
     setCookie("user", user, { path: "/" });
   }
