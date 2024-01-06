@@ -254,6 +254,7 @@ def queryCompatibleMusician(instruments, regions, styles):
     subq = db.select(
         User.id.label('user_id'),
         User.name.label('name'),
+        User.photo.label('photo'),
         db.func.coalesce(instrument_count.c.count, 0).label('instrument_count'),
         db.func.coalesce(region_count.c.count, 0).label('region_count'),
         db.func.coalesce(style_count.c.count, 0).label('style_count'),
