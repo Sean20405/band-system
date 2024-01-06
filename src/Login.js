@@ -54,7 +54,7 @@ const Login = ({ onLogin }) => {
         const id=user;
         const  newuser = { id , role };
 
-        await fetch('http://100.25.158.3:5000/sign-in',{
+        await fetch('http://127.0.0.1:5000/sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"

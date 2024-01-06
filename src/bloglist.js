@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+
+
 const BlogList = ({blogs,title}) => {
     return (  
         <div className="blog-list">

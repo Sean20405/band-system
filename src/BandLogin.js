@@ -37,7 +37,7 @@ const BandLogin = ({ onLogin }) => {
 
     useEffect(()=>{
         if(success){
-            console.log(user);
+            console.log({ user , role });
             onLogin({ user , role });
             history.push('/');
         }
@@ -54,7 +54,7 @@ const BandLogin = ({ onLogin }) => {
         const id=user;
         const  newuser = { id , role };
 
-        await fetch('http://100.25.158.3:5000/sign-in',{
+        await fetch('http://127.0.0.1:5000/sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
@@ -65,7 +65,7 @@ const BandLogin = ({ onLogin }) => {
             return res.json();
         })
         .then(data => {
-            console.log(data);
+            console.log(user);
             setInfo(data);
         })
         .catch(err => {
