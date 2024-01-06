@@ -15,11 +15,15 @@ import Logout from './Logout';
 import BandLogin from './BandLogin'
 import BandRegister from './BandRegister';
 import Forget from './Forget';
+import ResetPassword from './ResetPassword'
 function App() {
   const url="http://100.25.158.3:5000/"
-  const [cookies, setCookie] = useCookies(["user"]);
+  const [cookies, setCookie] = useCookies(["user","forget_user"]);
   function handleLogin(user) {
     setCookie("user", user, { path: "/" });
+  }
+  function Forget_func(id) {
+    setCookie("forget_user", id, { path: "/" });
   }
   return (
     <CookiesProvider>
@@ -28,14 +32,22 @@ function App() {
           <Navbar  user={cookies.user}/>
           <div className="content">
             <Switch>
+              
               <Route exact path="/">
                 <Home />
+              </Route>
+              <Route exact path="/ResetPassword">
+                { !cookies.forget_user ||cookies.forget_user.user=="null" ? (
+                  <NotFound />
+                ):(
+                  <ResetPassword forget_user={cookies.forget_user} forget={Forget_func}/>
+                )}
               </Route>
               <Route path="/login">
                   <Login onLogin={handleLogin} />
               </Route>
               <Route path="/forget">
-                  <Forget user={cookies.user}/>
+                  <Forget forget={Forget_func}/>
               </Route>
               <Route path="/Bandlogin">
                   <BandLogin onLogin={handleLogin} />
