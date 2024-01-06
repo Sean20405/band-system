@@ -54,7 +54,7 @@ const Login = ({ onLogin }) => {
         const id=user;
         const  newuser = { id , role };
 
-        await fetch('http://18.209.224.72:5000/sign-in',{
+        await fetch('http://100.25.158.3:5000/sign-in',{
             method: "POST",
             headers:{
                 "ngrok-skip-browser-warning": "69420"
@@ -107,6 +107,7 @@ const Login = ({ onLogin }) => {
                     />
 
                     <label htmlFor="password">Password:</label>
+                    
                     <input
                         type="password"
                         id="password"
@@ -114,11 +115,14 @@ const Login = ({ onLogin }) => {
                         value={pwd}
                         required
                     />
+                    <p>
+                        <Link to="/forget">Forget password</Link>
+                    </p>
                     <button>Sign In</button>
                 </form>
                 <p>
                     Need an Account?<br />
-                    <span className="line">
+                    <span className="">
                         <Link to="/register">Sign Up</Link>
                     </span>
                 </p>

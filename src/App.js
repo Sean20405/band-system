@@ -15,6 +15,7 @@ import Profile from './Profile';
 import Logout from './Logout';
 import BandLogin from './BandLogin'
 import BandRegister from './BandRegister';
+import Forget from './Forget';
 function App() {
   const url="http://18.209.224.72:3000/"
   const [cookies, setCookie] = useCookies(["user"]);
@@ -33,6 +34,9 @@ function App() {
               </Route>
               <Route path="/login">
                   <Login onLogin={handleLogin} />
+              </Route>
+              <Route path="/forget">
+                  <Forget user={cookies.user}/>
               </Route>
               <Route path="/Bandlogin">
                   <BandLogin onLogin={handleLogin} />
