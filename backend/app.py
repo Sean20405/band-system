@@ -64,12 +64,18 @@ def find_target():
 @app.route('/image/<file_name>', methods = ['GET'])
 def show_image(file_name):
     image_path = "static/uploads/" + file_name
-    if file_name.endswith(".png" or ".PNG"):
+    if file_name.endswith(".png"):
         return send_file(image_path, mimetype='image/png')
-    elif file_name.endswith(".jpg" or ".JPG"):
+    elif file_name.endswith(".PNG"):
+        return send_file(image_path, mimetype='image/PNG')
+    elif file_name.endswith(".jpg"):
         return send_file(image_path, mimetype='image/jpg')
-    elif file_name.endswith(".jpeg" or ".JPEG"):
+    elif file_name.endswith(".JPG"):
+        return send_file(image_path, mimetype='image/JPG')
+    elif file_name.endswith(".jpeg"):
         return send_file(image_path, mimetype='image/jpeg')
+    elif file_name.endswith(".JPEG"):
+        return send_file(image_path, mimetype='image/JPEG')
     
 @app.route('/getcookie', methods = ['GET'])
 def getcookie():
