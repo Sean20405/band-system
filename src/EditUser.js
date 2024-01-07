@@ -213,7 +213,7 @@ const EditUser = ({user,url}) => {
                     autoComplete="off"
                     onChange={(e) => setPrefered_time(e.target.value)}
                     value={prefered_time}
-                    required
+                    
                 />
 
                 <label htmlFor="ig" class = "profile-edit-lable">
@@ -226,7 +226,7 @@ const EditUser = ({user,url}) => {
                     autoComplete="off"
                     onChange={(e) => setIg(e.target.value)}
                     value={ig}
-                    required
+                    
                 />
 
                 <label htmlFor="fb" class = "profile-edit-lable">
@@ -239,7 +239,7 @@ const EditUser = ({user,url}) => {
                     autoComplete="off"
                     onChange={(e) => setFb(e.target.value)}
                     value={fb}
-                    required
+                    
                 />
 
                 <label htmlFor="email" class = "profile-edit-lable">
@@ -252,7 +252,7 @@ const EditUser = ({user,url}) => {
                     autoComplete="off"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
-                    required
+                    
                 />
 
                 <label htmlFor="bio" class = "profile-edit-lable">
@@ -265,7 +265,7 @@ const EditUser = ({user,url}) => {
                     autoComplete="off"
                     onChange={(e) => setBio(e.target.value)}
                     value={bio}
-                    required
+                    
                 />
                 <button type = "submit" class="profile-edit-button" >Save</button>
             </form>

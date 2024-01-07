@@ -20,7 +20,7 @@ const Navbar = ({user, role}) => {
       <nav className="navbar">
       <div className="container">
         <div className="logo">
-          <img src={logo} />
+          <img src={logo} className="d-inline"/>
         </div>
         <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>

@@ -121,16 +121,22 @@ const BandProfile = ({user,url}) => {
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
+                                    <h1>
                                         {info.name}
-                                    </h5>
-
+                                    </h1>
+                        </div>
+                        <br />
+                        <div class="profile-head row" >
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-                       
-                            </ul>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    </li>
+                        
+                                </ul>
+                        </div>
+                        
+                        <div class="overflow-wrap text-break" >
+                            {info.bio}   
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -164,10 +170,11 @@ const BandProfile = ({user,url}) => {
                         </div>
                     </div>
                     <div class="col-md-8">
+                    
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         
-                                        <div class="row border mt-1 rounded">
+                                        <div class="row border mt-3 rounded">
                                             <div class="col-md-6">
                                                 <label className="mt-1">User Id</label>
                                             </div>
@@ -206,12 +213,7 @@ const BandProfile = ({user,url}) => {
                                                 <p  className="mt-1">{info.practice_time}</p>
                                             </div>
                                         </div>
-                                    <div class="row border mt-1 rounded">
-                                        <div class="col-md-12">
-                                            <label className="mt-1">Your Bio</label><br/>
-                                            <p className="mt-1">{info.bio}</p>
-                                        </div>
-                                    </div>
+                                    
                             </div>
 
                         </div>

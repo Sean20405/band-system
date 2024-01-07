@@ -20,7 +20,7 @@ import EditUser from './EditUser'
 import EditBand from './EditBand';
 import BandProfile from './BandProfile';
 import ProfilePublic from './ProfilePublic';
-import React, { useState } from 'react';
+import About from './About';
 
 
 function App() {
@@ -58,10 +58,13 @@ function App() {
               <Route path="/login">
                   <Login onLogin={handleLogin} url={url}/>
               </Route>
+              <Route path="/about">
+                  <About url={url}/>
+              </Route>
               <Route path="/forget">
                   <Forget forget={Forget_func} url={url}/>
               </Route>
-              <Route path="/Bandlogin">
+              <Route path="/BandLogin">
                   <BandLogin onLogin={handleLogin} url={url}/>
               </Route>
               <Route path="/BandRegister">
