@@ -20,6 +20,7 @@ import EditUser from './EditUser'
 import EditBand from './EditBand';
 import BandProfile from './BandProfile';
 import About from './About';
+import PublicUserProfile from './PublicUserProfile'
 
 function App() {
   const url="http://127.0.0.1:5000/"

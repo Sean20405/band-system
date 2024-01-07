@@ -20,7 +20,7 @@
   opacity: 1;
 }
 .navbar h1 {
-  color: #f1356d;
+  color: #1f2e6b;
   font-size: 24px;
 }
 .navbar .links {
@@ -33,7 +33,7 @@
   padding: 6px;
 }
 .navbar a:hover {
-  color: #f1356d;
+  color: #1f2e6b;
 }
 .content {
   margin: 40px auto;
@@ -42,7 +42,7 @@
 
 .blog-preview h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #1f2e6b;
   margin-bottom: 8px;
 }
 .blog-preview a{
@@ -134,14 +134,14 @@
 /* blog details page */
 .blog-details h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #1f2e6b;
   margin-bottom: 10px;
 }
 .blog-details div {
   margin: 20px 0;
 }
 .blog-details button {
-  background: #f1356d;
+  background: #1f2e6b;
   color: #fff;
   border: 0;
   padding: 8px;
@@ -161,7 +161,7 @@
 }
 .search h2 {
   font-size: 30px;
-  color: #f1356d;
+  color: #1f2e6b;
   margin-bottom: 30px;
 }
 .search h4 {
@@ -176,7 +176,7 @@
 }
 
 .search button {
-  background: #f1356d;
+  background: #1f2e6b;
   color: #fff;
   border: 0;
   padding: 8px;
@@ -320,8 +320,8 @@ ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
 }
 
 ul.ks-cboxtags li input[type="checkbox"]:checked + label {
-  border: 2px solid #f1356d;
-  background-color: #e24b78;
+  border: 2px solid #1f2e6b;
+  background-color: #1a3f87;
   color: #fff;
   transition: all .2s;
 }
@@ -381,8 +381,8 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 
 .top{
-  &:before{transform:rotate(45deg);background:#e46569;}
-  &:after{transform:rotate(135deg);background:#ecaf81;}
+  &:before{transform:rotate(45deg);background:#20207f;}
+  &:after{transform:rotate(135deg);background:#32689b;}
 }
 
 .bottom{
@@ -436,7 +436,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 .login h2 {
   font-size: 20px;
-  color: #f1356d;
+  color: #1f2e6b;
   margin-bottom: 30px;
 }
 .login input, .login textarea, .login select {
@@ -450,7 +450,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 .login button {
   margin-bottom: 10%;
   width: 100%;
-  background: #f1356d;
+  background: #1f2e6b;
   color: #fff;
   border: 0;
   padding: 8px;
@@ -497,7 +497,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 .register button {
   width: 100%;
-  background: #f1356d;
+  background: #1f2e6b;
   color: #fff;
   border: 0;
   padding: 8px;
@@ -525,7 +525,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
   float: left;
   display: none;
   position: absolute;
-  background-color: #f1356d;
+  background-color: #1f2e6b;
   min-width: 100px;
   z-index: 1;
 }
@@ -576,18 +576,18 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 
 .valid {
-  color: limegreen;
+  color: rgb(50, 205, 174);
   margin-left: 0.25rem;
 }
 
 .invalid {
-  color: red;
+  color: rgb(34, 47, 78);
   margin-left: 0.25rem;
 }
 
 .errmsg {
-  background-color: lightpink;
-  color: firebrick;
+  background-color: rgb(182, 226, 255);
+  color: rgb(34, 96, 178);
   font-weight: bold;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
@@ -628,14 +628,14 @@ img.stretchy {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color:  #a95b5d; /*D8D8EB  FFF8D7 FFF4C1*/
+  background-color:  #5b75a9; /*D8D8EB  FFF8D7 FFF4C1*/
 }
 
 
 .profile-container {
   max-width: 800px;
   margin: 70px auto;
-  background-color: #ffffffc7;
+  background-color: #e8ebefc7;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 50px;
 }
