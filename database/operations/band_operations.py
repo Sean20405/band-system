@@ -66,15 +66,7 @@ def get_style_by_band(band_id):
     return db.session.scalars(query).all()
 
 
-def get_member_by_band(band_id):
-    query = db.select(
-        User_Band.c.user_id
-    ).where(
-        User_Band.c.band_id == band_id,
-        User_Band.c.status == 1
-    )
 
-    return db.session.scalars(query).all()
 
 def get_member_request(band_id):
     query = db.select(
@@ -88,7 +80,7 @@ def get_member_request(band_id):
 
 def getRequestUser(band_id):
     request_id = get_member_request(band_id)
-
+    print(request_id)
     for i in request_id:
         request_user = db.select(
             User.id.label('user_id'),
