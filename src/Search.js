@@ -55,18 +55,6 @@ export function SearchMusician ({url}) {
     region.forEach(item => { formData.append('region', item) });
     style.forEach(item => { formData.append('style', item) });
     formData.append("role", "musician");
-    //console.log(formData.getAll("style"));
-    /* === GET url ===
-    const params = new URLSearchParams({})
-    instrument.forEach(item => { params.append("instrument", item) });
-    region.forEach(item => { params.append("region", item) });
-    style.forEach(item => { params.append("style", item) });
-    var para = '';
-    instrument.forEach(item => { para = para + 'instrument=' + item + '&'; });
-    region.forEach(item => { para = para + 'region=' + item + '&'; });
-    style.forEach(item => { para = para + 'style=' + item + '&'; });
-    para = para.slice(0, -1);
-    const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
     fetch( url , {
       method: 'POST',
@@ -90,6 +78,7 @@ export function SearchMusician ({url}) {
   const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
   return (
     <div className="search">
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
       <div className="filter">
         <h2>Search for a musician!</h2>
         <form onSubmit={handleSubmit}>
@@ -129,13 +118,13 @@ export function SearchMusician ({url}) {
           </div>
           <br />
           <br />
-          { !isPending && (<button>Search!</button>) }
+          { !isPending && (<button>&#xf002;&nbsp;&nbsp;Search</button>) }
           { isPending && (<button disabled style={{color: "#5b75a9"}}>Searching...</button>) }
         </form>
       </div>
       { hasResult && 
       (<div className="result" ref={ref}>
-        <SearchResultUser datas={searchData}></SearchResultUser>
+        <SearchResultUser datas={searchData} url={url}></SearchResultUser>
       </div>) }
   </div>
   
@@ -182,17 +171,6 @@ export function SearchBand ({url}) {
     region.forEach(item => { formData.append('region', item) });
     style.forEach(item => { formData.append('style', item) });
     formData.append("role", "band");
-    /* === GET url ===
-    const params = new URLSearchParams({})
-    instrument.forEach(item => { params.append("instrument", item) });
-    region.forEach(item => { params.append("region", item) });
-    style.forEach(item => { params.append("style", item) });
-    var para = '';
-    instrument.forEach(item => { para = para + 'instrument=' + item + '&'; });
-    region.forEach(item => { para = para + 'region=' + item + '&'; });
-    style.forEach(item => { para = para + 'style=' + item + '&'; });
-    para = para.slice(0, -1);
-    const url = 'https://f139-140-113-235-250.ngrok-free.app/?' + para;*/
 
     fetch(url, {
       method: 'POST',
@@ -215,6 +193,7 @@ export function SearchBand ({url}) {
   const regions = [["KLU", "基隆市"], ["TPH", "新北市"], ["TPE", "臺北市"], ["TYC", "桃園市"], ["HSH", "新竹縣"], ["HSC", "新竹市"], ["MAL", "苗栗縣"], ["TXG", "臺中市"], ["CWH", "彰化縣"], ["NTO", "南投縣"], ["YLH", "雲林縣"], ["CHY", "嘉義縣"], ["CYI", "嘉義市"], ["TNN", "臺南市"], ["KHH", "高雄市"], ["IUH", "屏東縣"], ["ILN", "宜蘭縣"], ["HWA", "花蓮縣"], ["TTT", "臺東縣"], ["PEH", "澎湖縣"], ["GNI", "綠島"], ["KYD", "蘭嶼"], ["KMN", "金門縣"], ["LNN", "連江縣"]];
   return (
     <div className="search">
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
       <div className="filter">
         <h2>Find a Band!</h2>
         <form onSubmit={handleSubmit}>
@@ -242,13 +221,13 @@ export function SearchBand ({url}) {
           </div>
           <br />
           <br />
-          { !isPending && (<button>Search!</button>) }
+          { !isPending && (<button>&#xf002;&nbsp;&nbsp;Search</button>) }
           { isPending && (<button disabled style={{color: "#5b75a9"}}>Searching...</button>) }
         </form>
       </div>
       { hasResult && 
       (<div className="result" ref={ref}>
-        <SearchResultBand datas={searchData}></SearchResultBand>
+        <SearchResultBand datas={searchData} url={url}></SearchResultBand>
       </div>) }
   </div>
   
