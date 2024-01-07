@@ -247,9 +247,6 @@ def sendBandJoinRequest(user_id, band_id):
     #     fb = fb,
     #     photo = photo
     # )
-    
-    db.session.execute(stmt)
-    db.session.commit()
     return
 
 def updateUserPassword(user_id, password):
