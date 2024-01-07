@@ -346,7 +346,7 @@ def request_band():
     resp.status_code = 201
     return resp
 
-@app.route('/requestList', methods = ["GET"])
+@app.route('/requestList', methods = ["POST"])
 def get_request_user():
     band_id = request.form.get('band_id')
     if (band_id is None):
