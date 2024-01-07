@@ -411,6 +411,7 @@ def band_info():
         return resp
     styles = request.form.getlist('style')
     regions = request.form.getlist('region')
+    name = request.form.get('name')
     practice_time = request.form.get('practice_time')
     bio = request.form.get('bio')
     ig = request.form.get('ig')
@@ -440,7 +441,7 @@ def band_info():
     updateBandStyles(band_id, styles)
     updateBandRegions(band_id, regions)
     updateBandMembers(members, band_id)
-    updateBand(band_id, bio, practice_time, ig, fb, filename, contact_window)
+    updateBand(band_id, name, bio, practice_time, ig, fb, filename, contact_window)
 
     db.session.commit()
     

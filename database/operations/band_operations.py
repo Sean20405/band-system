@@ -170,13 +170,14 @@ def updateBandMembers(new_ids, band_id):
     db.session.commit()
     return
 
-def updateBand(band_id, bio, practice_time, ig, fb, photo, contact_window):
+def updateBand(band_id, name, bio, practice_time, ig, fb, photo, contact_window):
     if photo == "not Exist":
         stmt = db.update(
         Band
         ).where(
             Band.id == band_id
         ).values(
+            name = name,
             bio = bio,
             practice_time = practice_time,
             ig = ig,
@@ -192,6 +193,7 @@ def updateBand(band_id, bio, practice_time, ig, fb, photo, contact_window):
     ).where(
         Band.id == band_id
     ).values(
+        name = name,
         bio = bio,
         practice_time = practice_time,
         ig = ig,
