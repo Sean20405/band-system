@@ -17,7 +17,7 @@ const EditUser = ({user,url}) => {
     const [region, setRegion] = useState([]);
     const [ig, setIg] = useState("null");
     const [fb, setFb] = useState("null");
-    const [photo, setPhoto] = useState("null");
+    const [photo, setPhoto] = useState("");
     const [email, setEmail] = useState("null");
     const [bio, setBio] = useState("null");
 
@@ -28,6 +28,10 @@ const EditUser = ({user,url}) => {
     const styles = ['J-rock', 'Metal', 'J-pop', 'Lo-Fi', 'Jazz', 'Post Rock', 'Math Rock', 'Acoustic', 'Softcore', 'Pop-Punk', 'Country', "Others"];
     const regions = [["KLU", "基隆市"], ["TPH", "新北市"], ["TPE", "臺北市"], ["TYC", "桃園市"], ["HSH", "新竹縣"], ["HSC", "新竹市"], ["MAL", "苗栗縣"], ["TXG", "臺中市"], ["CWH", "彰化縣"], ["NTO", "南投縣"], ["YLH", "雲林縣"], ["CHY", "嘉義縣"], ["CYI", "嘉義市"], ["TNN", "臺南市"], ["KHH", "高雄市"], ["IUH", "屏東縣"], ["ILN", "宜蘭縣"], ["HWA", "花蓮縣"], ["TTT", "臺東縣"], ["PEH", "澎湖縣"], ["GNI", "綠島"], ["KYD", "蘭嶼"], ["KMN", "金門縣"], ["LNN", "連江縣"]];
     const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
+
+    useEffect(() => {
+        console.log(photo);
+    },[photo]);
 
     useEffect(() => {
         loadInitialPage();
@@ -41,12 +45,11 @@ const EditUser = ({user,url}) => {
         const data = await response.json();
         console.log(data);
         setInfo(data);
-        console.log(info);
     }
 
     useEffect(()=>{
         if(info){
-            fetchPhoto(info.photo);
+            // fetchPhoto(info.photo);
             setName(info.name);
             setPrefered_time(info.prefered_time);
             setIg(info.ig);
@@ -56,8 +59,6 @@ const EditUser = ({user,url}) => {
             setStyle(info.style);
             setInstrument(info.instrument);
             setRegion(info.region);
-            console.log("style: ");
-            console.log(style);
         }
         else {
             console.log("cannot fetch info");
@@ -94,15 +95,15 @@ const EditUser = ({user,url}) => {
       };
 
     const handleStyleChange = (e) => {
-    const value = parseInt(e.target.defaultValue);
-    if (e.target.checked) {
-        setStyle(item => [...item, value]);
-        console.log('Add ' + e.target.name + ' successfully!');
-    }
-    else {
-        setStyle(style.filter(item => item !== value));
-        console.log('Delete ' + e.target.name + ' successfully!');
-    }
+        const value = parseInt(e.target.defaultValue);
+        if (e.target.checked) {
+            setStyle(item => [...item, value]);
+            console.log('Add ' + e.target.name + ' successfully!');
+        }
+        else {
+            setStyle(style.filter(item => item !== value));
+            console.log('Delete ' + e.target.name + ' successfully!');
+        }
     };
 
     const handleRegionChange = (e) => {
@@ -116,6 +117,10 @@ const EditUser = ({user,url}) => {
             console.log('Delete ' + e.target.name + ' successfully!');
         }
     };
+    
+    const handlePhotoChange = (e) => {
+        console.log(e.target.defaultValue);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -126,13 +131,16 @@ const EditUser = ({user,url}) => {
         formData.append('ig', ig);
         formData.append('fb', fb);
         formData.append('email', email);
+        console.log(photo);
+        if (photo !== ""){
+            console.log("yes photo");
+            formData.append('photo', photo);
+        }
         instrument.forEach(item => { formData.append('instrument', item) });
         region.forEach(item => { formData.append('region', item) });
         style.forEach(item => { formData.append('style', item) });
 
-        formData.append('photo', "IMG_4363");
-
-        console.log(formData.get("instrument"));
+        console.log(formData.has('photo'));
 
         fetch(url + 'user-edit?user_id=' + id, {
             method: 'PUT',
@@ -164,6 +172,9 @@ const EditUser = ({user,url}) => {
         <h2 class="profile-edit-heading">Edit Profile</h2>
 
             <form class = "profile-edit-from" onSubmit={handleSubmit}>
+            <label for="fileInput" class="custom-upload-btn">Choose a Photo</label>
+            <input type="file" id="fileInput" accept="image/*" onChange={(e) => setPhoto(e.target.files[0])} />
+            <div id="fileName"></div>
 
                 <label htmlFor="username" class = "profile-edit-lable">
                     Name:
