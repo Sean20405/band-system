@@ -141,9 +141,10 @@ const BandProfilePublic = ({user, role , url}) => {
                             {request_send ? (
                                 <p>Request Sended</p>
                                 ):(
-                                    <div class="col-md-3">
+                                    <div className="login" style={{width: 'auto',padding: '0px'}}>
+                                    <div class="col-md-0" >
                                         <button onClick={click}>Send Request</button> 
-                                    </div>
+                                    </div></div>
                                 )
                             }
                             </>

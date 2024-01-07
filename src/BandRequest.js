@@ -21,6 +21,9 @@ const BandRequest = ({user,url}) => {
             setSearchData(data);
             setIsPending(false);
         })
+        .catch(err => {
+            console.log(err);
+        })
     },[])
     const click = async (e) => {
         console.log(e)
@@ -51,7 +54,8 @@ const BandRequest = ({user,url}) => {
                 <Link to={`/ProfilePublic/${data.user_id}`} className="profile-link">
                 <SearchCard id={data.user_id} name={data.name} filename={data.photo}/></Link>
                 <div class="col-md-7">
-                <button onClick={() => {click(data.user_id)}}>Accept</button>
+                <div className="login" style={{float: 'left', width: '77.5%',padding: '0px',textDecoration: ''}}>   
+                <button onClick={() => {click(data.user_id)}}>Accept</button></div>
                 </div></>
             )) }
           </div>

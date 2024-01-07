@@ -21,7 +21,7 @@ const Login = ({ onLogin ,url }) => {
 
     useEffect(()=>{
         if(info){
-            console.log(info);
+            //console.log(info);
             if(info.status == "Failed"){
                 setErrMsg('Unauthorized');
             }
@@ -64,7 +64,7 @@ const Login = ({ onLogin ,url }) => {
             return res.json();
         })
         .then(data => {
-            console.log(data);
+            //console.log(data);
             setInfo(data);
         })
         .catch(err => {
