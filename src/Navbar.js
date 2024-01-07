@@ -57,7 +57,6 @@ export default Navbar;*/
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from './img/Band_System.png';
-import { Link } from "react-router-dom";
 import './navbar.css'
 
 const Navbar = ({user}) => {
@@ -76,26 +75,36 @@ const Navbar = ({user}) => {
         <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/home"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</NavLink>
             </li>
             <li>
-              <NavLink to="/About">About</NavLink>
+              
+              <NavLink to="/searchmusician">
+                <i class="fas fa-search"></i>&nbsp;&nbsp;Find Members</NavLink>
             </li>
             <li>
-              <div  className="dropdown " >                         
+              
+              <NavLink to="/About"><i class="fas fa-guitar"></i>&nbsp;&nbsp;About</NavLink>
+            </li>
                   { !user ||user.user=="null" ? (
-                    <><button className="dropbtn">Login</button><div className="dropdown-content">
-                        <Link to="/login">As User</Link>
-                        <Link to="/BandLogin">As Band</Link>
-                      </div></>
+                    <>
+                      <li>
+                        <NavLink to="/login"><i class="fas fa-user"></i>&nbsp;&nbsp;Login As User</NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/BandLogin"><i class="fas fa-users"></i>&nbsp;&nbsp;Login As Band</NavLink>
+                      </li>
+                    </>
                   ) : (
-                    <><button className="dropbtn">{user.user}</button><div className="dropdown-content">
-                        <Link to="/Profile">Profile</Link>
-                        <Link to="/logout">Logout</Link>
-                      </div></>
+                    <>
+                      <li>
+                        <NavLink to="/Profile"><i class="fas fa-id-card"></i>&nbsp;&nbsp;{user.user}</NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</NavLink>
+                      </li>
+                    </>
                   )}
-              </div>
-            </li>
           </ul>
         </div>
       </div>
