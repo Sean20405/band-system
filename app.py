@@ -331,6 +331,8 @@ def user_info():
 def request_band():
     user_id = request.form.get('user_id')
     band_id = request.form.get('band_id')
+    print(user_id)
+    print(band_id)
     sendBandJoinRequest(user_id, band_id)
     db.session.commit()
     # Create message
