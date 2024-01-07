@@ -91,7 +91,7 @@ const Navbar = ({user}) => {
                       </div></>
                   ) : (
                     <><button className="dropbtn">{user.user}</button><div className="dropdown-content">
-                      <NavLink to="/Profile">Profile</NavLink>
+                      <Link to="/Profile">Profile</Link>
                       <Link to="/logout">Logout</Link>
                       </div></>
                   )}
