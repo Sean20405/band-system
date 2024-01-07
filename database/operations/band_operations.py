@@ -65,6 +65,16 @@ def get_style_by_band(band_id):
 
     return db.session.scalars(query).all()
 
+def get_region_by_band(band_id):
+    query = db.select(
+        Band_Region.c.region_id
+    ).where(
+        Band_Region.c.band_id == band_id
+    )
+
+    return db.session.scalars(query).all()
+
+
 def get_member_by_band(band_id):
     query = db.select(
         User_Band.c.user_id
@@ -101,6 +111,36 @@ def updateBandStyles(band_id ,new_ids):
             db.session.execute(ins_stmt)
     db.session.commit()
     return
+
+def updateBandRegions(band_id ,new_ids):
+    if len(new_ids) == 0:
+        return
+    cur_ids = get_region_by_band(band_id)
+
+    for i in cur_ids:
+        if i not in new_ids:
+            del_stmt = db.delete(
+                Band_Region
+            ).where(
+                Band_Region.c.band_id == band_id
+            ).where(
+                Band_Region.c.region_id == i
+            )
+            db.session.execute(del_stmt)
+
+    for i in new_ids:
+        if i not in cur_ids:
+            ins_stmt = db.insert(
+                Band_Region
+            ).values(
+                band_id = band_id,
+                region_id = i
+            )
+            db.session.execute(ins_stmt)
+    db.session.commit()
+    return
+
+
 
 def updateBandMembers(new_ids, band_id):
     if len(new_ids) == 0:

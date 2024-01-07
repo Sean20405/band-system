@@ -403,15 +403,14 @@ def band_info():
         resp.status_code = 400
         return resp
 
-
     band_id = request.args.get('band_id')
-
 
     if not bandExist(band_id):
         resp = make_response("id not found")
         resp.status_code = 404
         return resp
     styles = request.form.getlist('style')
+    regions = request.form.getlist('region')
     practice_time = request.form.get('practice_time')
     bio = request.form.get('bio')
     ig = request.form.get('ig')
@@ -439,6 +438,7 @@ def band_info():
             return resp
 
     updateBandStyles(band_id, styles)
+    updateBandRegions(band_id, regions)
     updateBandMembers(members, band_id)
     updateBand(band_id, bio, practice_time, ig, fb, filename, contact_window)
 
