@@ -56,6 +56,15 @@ def find_target():
 @app.route('/image/<file_name>', methods = ['GET'])
 def show_image(file_name):
     image_path = "static/uploads/" + file_name
+    if not os.path.isfile(os.getcwd() + '/' + image_path):
+        resp = jsonify({
+            "message": "No photo doesn't exist",
+            "status": "Failed"
+        })
+        resp.status_code = 400
+        return resp
+
+
     part = file_name.split('.')
     type = part[-1]
     resp = send_file(image_path, mimetype='image/'+type)
