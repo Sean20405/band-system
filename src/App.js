@@ -21,6 +21,7 @@ import EditBand from './EditBand';
 import BandProfile from './BandProfile';
 import ProfilePublic from './ProfilePublic';
 import About from './About';
+import BandProfilePublic from './BandProfilePublic';
 
 
 function App() {
@@ -96,6 +97,9 @@ function App() {
               </Route>
               <Route path={"/ProfilePublic/:id"}>
                 <ProfilePublic url={url}></ProfilePublic>
+              </Route>
+              <Route path={"/BandProfilePublic/:id"}>
+                <BandProfilePublic url={url}>1</BandProfilePublic>
               </Route>
               <Route path="/blogs/:id">
                 <BlogDetails />
