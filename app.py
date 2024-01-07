@@ -329,8 +329,8 @@ def user_info():
 
 @app.route('/requestBand', methods = ["GET"])
 def request_band():
-    user_id = request.args.get('user_id')
-    band_id = request.args.get('band_id')
+    user_id = request.form.get('user_id')
+    band_id = request.form.get('band_id')
     sendBandJoinRequest(user_id, band_id)
     db.session.commit()
     # Create message
