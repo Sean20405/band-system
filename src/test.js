@@ -12,73 +12,37 @@ const test = () => {
     formData.append('region', 'Taipei');
     formData.append('style', 'rock paper scissor');
 
-  return(
-    <body class="profile-main">
-    
-      <div class="profile-container">
-        <div class="profile-header">
-          {/* <img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture"> */}
-          <h1 class="user-name">John Doe</h1>
-          <p class="user-id">ID: JD123</p>
-          <p class="user-bio">Web Developer and Music Enthusiast</p>
-        </div>
-        <div class="profile-details">
-          <div class="detail">
-            <strong>Preferred Practice Time:</strong> Evening
-          </div>
-          <div class="detail">
-            <strong>Instrument Played:</strong> Guitar
-          </div>
-          <div class="detail">
-            <strong>Music Style Liked:</strong> Rock, Jazz
-          </div>
-          <div class="detail">
-            <strong>Region:</strong> City, Country
-          </div>
-          <div class="detail">
-            <strong>Instagram:</strong> <a href="https://www.instagram.com/johndoe/" target="_blank">johndoe</a>
-          </div>
-          <div class="detail">
-            <strong>Facebook:</strong> <a href="https://www.facebook.com/johndoe/" target="_blank">johndoe</a>
-          </div>
-          <div class="detail">
-            <strong>Email:</strong> johndoe@example.com
-          </div>
-        </div>
-      </div>
-    </body>
+    function validateFile() {
+        const fileInput = document.getElementById("fileInput");
+        const fileNameDisplay = document.getElementById("fileName");
+        const fileSizeError = document.getElementById("fileSizeError");
 
-  /*   
-    // <div>
-    // <div class="profileTitle">
-      
-    //         <h1>{ formData.get("name") }'s Public profile</h1>
-    //         <br></br>
-    //         <br></br>
-    //         <br></br>
-            
-    // </div> 
-    // <div class="grid-container">           
-    //             <div class="grid-item">
-    //                 <h4></h4>
-    //                 <p>ID : vitolin</p>
-    //                 <br></br>
-    //             </div>
-                
-    //             <div class="grid-item">
-    //                 <h2>Name:</h2>
-    //                 <p>{  formData.get("name") }</p>
-    //                 <br></br>
-    //             </div>
-                 
-    //             <div class="grid-item">
-    //                 <h2>Bio: </h2> 
-    //                 <p>{ formData.get("bio")}</p> <br></br>
-    //             </div>
-               
-    //   </div>      
-    //   </div>    
-     */
+        if (fileInput.files.length > 0) {
+            const fileSize = fileInput.files[0].size; // Size in bytes
+            const maxSizeInBytes = 1024 * 1024; // 1 MB
+
+            if (fileSize > maxSizeInBytes) {
+                fileSizeError.textContent = "File size exceeds the allowed limit (1 MB).";
+                fileInput.value = ""; // Clear the file input
+            } else {
+                fileSizeError.textContent = "";
+                fileNameDisplay.textContent = `Selected File: ${fileInput.files[0].name}`;
+            }
+        } else {
+            fileSizeError.textContent = "";
+            fileNameDisplay.textContent = "No file selected";
+        }
+    }
+    
+  return(
+    <div class="upload-container">
+        <label for="fileInput" class="custom-upload-btn">Choose a Photo</label>
+        <input type="file" id="fileInput" accept="image/*" onchange="validateFile()" />
+        <div id="fileName"></div>
+        <div id="fileSizeError"></div>
+    </div>
+
+    
   )
 }
 export default test;
