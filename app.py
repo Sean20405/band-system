@@ -58,10 +58,10 @@ def show_image(file_name):
     image_path = "static/uploads/" + file_name
     if not os.path.isfile(os.getcwd() + '/' + image_path):
         resp = jsonify({
-            "message": "No photo doesn't exist",
+            "message": "photo doesn't exist",
             "status": "Failed"
         })
-        resp.status_code = 400
+        resp.status_code = 404
         return resp
 
 
