@@ -129,25 +129,27 @@ const BandProfilePublic = ({user, role , url}) => {
                         </div>
                     </div>
                     <div class="col-md-6">
-                        {role=="user" ? (
-                            <>
-                            {request_send ? (
-                                <p>Request Sended</p>
-                                ):(
-                                    <button onClick={click}>Send Request</button> 
-                                )
-                            }
-                            </>
-                        ) : (
-                            <></>
-                        )}
+                        
                         
                         <div class="profile-head">
                                     <h1>
                                         {info.name}
                                     </h1>
                         </div>
-                        <br />
+                        <br />{role=="user" ? (
+                            <>
+                            {request_send ? (
+                                <p>Request Sended</p>
+                                ):(
+                                    <div class="col-md-3">
+                                        <button onClick={click}>Send Request</button> 
+                                    </div>
+                                )
+                            }
+                            </>
+                        ) : (
+                            <></>
+                        )}
                         <div class="profile-head row" >
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
@@ -240,7 +242,6 @@ const BandProfilePublic = ({user, role , url}) => {
                                                 {info.members.map((member_id, index) => (
                                                     <Link to={"/profilepublic/" + member_id}><p className="mt-1" key={index}>{ member_id }</p></Link>
                                                 ))}
-              
                                             </div>
                                         </div>
                             </div>
