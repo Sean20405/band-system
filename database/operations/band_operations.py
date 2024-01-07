@@ -149,51 +149,47 @@ def updateBandRegions(band_id ,new_ids):
 
 
 
-def updateBandMembers(new_ids, band_id):
-    if len(new_ids) == 0:
-        return
-    cur_ids = get_member_by_band(band_id)
+# def updateBandMembers(new_ids, band_id):
+#     if len(new_ids) == 0:
+#         return
+#     cur_ids = get_member_by_band(band_id)
 
-    for i in cur_ids:
-        if i not in new_ids:
-            del_stmt = db.delete(
-                User_Band
-            ).where(
-                User_Band.c.band_id == band_id
-            ).where(
-                User_Band.c.user_id == i
-            )
-            db.session.execute(del_stmt)
+#     for i in cur_ids:
+#         if i not in new_ids:
+#             del_stmt = db.delete(
+#                 User_Band
+#             ).where(
+#                 User_Band.c.band_id == band_id
+#             ).where(
+#                 User_Band.c.user_id == i
+#             )
+#             db.session.execute(del_stmt)
 
-    for i in new_ids:
-        if i not in cur_ids:
-            ins_stmt = db.insert(
-                User_Band
-            ).values(
-                band_id = band_id,
-                user_id = i,
-                status = 1
-            )
-            db.session.execute(ins_stmt)
-    db.session.commit()
-    return
+#     for i in new_ids:
+#         if i not in cur_ids:
+#             ins_stmt = db.insert(
+#                 User_Band
+#             ).values(
+#                 band_id = band_id,
+#                 user_id = i,
+#                 status = 1
+#             )
+#             db.session.execute(ins_stmt)
+#     db.session.commit()
+#     return
 
-def updateRequestMembers(new_ids, band_id):
-    if len(new_ids) == 0:
-        return
-    request_ids = get_member_request(band_id)
+def updateRequestMembers(user_id, band_id):
 
-    for i in new_ids:
-        if i in new_ids:
-            stmt = db.update(
-                User_Band
-            ).where(
-                User_Band.c.band_id == band_id,
-                User_Band.c.user_id == i
-            ).values(
-                status = 1
-            )
-            db.session.execute(stmt)
+    stmt = db.update(
+        User_Band
+    ).where(
+        User_Band.c.band_id == band_id
+    ).where(
+        User_Band.c.user_id == user_id
+    ).values(
+        status = 1
+    )
+    db.session.execute(stmt)
     db.session.commit()
     return
 

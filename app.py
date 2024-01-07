@@ -362,6 +362,26 @@ def get_request_user():
     resp.status_code = 200
     return resp
 
+@app.route('/acceptRequest', methods = ["POST"])
+def ac_request():
+    user_id = request.form.get('user_id')
+    band_id = request.form.get('band_id')
+    if (band_id is None):
+        resp = jsonify({
+            "message": "Failed to request to band, user_id or band_id is none",
+            "status": "Failed"
+        })
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.status_code = 400
+        return resp
+    updateRequestMembers(user_id, band_id)
+    resp = jsonify({
+        "message": "Successfully add user to your band",
+        "status": "Success"
+    })
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    resp.status_code = 200
+    return resp
 
 # Sign-up a band account for your band
 @app.route('/band-sign-up', methods = ['POST'])
