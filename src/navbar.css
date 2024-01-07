@@ -6,48 +6,61 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: #fcfcfc;
 }
-.navbar img{
-    height: 70px; /* 新的高度 */
-    background-size: contain;
-    padding-bottom: 0px;
+
+.navbar {
+  background-color: #262d3e;
+  position: relative;
+  padding: 2.2vw;
+  flex-wrap: nowrap;
+  height: 6vw;
 }
+
+.navbar img{
+  height: 4vw;
+  background-size: contain;
+  padding-bottom: 0px;
+}
+
 .navbar .container {
   padding-right: 0;
   padding-left: 0;
-  margin-top: -5px;
+  margin-right: 1vw;
+  margin-left: 1vw;
+  margin-top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 100%;
   width: 100%;
+  max-width: 100%;
   border-right: 0px; 
-}
-
-.navbar {
-  height: 100px;
-  background-color: #262d3e;
-  position: relative;
-  
 }
 
 .nav-elements ul {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   list-style-type: none;
   margin-bottom: 0px;
-  
+  height: 6vw;
 }
 
 .nav-elements ul li {
-    padding: 8px;
+  padding: 8px;
 }
 
 .nav-elements ul a {
-  font-size: 17px;
+  font-size: 1.15rem;
   font-weight: 400;
   color: #fef7e5;
   text-decoration: none;
   margin-left: 10px;
+  
+}
+@media (max-width: 1140px) {
+  .nav-elements ul a {
+    font-size: 1rem;
+  }
 }
 
 .nav-elements ul a.active {
@@ -60,9 +73,9 @@ body {
 
 
 .nav-elements ul a:hover {
-    color: #ef7f39;
-    background-color: white;
-    border-radius: 10px;
+  color: #ef7f39;
+  background-color: white;
+  border-radius: 10px;
 }
 
 
@@ -77,13 +90,13 @@ body {
 } */
 
 navbar .dropdown1 {
-    float: right;  
-    overflow: hidden;
-    text-decoration: none;
+  float: right;  
+  overflow: hidden;
+  text-decoration: none;
 }
 
 .dropdown .dropbtn{
-    font-size: 16px;
+    font-size: 1.1rem;
     background:none;
     border:none;
     margin:0;
