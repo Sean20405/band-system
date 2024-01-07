@@ -17,6 +17,7 @@ import BandRegister from './BandRegister';
 import Forget from './Forget';
 import ResetPassword from './ResetPassword'
 import EditUser from './EditUser'
+import EditBand from './EditBand';
 import BandProfile from './BandProfile';
 
 function App() {
@@ -66,6 +67,9 @@ function App() {
               </Route>
               <Route path="/EditUser">
                   <EditUser  user={cookies.user} url={url}/>
+              </Route>
+              <Route path="/EditBand">
+                  <EditBand  user={cookies.user} url={url}/>
               </Route>
               <Route path="/Logout">
                   <Logout onLogin={handleLogin} />
