@@ -99,7 +99,7 @@ const BandLogin = ({ onLogin ,url }) => {
                 <br></br>
                 <div ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</div>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="username">Bandname:</label>
+                    <label htmlFor="username">BandID:</label>
                     <input
                         type="text"
                         id="username"
