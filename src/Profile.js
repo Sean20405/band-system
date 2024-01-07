@@ -26,20 +26,6 @@ const Profile = ({user,url}) => {
     const [photo, setPhoto] = useState(null);
     const [email, setEmail] = useState(null);
     const [bio, setBio] = useState(null);
-
-    
-    let formData = new FormData(); 
-    formData.append('name', "Sheng_Shun_Chang");
-    formData.append('prefered_time', "midnight");
-    formData.append('bio', "love Amazing Show");
-    formData.append('photo', "Some random URL");
-    formData.append('ig', "vitolin_yucheng");
-    formData.append('fb', 'Kent_l');
-    formData.append('email', 'vitolin0416@gmail.com');
-    formData.append('instrument', 'violin');
-    formData.append('region', 'Taipei');
-    formData.append('style', 'rock paper scissor');
-
    
 
     useEffect(()=>{
@@ -75,7 +61,6 @@ const Profile = ({user,url}) => {
         {
             console.log("fetch")
             filename = "default.jpg"
-
         }
         
         const res = await fetch(url + 'image/' + filename ,{
@@ -136,18 +121,21 @@ const Profile = ({user,url}) => {
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h5>
+                                    <h1>
                                         {info.name}
-                                    </h5>
-
+                                    </h1>
+                        </div>
+                        <br />
+                        <div class="profile-head">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
-                                {/* <!-- <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                </li> --> */}
+        
                             </ul>
+                        </div>
+                        <div class="overflow-wrap text-break" >
+                            {info.bio}   
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -184,7 +172,7 @@ const Profile = ({user,url}) => {
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         
-                                        <div class="row border mt-1 rounded">
+                                        <div class="row border mt-3 rounded">
                                             <div class="col-md-6">
                                                 <label className="mt-1">User Id</label>
                                             </div>
@@ -233,12 +221,7 @@ const Profile = ({user,url}) => {
                                                 <p  className="mt-1">{info.prefered_time}</p>
                                             </div>
                                         </div>
-                                    <div class="row border mt-1 rounded">
-                                        <div class="col-md-12">
-                                            <label className="mt-1">Your Bio</label><br/>
-                                            <p className="mt-1">{info.bio}</p>
-                                        </div>
-                                    </div>
+                                    
                             </div>
 
                         </div>

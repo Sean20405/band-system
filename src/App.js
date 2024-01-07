@@ -19,6 +19,7 @@ import ResetPassword from './ResetPassword'
 import EditUser from './EditUser'
 import EditBand from './EditBand';
 import BandProfile from './BandProfile';
+import About from './About';
 
 function App() {
   const url="http://127.0.0.1:5000/"
@@ -53,10 +54,13 @@ function App() {
               <Route path="/login">
                   <Login onLogin={handleLogin} url={url}/>
               </Route>
+              <Route path="/about">
+                  <About url={url}/>
+              </Route>
               <Route path="/forget">
                   <Forget forget={Forget_func} url={url}/>
               </Route>
-              <Route path="/Bandlogin">
+              <Route path="/BandLogin">
                   <BandLogin onLogin={handleLogin} url={url}/>
               </Route>
               <Route path="/BandRegister">
