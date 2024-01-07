@@ -20,21 +20,13 @@ const Navbar = ({user, role}) => {
       <nav className="navbar">
       <div className="container">
         <div className="logo">
-<<<<<<< HEAD
-          <NavLink to="/"><img src={logo} /></NavLink>
-        </div>
-        <div className={`nav-elements  ${showNavbar && 'active'}`}>
-          <ul>
-            
-=======
-          <img src={logo} className="d-inline"/>
+          <NavLink to="/home"><img src={logo} className="d-inline"/></NavLink>
         </div>
         <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>
             <li>
               <NavLink to="/home"><i class="fas fa-home"></i>&nbsp;&nbsp;Home</NavLink>
             </li>
->>>>>>> 96e85fb939d471338465ab4ec6993fc276ff6a0c
             <li>
               
               <NavLink to="/searchmusician">
