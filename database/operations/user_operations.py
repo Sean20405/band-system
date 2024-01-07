@@ -227,7 +227,7 @@ def sendBandJoinRequest(user_id, band_id):
     stmt = db.insert(
         User_Band
     ).values(
-        user_id == user_id,
+        user_id = user_id,
         band_id = band_id,
         status = 0 
     )
