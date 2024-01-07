@@ -22,17 +22,19 @@ import BandProfile from './BandProfile';
 import About from './About';
 
 function App() {
-  const url="http://127.0.0.1:5000/"
+  const url="http://54.172.70.94:5000/"
   const [cookies, setCookie] = useCookies(["user","role"]);
   // const [role_cookies, setRoleCookie] = useCookies(["role"]);
   function handleLogin(user, role) {
     setCookie("user", user, { path: "/" });
     setCookie("role", role, {path: "/"})
   }
+
   function Forget_func(id) {
     setCookie("forget_user", id, { path: "/" });
     // setRoleCookie("forget_role", role, { path: "/" });
   }
+
   return (
     <CookiesProvider>
       <Router>
@@ -106,5 +108,7 @@ function App() {
     </CookiesProvider>
   );
 }
+
+
 
 export default App;
