@@ -23,7 +23,7 @@ const BandLogin = ({ onLogin ,url }) => {
     useEffect(()=>{
         if(info){
             console.log(info);
-            if(info.status == "Failed"){
+            if(info.status === "Failed"){
                 setErrMsg('Unauthorized');
             }
             else if(info.password == pwd){
@@ -38,7 +38,7 @@ const BandLogin = ({ onLogin ,url }) => {
     useEffect(()=>{
         if(success){
             console.log(user);
-            onLogin({ user , role });
+            onLogin(user , role);
             history.push('/');
         }
     },[success])

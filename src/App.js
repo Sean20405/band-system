@@ -17,21 +17,25 @@ import BandRegister from './BandRegister';
 import Forget from './Forget';
 import ResetPassword from './ResetPassword'
 import EditUser from './EditUser'
+import BandProfile from './BandProfile';
 
 function App() {
   const url="http://127.0.0.1:5000/"
-  const [cookies, setCookie] = useCookies(["user"]);
-  function handleLogin(user) {
+  const [cookies, setCookie] = useCookies(["user","role"]);
+  // const [role_cookies, setRoleCookie] = useCookies(["role"]);
+  function handleLogin(user, role) {
     setCookie("user", user, { path: "/" });
+    setCookie("role", role, {path: "/"})
   }
   function Forget_func(id) {
     setCookie("forget_user", id, { path: "/" });
+    // setRoleCookie("forget_role", role, { path: "/" });
   }
   return (
     <CookiesProvider>
       <Router>
         <div className="App">
-          <Navbar  user={cookies.user}/>
+          <Navbar  user={cookies.user} role={cookies.role}/>
           <div className="content">
             <Switch>
               
@@ -72,7 +76,9 @@ function App() {
               <Route path="/searchband">
                 <SearchBand url={url}/>
               </Route>
-
+              <Route path="/BandProfile">
+                <BandProfile user={cookies.user} url={url}/>
+              </Route>
               <Route path="/register">
                 <Register url={url}/>
               </Route>

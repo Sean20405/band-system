@@ -11,9 +11,11 @@ import useFetch from "./useFetch";
 import { useState, useEffect } from "react";
 import './profile.css'
 
-const Profile = ({user,url}) => {
+const BandProfile = ({user,url}) => {
+    console.log(user);
+    // console.log(role);
     const id = user;
-    // const role = user.role;
+    // const role = role;
     const [info, setInfo] = useState(null);
     const [errMsg, setErrMsg] = useState('1234');
     const [name, setName] = useState(null);
@@ -24,7 +26,7 @@ const Profile = ({user,url}) => {
     const [ig, setIg] = useState(null);
     const [fb, setFb] = useState(null);
     const [photo, setPhoto] = useState(null);
-    const [email, setEmail] = useState(null);
+    const [contact_window, setContactWindow] = useState(null);
     const [bio, setBio] = useState(null);
 
     
@@ -58,7 +60,7 @@ const Profile = ({user,url}) => {
 
     const loadInitialPage = async () => {
         console.log("init");
-        const response = await fetch(url + 'user?user_id=' + id, {
+        const response = await fetch(url + 'band?band_id=' + id, {
             method: 'GET'
         });
         const data = await response.json();
@@ -118,7 +120,7 @@ const Profile = ({user,url}) => {
         "KMN": "金門縣", 
         "LNN": "連江縣"
     };
-    const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
+    // const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
 
     if(!info || !photo) return "loading";
     console.log(info.region)
@@ -128,10 +130,7 @@ const Profile = ({user,url}) => {
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src={photo} alt="profile"/>
-                            {/* <!-- <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div> --> */}
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -173,7 +172,7 @@ const Profile = ({user,url}) => {
                             
                             <div className="mt-3">
                                 <a href="" className="d-inline p-2"><FontAwesomeIcon icon={faEnvelope} size="2x"/></a>
-                                <div className="d-inline p-2">{info.email}</div>
+                                <div className="d-inline p-2">{info.contact_window}</div>
                             </div>
                             
                             
@@ -197,7 +196,7 @@ const Profile = ({user,url}) => {
                                                 <label className="mt-1">Music Style</label>
                                             </div>
                                             <div class="col-md-6">
-                                                {info.style?.map((i, index) => (
+                                                {info.style.map((i, index) => (
                                                         <p  className="mt-1" key={index}>{styles[i]}</p>
                                                 ))}
                                                 {/* <p className="mt-1">{info.style}</p> */}
@@ -214,7 +213,7 @@ const Profile = ({user,url}) => {
                                                 {/* <p>{info.region}</p> */}
                                             </div>
                                         </div>
-                                        <div class="row border mt-1 rounded">
+                                        {/* <div class="row border mt-1 rounded">
                                             <div class="col-md-6">
                                                 <label  className="mt-1">Instrument</label>
                                             </div>
@@ -222,9 +221,9 @@ const Profile = ({user,url}) => {
                                                 {info.instrument?.map((i, index) => (
                                                     <p  className="mt-1" key={index}>{Instruments[i]}</p>
                                                 ))}
-                                                {/* <p>{info.instrument}</p> */}
+                                                
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div class="row border mt-1 rounded">
                                             <div class="col-md-6">
                                                 <label  className="mt-1">Prefered Time</label>
@@ -249,4 +248,4 @@ const Profile = ({user,url}) => {
     ); 
 }
  
-export default Profile;
+export default BandProfile;
