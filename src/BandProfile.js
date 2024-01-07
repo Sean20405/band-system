@@ -11,21 +11,24 @@ import useFetch from "./useFetch";
 import { useState, useEffect } from "react";
 import './profile.css'
 
-const Profile = ({user,url}) => {
+const BandProfile = ({user,url}) => {
+    console.log(user);
+    // console.log(role);
     const id = user;
-    // const role = user.role;
+    // const role = role;
     const [info, setInfo] = useState(null);
     const [errMsg, setErrMsg] = useState('1234');
     const [name, setName] = useState(null);
-    const [prefered_time, setPrefered_time] = useState(null);
+    const [practice_time, setPractice_time] = useState(null);
     const [instrument, setInstrument] = useState(null);
     const [style, setStyle] = useState(null);
     const [region, setRegion] = useState(null);
     const [ig, setIg] = useState(null);
     const [fb, setFb] = useState(null);
     const [photo, setPhoto] = useState(null);
-    const [email, setEmail] = useState(null);
+    const [contact_window, setContactWindow] = useState(null);
     const [bio, setBio] = useState(null);
+
    
 
     useEffect(()=>{
@@ -44,7 +47,7 @@ const Profile = ({user,url}) => {
 
     const loadInitialPage = async () => {
         console.log("init");
-        const response = await fetch(url + 'user?user_id=' + id, {
+        const response = await fetch(url + 'band?band_id=' + id, {
             method: 'GET'
         });
         const data = await response.json();
@@ -61,6 +64,7 @@ const Profile = ({user,url}) => {
         {
             console.log("fetch")
             filename = "default.jpg"
+
         }
         
         const res = await fetch(url + 'image/' + filename ,{
@@ -103,8 +107,7 @@ const Profile = ({user,url}) => {
         "KMN": "金門縣", 
         "LNN": "連江縣"
     };
-    const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
-
+    
     if(!info || !photo) return "loading";
     console.log(info.region)
     return(
@@ -113,10 +116,7 @@ const Profile = ({user,url}) => {
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src={photo} alt="profile"/>
-                            {/* <!-- <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div> --> */}
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -126,20 +126,21 @@ const Profile = ({user,url}) => {
                                     </h1>
                         </div>
                         <br />
-                        <div class="profile-head">
+                        <div class="profile-head row" >
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                </li>
-        
-                            </ul>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    </li>
+                        
+                                </ul>
                         </div>
+                        
                         <div class="overflow-wrap text-break" >
                             {info.bio}   
                         </div>
                     </div>
                     <div class="col-md-2">
-                    <Link to="/edituser"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/></Link>
+                    <Link to="/EditBand"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/></Link>
                         
                     </div>
                 </div>
@@ -161,7 +162,7 @@ const Profile = ({user,url}) => {
                             
                             <div className="mt-3">
                                 <a href="" className="d-inline p-2"><FontAwesomeIcon icon={faEnvelope} size="2x"/></a>
-                                <div className="d-inline p-2">{info.email}</div>
+                                <div className="d-inline p-2">{info.contact_window}</div>
                             </div>
                             
                             
@@ -169,6 +170,7 @@ const Profile = ({user,url}) => {
                         </div>
                     </div>
                     <div class="col-md-8">
+                    
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         
@@ -185,10 +187,10 @@ const Profile = ({user,url}) => {
                                                 <label className="mt-1">Music Style</label>
                                             </div>
                                             <div class="col-md-6">
-                                                {info.style?.map((i, index) => (
-                                                        <p  className="mt-1" key={index}>{styles[i]}</p>
+                                                {info.style.map((i, index) => (
+                                                        <p  className="mt-1" key={index}>{styles[i-1]}</p>
                                                 ))}
-                                                {/* <p className="mt-1">{info.style}</p> */}
+                                             
                                             </div>
                                         </div>
                                         <div class="row border mt-1 rounded">
@@ -199,26 +201,16 @@ const Profile = ({user,url}) => {
                                                 {info.region.map((i, index) => (
                                                     <p className="mt-1" key={index}>{regions[i]}</p>
                                                 ))}
-                                                {/* <p>{info.region}</p> */}
+              
                                             </div>
                                         </div>
+                                        
                                         <div class="row border mt-1 rounded">
                                             <div class="col-md-6">
-                                                <label  className="mt-1">Instrument</label>
+                                                <label  className="mt-1">practice Time</label>
                                             </div>
                                             <div class="col-md-6">
-                                                {info.instrument?.map((i, index) => (
-                                                    <p  className="mt-1" key={index}>{Instruments[i]}</p>
-                                                ))}
-                                                {/* <p>{info.instrument}</p> */}
-                                            </div>
-                                        </div>
-                                        <div class="row border mt-1 rounded">
-                                            <div class="col-md-6">
-                                                <label  className="mt-1">Prefered Time</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p  className="mt-1">{info.prefered_time}</p>
+                                                <p  className="mt-1">{info.practice_time}</p>
                                             </div>
                                         </div>
                                     
@@ -232,4 +224,4 @@ const Profile = ({user,url}) => {
     ); 
 }
  
-export default Profile;
+export default BandProfile;

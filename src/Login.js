@@ -37,7 +37,7 @@ const Login = ({ onLogin ,url }) => {
     useEffect(()=>{
         if(success){
             console.log(user);
-            onLogin({ user , role });
+            onLogin(user , role );
             history.push('/');
         }
     },[success])

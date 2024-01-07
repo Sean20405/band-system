@@ -130,7 +130,7 @@ export function SearchMusician ({url}) {
           <br />
           <br />
           { !isPending && (<button>Search!</button>) }
-          { isPending && (<button disabled style={{color: "#eb91ac"}}>Searching...</button>) }
+          { isPending && (<button disabled style={{color: "#5b75a9"}}>Searching...</button>) }
         </form>
       </div>
       { hasResult && 
@@ -243,7 +243,7 @@ export function SearchBand ({url}) {
           <br />
           <br />
           { !isPending && (<button>Search!</button>) }
-          { isPending && (<button disabled style={{color: "#eb91ac"}}>Searching...</button>) }
+          { isPending && (<button disabled style={{color: "#5b75a9"}}>Searching...</button>) }
         </form>
       </div>
       { hasResult && 

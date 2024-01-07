@@ -1,6 +1,6 @@
 import Navbar from './Navbar';
 import Home from './Home';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Create from './Create';
 import BlogDetails from './BlogDetails'
 import NotFound from './NotFound';
@@ -17,25 +17,34 @@ import BandRegister from './BandRegister';
 import Forget from './Forget';
 import ResetPassword from './ResetPassword'
 import EditUser from './EditUser'
+import EditBand from './EditBand';
+import BandProfile from './BandProfile';
+import About from './About';
+import PublicUserProfile from './PublicUserProfile'
 
 function App() {
-  const url="http://100.26.241.42:5000/"
-  const [cookies, setCookie] = useCookies(["user"]);
-  function handleLogin(user) {
+  const url="http://127.0.0.1:5000/"
+  const [cookies, setCookie] = useCookies(["user","role"]);
+  // const [role_cookies, setRoleCookie] = useCookies(["role"]);
+  function handleLogin(user, role) {
     setCookie("user", user, { path: "/" });
+    setCookie("role", role, {path: "/"})
   }
+
   function Forget_func(id) {
     setCookie("forget_user", id, { path: "/" });
+    // setRoleCookie("forget_role", role, { path: "/" });
   }
+
   return (
     <CookiesProvider>
       <Router>
         <div className="App">
-          <Navbar  user={cookies.user}/>
+          <Navbar  user={cookies.user} role={cookies.role}/>
           <div className="content">
             <Switch>
-              
-              <Route exact path="/">
+              <Redirect exact from="/" to="/home" />
+              <Route exact path="/home">
                 <Home />
               </Route>
               <Route exact path="/ResetPassword">
@@ -48,10 +57,13 @@ function App() {
               <Route path="/login">
                   <Login onLogin={handleLogin} url={url}/>
               </Route>
+              <Route path="/about">
+                  <About url={url}/>
+              </Route>
               <Route path="/forget">
                   <Forget forget={Forget_func} url={url}/>
               </Route>
-              <Route path="/Bandlogin">
+              <Route path="/BandLogin">
                   <BandLogin onLogin={handleLogin} url={url}/>
               </Route>
               <Route path="/BandRegister">
@@ -63,6 +75,9 @@ function App() {
               <Route path="/EditUser">
                   <EditUser  user={cookies.user} url={url}/>
               </Route>
+              <Route path="/EditBand">
+                  <EditBand  user={cookies.user} url={url}/>
+              </Route>
               <Route path="/Logout">
                   <Logout onLogin={handleLogin} />
               </Route>
@@ -72,7 +87,9 @@ function App() {
               <Route path="/searchband">
                 <SearchBand url={url}/>
               </Route>
-
+              <Route path="/BandProfile">
+                <BandProfile user={cookies.user} url={url}/>
+              </Route>
               <Route path="/register">
                 <Register url={url}/>
               </Route>
@@ -92,5 +109,7 @@ function App() {
     </CookiesProvider>
   );
 }
+
+
 
 export default App;
