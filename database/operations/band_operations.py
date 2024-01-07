@@ -69,7 +69,8 @@ def get_member_wishlist(band_id):
     query = db.select(
         User_Band.c.user_id
     ).where(
-        User_Band.c.band_id == band_id,
+        User_Band.c.band_id == band_id
+    ).where(
         User_Band.c.status == 0
     )
 
