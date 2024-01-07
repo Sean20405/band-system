@@ -87,19 +87,20 @@ def get_member_request(band_id):
     return db.session.scalars(query).all()
 
 def getRequestUser(band_id):
+    request_id = get_member_request(band_id)
 
-    request_user = db.select(
-        User.id.label('user_id'),
-        User.name.label('name'),
-        User.photo.label('photo'),
-    ).where(
-        User_Band.band_id == band_id
-    ).where(
-        User_Band.status == 0
-    )
+    for i in request_id:
+        request_user = db.select(
+            User.id.label('user_id'),
+            User.name.label('name'),
+            User.photo.label('photo'),
+        ).where(
+            User.id == i
+        )
+        db.session.execute(request_user)
 
-    result = db.session.execute(request_user).all()
-    return [row._asdict() for row in result]
+    db.session.commit()
+    return
 
 def updateBandStyles(band_id ,new_ids):
     if len(new_ids) == 0:
