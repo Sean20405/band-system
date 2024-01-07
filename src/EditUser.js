@@ -71,7 +71,7 @@ const EditUser = ({user,url}) => {
             console.log("no filename");
             return
         }
-        const res = await fetch('http://127.0.0.1:5000/image/' + filename ,{
+        const res = await fetch(url + '/mage/'+ filename ,{
             // mode: "no-cors",
             method: 'GET',
         });

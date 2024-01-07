@@ -58,7 +58,7 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from './img/Band_System.png';
 import { Link } from "react-router-dom";
-import './Navbar.css'
+import './navbar.css'
 
 const Navbar = ({user}) => {
   const [showNavbar, setShowNavbar] = useState(false)
