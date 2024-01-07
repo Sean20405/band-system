@@ -67,7 +67,8 @@ User_Style = db.Table(
 User_Band = db.Table(
     'User_Band',
     db.Column("user_id", sa.ForeignKey(User.id), primary_key=True),
-    db.Column("band_id", sa.ForeignKey(Band.id), primary_key=True)
+    db.Column("band_id", sa.ForeignKey(Band.id), primary_key=True),
+    db.Column("status", sa.Integer)
 )
 
 Band_Style = db.Table(

@@ -222,6 +222,36 @@ def updateUser(user_id, name, bio, prefered_time, email, ig, fb, photo):
     db.session.commit()
     return
 
+def sendBandJoinRequest(user_id, band_id):
+    
+    stmt = db.insert(
+        User_Band
+    ).values(
+        user_id == user_id,
+        band_id = band_id,
+        status = 0 
+    )
+    db.session.execute(stmt)
+    db.session.commit()
+
+    # stmt = db.update(
+    #     User
+    # ).where(
+    #     User.id == user_id
+    # ).values(
+    #     name = name,
+    #     bio = bio,
+    #     prefered_time = prefered_time,
+    #     email = email,
+    #     ig = ig,
+    #     fb = fb,
+    #     photo = photo
+    # )
+    
+    db.session.execute(stmt)
+    db.session.commit()
+    return
+
 def updateUserPassword(user_id, password):
     stmt = db.update(
         User

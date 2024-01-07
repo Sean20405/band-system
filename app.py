@@ -315,6 +315,21 @@ def user_info():
     return resp
 
 
+@app.route('/requestBand', methods = ["GET"])
+def request_band():
+    user_id = request.args.get('user_id')
+    band_id = request.args.get('band_id')
+    sendBandJoinRequest(user_id, band_id)
+    db.session.commit()
+    # Create message
+    resp = jsonify({
+        "message": "Successfully request to band" + band_id,
+        "status": "Success"
+    })
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    resp.status_code = 201
+    return resp
+
 # API for Band
 
 # Sign-up a band account for your band

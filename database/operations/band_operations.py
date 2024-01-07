@@ -65,6 +65,15 @@ def get_style_by_band(band_id):
 
     return db.session.scalars(query).all()
 
+def get_member_wishlist(band_id):
+    query = db.select(
+        User_Band.c.user_id
+    ).where(
+        User_Band.c.band_id == band_id,
+        User_Band.c.status == 0
+    )
+
+
 def get_member_by_band(band_id):
     query = db.select(
         User_Band.c.user_id
@@ -124,7 +133,8 @@ def updateBandMembers(new_ids, band_id):
                 User_Band
             ).values(
                 band_id = band_id,
-                user_id = i
+                user_id = i,
+                status = 1
             )
             db.session.execute(ins_stmt)
     db.session.commit()
