@@ -33,8 +33,9 @@ export function SearchResultUser({ datas }) {
       
       <div className="search-detail">
         { datas.map(data => (
-          <Link to={`/ProfilePublic/${data.user_id}`}>
-          <SearchCard id={data.user_id} name={data.name} filename={data.photo}/></Link>
+          <Link to={`/ProfilePublic/${data.user_id}`} className="profile-link">
+            <SearchCard id={data.user_id} name={data.name} filename={data.photo}/>
+          </Link>
         )) }
       </div>
       

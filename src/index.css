@@ -192,18 +192,24 @@
   width: 100%;
 }
 
+.search-detail .profile-link {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  width: 45%;
+  margin: 20px 0;
+}
+
 /* search card */
 .search-card {
   display: flex;
-  width: 45%;
   gap: 20px;
   padding: 10px 16px;
   margin: 20px 0;
-  border-bottom: 1px solid #fafafa;
 }
 
-.search-card:hover {
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+.profile-link:hover {
+  box-shadow: 2px 4px 6px rgba(0,0,0,0.2);
 }
 
 .search-card img {
