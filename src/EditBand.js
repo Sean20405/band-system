@@ -19,6 +19,7 @@ const EditBand = ({user,url}) => {
     const [photo, setPhoto] = useState("");
     const [contact_window, setContactWindow] = useState("null");
     const [bio, setBio] = useState("null");
+    const [members, setMembers] = useState([]);
 
     const history=useHistory();
 
@@ -57,6 +58,7 @@ const EditBand = ({user,url}) => {
             setStyle(info.style);
             // setInstrument(info.instrument);
             setRegion(info.region);
+            setMembers(info.members);
         }
         else {
             console.log("cannot fetch info");
