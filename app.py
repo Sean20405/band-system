@@ -472,9 +472,9 @@ def band_info():
     fb = request.form.get('fb')
     contact_window = request.form.get('contact_window')
     members = request.form.getlist('members')
-    for user in members:
-        if not userExist(user):
-            return f"member {user} doesn't exist"
+    # for user in members:
+    #     if not userExist(user):
+    #         return f"member {user} doesn't exist"
 
     filename = "not Exist"
     # Upload Photo
@@ -494,7 +494,7 @@ def band_info():
 
     updateBandStyles(band_id, styles)
     updateBandRegions(band_id, regions)
-    updateBandMembers(members, band_id)
+    #updateBandMembers(members, band_id)
     updateBand(band_id, name, bio, practice_time, ig, fb, filename, contact_window)
 
     db.session.commit()

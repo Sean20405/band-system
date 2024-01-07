@@ -33,6 +33,8 @@ def get_band_by_id(id):
         User_Band.c.user_id
     ).where(
         User_Band.c.band_id == id
+    ).where(
+        User_Band.c.status == 1
     )
 
     members = db.session.scalars(member_q).all()
@@ -65,10 +67,18 @@ def get_style_by_band(band_id):
 
     return db.session.scalars(query).all()
 
+def get_region_by_band(band_id):
+    query = db.select(
+        Band_Region.c.region_id
+    ).where(
+        Band_Region.c.band_id == band_id
+    )
+
+    return db.session.scalars(query).all()
 
 
 
-def get_member_request(band_id):
+def get_user_request(band_id):
     query = db.select(
         User_Band.c.user_id
     ).where(
@@ -78,8 +88,18 @@ def get_member_request(band_id):
     )
     return db.session.scalars(query).all()
 
+def get_member(band_id):
+    query = db.select(
+        User_Band.c.user_id
+    ).where(
+        User_Band.c.band_id == band_id
+    ).where(
+        User_Band.c.status == 1
+    )
+    return db.session.scalars(query).all()
+
 def getRequestUser(band_id):
-    request_id = get_member_request(band_id)
+    request_id = get_user_request(band_id)
     ids = [str(i) for i in request_id]
     subq = db.select(
         User.id.label('user_id'),
