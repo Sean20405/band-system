@@ -80,19 +80,16 @@ def get_member_request(band_id):
 
 def getRequestUser(band_id):
     request_id = get_member_request(band_id)
-    print(request_id)
-    for i in request_id:
-        request_user = db.select(
-            User.id.label('user_id'),
-            User.name.label('name'),
-            User.photo.label('photo'),
-        ).where(
-            User.id == i
-        )
-        db.session.execute(request_user)
-
-    db.session.commit()
-    return
+    ids = [str(i) for i in request_id]
+    subq = db.select(
+        User.id.label('user_id'),
+        User.name.label('name'),
+        User.photo.label('photo'),
+    ).where(
+        User.id.in_(ids)
+    )
+    result = db.session.execute(subq).all()
+    return [row._asdict() for row in result]
 
 def updateBandStyles(band_id ,new_ids):
     if len(new_ids) == 0:
