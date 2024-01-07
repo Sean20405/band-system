@@ -17,6 +17,7 @@ import BandRegister from './BandRegister';
 import Forget from './Forget';
 import ResetPassword from './ResetPassword'
 import EditUser from './EditUser'
+import EditBand from './EditBand';
 import BandProfile from './BandProfile';
 import React, { useState } from 'react';
 
@@ -24,16 +25,12 @@ import React, { useState } from 'react';
 function App() {
   const url="http://54.172.70.94:5000/"
   const [cookies, setCookie] = useCookies(["user","role"]);
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Initially set to true for example
   // const [role_cookies, setRoleCookie] = useCookies(["role"]);
   function handleLogin(user, role) {
     setCookie("user", user, { path: "/" });
     setCookie("role", role, {path: "/"})
   }
-  function handleLogout() {
-    // Call logout logic (e.g., on button click)
-    setIsAuthenticated(false); 
-  }
+
   function Forget_func(id) {
     setCookie("forget_user", id, { path: "/" });
     // setRoleCookie("forget_role", role, { path: "/" });
@@ -75,8 +72,11 @@ function App() {
               <Route path="/EditUser">
                   <EditUser  user={cookies.user} url={url}/>
               </Route>
-              <Route path="/logout">
-                {isAuthenticated ? <Logout onLogout={handleLogout} /> : <Redirect to="/home" />}
+              <Route path="/EditBand">
+                  <EditBand  user={cookies.user} url={url}/>
+              </Route>
+              <Route path="/Logout">
+                  <Logout onLogin={handleLogin} />
               </Route>
               <Route path="/searchmusician">
                 <SearchMusician url={url}/>

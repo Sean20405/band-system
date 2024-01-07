@@ -19,7 +19,7 @@ const BandProfile = ({user,url}) => {
     const [info, setInfo] = useState(null);
     const [errMsg, setErrMsg] = useState('1234');
     const [name, setName] = useState(null);
-    const [prefered_time, setPrefered_time] = useState(null);
+    const [practice_time, setPractice_time] = useState(null);
     const [instrument, setInstrument] = useState(null);
     const [style, setStyle] = useState(null);
     const [region, setRegion] = useState(null);
@@ -28,19 +28,6 @@ const BandProfile = ({user,url}) => {
     const [photo, setPhoto] = useState(null);
     const [contact_window, setContactWindow] = useState(null);
     const [bio, setBio] = useState(null);
-
-    
-    let formData = new FormData(); 
-    formData.append('name', "Sheng_Shun_Chang");
-    formData.append('prefered_time', "midnight");
-    formData.append('bio', "love Amazing Show");
-    formData.append('photo', "Some random URL");
-    formData.append('ig', "vitolin_yucheng");
-    formData.append('fb', 'Kent_l');
-    formData.append('email', 'vitolin0416@gmail.com');
-    formData.append('instrument', 'violin');
-    formData.append('region', 'Taipei');
-    formData.append('style', 'rock paper scissor');
 
    
 
@@ -120,8 +107,7 @@ const BandProfile = ({user,url}) => {
         "KMN": "金門縣", 
         "LNN": "連江縣"
     };
-    // const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
-
+    
     if(!info || !photo) return "loading";
     console.log(info.region)
     return(
@@ -143,14 +129,12 @@ const BandProfile = ({user,url}) => {
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
-                                {/* <!-- <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                </li> --> */}
+                       
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-2">
-                    <Link to="/edituser"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/></Link>
+                    <Link to="/EditBand"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/></Link>
                         
                     </div>
                 </div>
@@ -197,9 +181,9 @@ const BandProfile = ({user,url}) => {
                                             </div>
                                             <div class="col-md-6">
                                                 {info.style.map((i, index) => (
-                                                        <p  className="mt-1" key={index}>{styles[i]}</p>
+                                                        <p  className="mt-1" key={index}>{styles[i-1]}</p>
                                                 ))}
-                                                {/* <p className="mt-1">{info.style}</p> */}
+                                             
                                             </div>
                                         </div>
                                         <div class="row border mt-1 rounded">
@@ -210,26 +194,16 @@ const BandProfile = ({user,url}) => {
                                                 {info.region.map((i, index) => (
                                                     <p className="mt-1" key={index}>{regions[i]}</p>
                                                 ))}
-                                                {/* <p>{info.region}</p> */}
+              
                                             </div>
                                         </div>
-                                        {/* <div class="row border mt-1 rounded">
-                                            <div class="col-md-6">
-                                                <label  className="mt-1">Instrument</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                {info.instrument?.map((i, index) => (
-                                                    <p  className="mt-1" key={index}>{Instruments[i]}</p>
-                                                ))}
-                                                
-                                            </div>
-                                        </div> */}
+                                        
                                         <div class="row border mt-1 rounded">
                                             <div class="col-md-6">
-                                                <label  className="mt-1">Prefered Time</label>
+                                                <label  className="mt-1">practice Time</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p  className="mt-1">{info.prefered_time}</p>
+                                                <p  className="mt-1">{info.practice_time}</p>
                                             </div>
                                         </div>
                                     <div class="row border mt-1 rounded">

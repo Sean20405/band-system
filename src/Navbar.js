@@ -48,7 +48,7 @@ const Navbar = ({user, role}) => {
                   ) : (
                     <>
                       <li>
-                        <NavLink to="/Profile"><i class="fas fa-id-card"></i>&nbsp;&nbsp;{user}</NavLink>
+                        <NavLink to={profile}><i class="fas fa-id-card"></i>&nbsp;&nbsp;{user}</NavLink>
                       </li>
                       <li>
                         <NavLink to="/logout"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</NavLink>
