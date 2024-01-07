@@ -214,6 +214,7 @@
 .search-card .name-id{
   padding: 4px;
   align-self: center;
+  text-align: left;
 }
 
 /* Search Filter */
