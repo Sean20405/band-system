@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SearchCard from "./SearchCard";
+import { Link } from "react-router-dom";
 
 export function SearchResultUser({ datas }) {
   const [filter, setFilter] = useState("1");
@@ -32,7 +33,8 @@ export function SearchResultUser({ datas }) {
       
       <div className="search-detail">
         { datas.map(data => (
-          <SearchCard id={data.user_id} name={data.name} filename={data.photo}/>
+          <Link to={`/ProfilePublic/${data.user_id}`}>
+          <SearchCard id={data.user_id} name={data.name} filename={data.photo}/></Link>
         )) }
       </div>
       
