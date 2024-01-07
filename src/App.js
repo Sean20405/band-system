@@ -19,11 +19,12 @@ import ResetPassword from './ResetPassword'
 import EditUser from './EditUser'
 import EditBand from './EditBand';
 import BandProfile from './BandProfile';
+import ProfilePublic from './ProfilePublic';
 import React, { useState } from 'react';
 
 
 function App() {
-  const url="http://54.172.70.94:5000/"
+  const url="http://18.210.13.72:5000/"
   const [cookies, setCookie] = useCookies(["user","role"]);
   // const [role_cookies, setRoleCookie] = useCookies(["role"]);
   function handleLogin(user, role) {
@@ -89,6 +90,9 @@ function App() {
               </Route>
               <Route path="/register">
                 <Register url={url}/>
+              </Route>
+              <Route path={"/ProfilePublic/:id"}>
+                <ProfilePublic url={url}></ProfilePublic>
               </Route>
               <Route path="/blogs/:id">
                 <BlogDetails />

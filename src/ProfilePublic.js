@@ -1,19 +1,18 @@
-import { Link } from "react-router-dom";
+
+import { useParams} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faFacebook,
     faInstagram
   } from "@fortawesome/free-brands-svg-icons";
-
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-import useFetch from "./useFetch";
 import { useState, useEffect } from "react";
 import './profile.css'
 
-const Profile = ({user,url}) => {
-    const id = user;
-    // const role = user.role;
+const ProfilePublic = ({url}) => {
+    const {id} = useParams();
+    console.log(id);
     const [info, setInfo] = useState(null);
     const [errMsg, setErrMsg] = useState('1234');
     const [name, setName] = useState(null);
@@ -26,21 +25,6 @@ const Profile = ({user,url}) => {
     const [photo, setPhoto] = useState(null);
     const [email, setEmail] = useState(null);
     const [bio, setBio] = useState(null);
-
-    
-    let formData = new FormData(); 
-    formData.append('name', "Sheng_Shun_Chang");
-    formData.append('prefered_time', "midnight");
-    formData.append('bio', "love Amazing Show");
-    formData.append('photo', "Some random URL");
-    formData.append('ig', "vitolin_yucheng");
-    formData.append('fb', 'Kent_l');
-    formData.append('email', 'vitolin0416@gmail.com');
-    formData.append('instrument', 'violin');
-    formData.append('region', 'Taipei');
-    formData.append('style', 'rock paper scissor');
-
-   
 
     useEffect(()=>{
         if(info){
@@ -120,6 +104,7 @@ const Profile = ({user,url}) => {
     };
     const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
 
+
     if(!info || !photo) return "loading";
     console.log(info.region)
     return(
@@ -150,23 +135,19 @@ const Profile = ({user,url}) => {
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                    <Link to="/edituser"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/></Link>
-                        
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>CONTACT</p>
                             <div className="mt-3">
-                                <div className="d-inline p-2"><a href="" ><FontAwesomeIcon icon={faInstagram} size="2x" /></a></div>
+                                <div className="d-inline p-2"><a href={"https://instagram.com/" + info.ig} ><FontAwesomeIcon icon={faInstagram} size="2x" /></a></div>
                                 <div className="d-inline p-2">{info.ig}</div>
                                 <br/>
                             </div>
 
                             <div className="mt-3">
-                                <div className="d-inline p-2"><a href="" ><FontAwesomeIcon icon={faFacebook} size="2x" /></a></div>
+                                <div className="d-inline p-2"><a href={"https://facebook.com/" + info.fb}><FontAwesomeIcon icon={faFacebook} size="2x" /></a></div>
                                 <div className="d-inline p-2">{info.fb}</div>
                                 <br/>
                             </div>
@@ -198,7 +179,7 @@ const Profile = ({user,url}) => {
                                             </div>
                                             <div class="col-md-6">
                                                 {info.style?.map((i, index) => (
-                                                        <p  className="mt-1" key={index}>{styles[i-1]}</p>
+                                                        <p  className="mt-1" key={index}>{styles[i]}</p>
                                                 ))}
                                                 {/* <p className="mt-1">{info.style}</p> */}
                                             </div>
@@ -220,7 +201,7 @@ const Profile = ({user,url}) => {
                                             </div>
                                             <div class="col-md-6">
                                                 {info.instrument?.map((i, index) => (
-                                                    <p  className="mt-1" key={index}>{Instruments[i-1]}</p>
+                                                    <p  className="mt-1" key={index}>{Instruments[i]}</p>
                                                 ))}
                                                 {/* <p>{info.instrument}</p> */}
                                             </div>
@@ -240,7 +221,7 @@ const Profile = ({user,url}) => {
                                         </div>
                                     </div>
                             </div>
-
+                            
                         </div>
                     </div>
                 </div>           
@@ -249,4 +230,4 @@ const Profile = ({user,url}) => {
     ); 
 }
  
-export default Profile;
+export default ProfilePublic;
