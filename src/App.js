@@ -26,7 +26,6 @@ import BandRequest from './BandRequest';
 
 function App() {
   const url="http://18.209.225.128:5000/"
-  const url="http://18.209.225.128:5000/"
   const [cookies, setCookie] = useCookies(["user","role"]);
   // const [role_cookies, setRoleCookie] = useCookies(["role"]);
   function handleLogin(user, role) {
