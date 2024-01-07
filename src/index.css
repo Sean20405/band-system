@@ -506,7 +506,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 
 
-.dropdown1 {
+/* .dropdown1 {
   float: right;
   overflow: hidden;
   text-decoration: none;
@@ -548,7 +548,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 
 .dropdown:hover .dropdown-content {
   display: block;
-}
+} */
 .instructions {
   float: left;
   text-align:left;
