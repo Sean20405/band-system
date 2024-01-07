@@ -80,7 +80,7 @@ export function SearchMusician ({url}) {
     <div className="search">
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
       <div className="filter">
-        <h2>Search for a musician!</h2>
+        <h2>Search for a Player!</h2>
         <form onSubmit={handleSubmit}>
           <div className="instrument">
             <h4>Instrument:</h4>
