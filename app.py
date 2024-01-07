@@ -327,7 +327,7 @@ def user_info():
     return resp
 
 
-@app.route('/requestBand', methods = ["GET"])
+@app.route('/requestBand', methods = ["POST"])
 def request_band():
     user_id = request.form.get('user_id')
     band_id = request.form.get('band_id')
