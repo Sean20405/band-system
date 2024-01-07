@@ -19,8 +19,9 @@ import ResetPassword from './ResetPassword'
 import EditUser from './EditUser'
 import EditBand from './EditBand';
 import BandProfile from './BandProfile';
+import ProfilePublic from './ProfilePublic';
 import About from './About';
-import PublicUserProfile from './PublicUserProfile'
+
 
 function App() {
   const url="http://18.210.13.72:5000/"
@@ -92,6 +93,9 @@ function App() {
               </Route>
               <Route path="/register">
                 <Register url={url}/>
+              </Route>
+              <Route path={"/ProfilePublic/:id"}>
+                <ProfilePublic url={url}></ProfilePublic>
               </Route>
               <Route path="/blogs/:id">
                 <BlogDetails />

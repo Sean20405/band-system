@@ -1,19 +1,18 @@
-import { Link } from "react-router-dom";
+
+import { useParams} from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faFacebook,
     faInstagram
   } from "@fortawesome/free-brands-svg-icons";
-
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-import useFetch from "./useFetch";
 import { useState, useEffect } from "react";
 import './profile.css'
 
-const Profile = ({user,url}) => {
-    const id = user;
-    // const role = user.role;
+const ProfilePublic = ({url}) => {
+    const {id} = useParams();
+    console.log(id);
     const [info, setInfo] = useState(null);
     const [errMsg, setErrMsg] = useState('1234');
     const [name, setName] = useState(null);
@@ -26,7 +25,6 @@ const Profile = ({user,url}) => {
     const [photo, setPhoto] = useState(null);
     const [email, setEmail] = useState(null);
     const [bio, setBio] = useState(null);
-   
 
     useEffect(()=>{
         if(info){
@@ -61,6 +59,7 @@ const Profile = ({user,url}) => {
         {
             console.log("fetch")
             filename = "default.jpg"
+
         }
         
         const res = await fetch(url + 'image/' + filename ,{
@@ -105,6 +104,7 @@ const Profile = ({user,url}) => {
     };
     const Instruments = ["Electric Guitar", "KB", "Drums", "Bass", "Vocal", "Saxophone", "Cello", "Acoustic Guitar", "Trumpet", "Others"];
 
+
     if(!info || !photo) return "loading";
     console.log(info.region)
     return(
@@ -121,40 +121,33 @@ const Profile = ({user,url}) => {
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
-                                    <h1>
+                                    <h5>
                                         {info.name}
-                                    </h1>
-                        </div>
-                        <br />
-                        <div class="profile-head">
+                                    </h5>
+
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
-        
+                                {/* <!-- <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                </li> --> */}
                             </ul>
                         </div>
-                        <div class="overflow-wrap text-break" >
-                            {info.bio}   
-                        </div>
                     </div>
-                    {/* <div class="col-md-2">
-                    <Link to="/edituser"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/></Link>
-                        
-                    </div> */}
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>CONTACT</p>
                             <div className="mt-3">
-                                <div className="d-inline p-2"><a href="" ><FontAwesomeIcon icon={faInstagram} size="2x" /></a></div>
+                                <div className="d-inline p-2"><a href={"https://instagram.com/" + info.ig} ><FontAwesomeIcon icon={faInstagram} size="2x" /></a></div>
                                 <div className="d-inline p-2">{info.ig}</div>
                                 <br/>
                             </div>
 
                             <div className="mt-3">
-                                <div className="d-inline p-2"><a href="" ><FontAwesomeIcon icon={faFacebook} size="2x" /></a></div>
+                                <div className="d-inline p-2"><a href={"https://facebook.com/" + info.fb}><FontAwesomeIcon icon={faFacebook} size="2x" /></a></div>
                                 <div className="d-inline p-2">{info.fb}</div>
                                 <br/>
                             </div>
@@ -172,7 +165,7 @@ const Profile = ({user,url}) => {
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         
-                                        <div class="row border mt-3 rounded">
+                                        <div class="row border mt-1 rounded">
                                             <div class="col-md-6">
                                                 <label className="mt-1">User Id</label>
                                             </div>
@@ -221,9 +214,14 @@ const Profile = ({user,url}) => {
                                                 <p  className="mt-1">{info.prefered_time}</p>
                                             </div>
                                         </div>
-                                    
+                                    <div class="row border mt-1 rounded">
+                                        <div class="col-md-12">
+                                            <label className="mt-1">Your Bio</label><br/>
+                                            <p className="mt-1">{info.bio}</p>
+                                        </div>
+                                    </div>
                             </div>
-
+                            
                         </div>
                     </div>
                 </div>           
@@ -232,4 +230,4 @@ const Profile = ({user,url}) => {
     ); 
 }
  
-export default Profile;
+export default ProfilePublic;

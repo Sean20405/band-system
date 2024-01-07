@@ -186,7 +186,7 @@ const Profile = ({user,url}) => {
                                             </div>
                                             <div class="col-md-6">
                                                 {info.style?.map((i, index) => (
-                                                        <p  className="mt-1" key={index}>{styles[i]}</p>
+                                                        <p  className="mt-1" key={index}>{styles[i-1]}</p>
                                                 ))}
                                                 {/* <p className="mt-1">{info.style}</p> */}
                                             </div>
@@ -208,7 +208,7 @@ const Profile = ({user,url}) => {
                                             </div>
                                             <div class="col-md-6">
                                                 {info.instrument?.map((i, index) => (
-                                                    <p  className="mt-1" key={index}>{Instruments[i]}</p>
+                                                    <p  className="mt-1" key={index}>{Instruments[i-1]}</p>
                                                 ))}
                                                 {/* <p>{info.instrument}</p> */}
                                             </div>
