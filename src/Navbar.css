@@ -71,7 +71,7 @@ img{
   background-color: #e47979;
 }
 
-navbar.dropdown1 {
+navbar .dropdown1 {
     float: right;  
     overflow: hidden;
     text-decoration: none;

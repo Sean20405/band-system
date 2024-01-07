@@ -71,13 +71,11 @@ const Navbar = ({user}) => {
     <nav className="navbar">
       <div className="container">
         <div className="logo">
-          <img src={logo} />
+          <NavLink to="/"><img src={logo} /></NavLink>
         </div>
         <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
+            
             <li>
               <NavLink to="/About">About</NavLink>
             </li>
