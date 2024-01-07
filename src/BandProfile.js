@@ -6,6 +6,7 @@ import {
   } from "@fortawesome/free-brands-svg-icons";
 
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from 'react-router-dom'
 
 import useFetch from "./useFetch";
 import { useState, useEffect } from "react";
@@ -217,6 +218,7 @@ const BandProfile = ({user,url}) => {
                             </div>
 
                         </div>
+                        <NavLink to="/BandRequest"><i class="fas fa-home"></i>&nbsp;&nbsp;Request</NavLink>
                     </div>
                 </div>           
         </div>

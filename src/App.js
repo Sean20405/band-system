@@ -21,7 +21,7 @@ import EditBand from './EditBand';
 import BandProfile from './BandProfile';
 import ProfilePublic from './ProfilePublic';
 import About from './About';
-
+import BandRequest from './BandRequest';
 
 function App() {
   const url="http://18.210.13.72:5000/"
@@ -96,6 +96,9 @@ function App() {
               </Route>
               <Route path={"/ProfilePublic/:id"}>
                 <ProfilePublic url={url}></ProfilePublic>
+              </Route>
+              <Route path={"/BandRequest"}>
+                <BandRequest user={cookies.user} url={url}/>
               </Route>
               <Route path="/blogs/:id">
                 <BlogDetails />
