@@ -12,4 +12,5 @@ VALUES
 (8, 'Acoustic'),
 (9, 'Softcore'),
 (10, 'Pop-Punk'),
-(11, 'Country');
+(11, 'Country'),
+(12, 'others');
