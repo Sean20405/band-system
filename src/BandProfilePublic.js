@@ -129,10 +129,6 @@ const BandProfilePublic = ({url}) => {
                             {info.bio}   
                         </div>
                     </div>
-                    <div class="col-md-2">
-                    <Link to="/EditBand"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/></Link>
-                        
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
