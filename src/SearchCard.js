@@ -1,11 +1,14 @@
-import tmpphoto from "./img/logo192.png";
+import defaultphoto from "./img/default.jpg";
 import { Link } from "react-router-dom";
-const SearchCard = ({id, name, filename}) => {
-  const pathname = "http://54.160.85.246:5000/img/" + filename;
+const SearchCard = ({url, id, name, filename}) => {
+  var pathname
+  if(filename) pathname = url + "image/" + filename;
+  else pathname = defaultphoto;
+  console.log(pathname);
   return (
       <div className="search-card">
         <div className="photo">
-          <img src={tmpphoto} alt="profile"/>
+          <img src={pathname} alt="profile"/>
         </div>
         <div className="name-id">
           <h3>{name}</h3>

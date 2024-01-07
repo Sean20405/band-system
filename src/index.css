@@ -167,7 +167,9 @@
 .search h4 {
   text-align: left;
 }
-
+.search button{
+  font-family: "Noto Sans TC", "FontAwesome";
+}
 .search input{
   padding: 6px 10px;
   margin: 10px 0px;
@@ -179,7 +181,7 @@
   background: #1f2e6b;
   color: #fff;
   border: 0;
-  padding: 8px;
+  padding: 8px 14px;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -212,9 +214,13 @@
   box-shadow: 2px 4px 6px rgba(0,0,0,0.2);
 }
 
+
 .search-card img {
-  height: 80px;
+  height: 120px;
+  width: 120px;
   padding: 4px;
+  margin-left: 10px;
+  object-fit:cover
 }
 
 .search-card .name-id{

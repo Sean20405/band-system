@@ -231,7 +231,18 @@ const BandProfilePublic = ({user, role , url}) => {
                                                 <p  className="mt-1">{info.practice_time}</p>
                                             </div>
                                         </div>
-                                    
+
+                                        <div class="row border mt-1 rounded">
+                                            <div class="col-md-6">
+                                                <label className="mt-1 mb-2">members</label>
+                                            </div>
+                                            <div class="col-md-6 mt-1 rounded">
+                                                {info.members.map((member_id, index) => (
+                                                    <Link to={"/profilepublic/" + member_id}><p className="mt-1" key={index}>{ member_id }</p></Link>
+                                                ))}
+              
+                                            </div>
+                                        </div>
                             </div>
 
                         </div>
