@@ -64,7 +64,6 @@ def get_style_by_band(band_id):
     ).where(
         Band_Style.c.band_id == band_id
     )
-
     return db.session.scalars(query).all()
 
 def get_region_by_band(band_id):
@@ -287,6 +286,7 @@ def queryCompatibleBand(regions, styles):
     subq = db.select(
         Band.id.label('band_id'),
         Band.name.label('name'),
+        Band.photo.label('photo'),
         db.func.coalesce(region_count.c.count, 0).label('region_count'),
         db.func.coalesce(style_count.c.count, 0).label('style_count'),
         

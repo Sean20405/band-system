@@ -471,7 +471,7 @@ def band_info():
     ig = request.form.get('ig')
     fb = request.form.get('fb')
     contact_window = request.form.get('contact_window')
-    members = request.form.getlist('members')
+    # members = request.form.getlist('members')
     # for user in members:
     #     if not userExist(user):
     #         return f"member {user} doesn't exist"
