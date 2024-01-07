@@ -233,20 +233,6 @@ def sendBandJoinRequest(user_id, band_id):
     )
     db.session.execute(stmt)
     db.session.commit()
-
-    # stmt = db.update(
-    #     User
-    # ).where(
-    #     User.id == user_id
-    # ).values(
-    #     name = name,
-    #     bio = bio,
-    #     prefered_time = prefered_time,
-    #     email = email,
-    #     ig = ig,
-    #     fb = fb,
-    #     photo = photo
-    # )
     return
 
 def updateUserPassword(user_id, password):

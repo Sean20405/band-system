@@ -78,7 +78,18 @@ def get_member_by_band(band_id):
     query = db.select(
         User_Band.c.user_id
     ).where(
-        User_Band.c.band_id == band_id
+        User_Band.c.band_id == band_id,
+        User_Band.c.status == 1
+    )
+
+    return db.session.scalars(query).all()
+
+def get_member_request(band_id):
+    query = db.select(
+        User_Band.c.user_id
+    ).where(
+        User_Band.c.band_id == band_id,
+        User_Band.c.status == 0
     )
 
     return db.session.scalars(query).all()
@@ -167,6 +178,25 @@ def updateBandMembers(new_ids, band_id):
                 status = 1
             )
             db.session.execute(ins_stmt)
+    db.session.commit()
+    return
+
+def updateRequestMembers(new_ids, band_id):
+    if len(new_ids) == 0:
+        return
+    request_ids = get_member_request(band_id)
+
+    for i in new_ids:
+        if i in new_ids:
+            stmt = db.update(
+                User_Band
+            ).where(
+                User_Band.c.band_id == band_id,
+                User_Band.c.user_id == i
+            ).values(
+                status = 1
+            )
+            db.session.execute(stmt)
     db.session.commit()
     return
 
@@ -263,9 +293,23 @@ def queryCompatibleBand(regions, styles):
     result = db.session.execute(subq).all()
     return [row._asdict() for row in result]
 
+def queryCompatibleMusician(band_id):
 
+    request_user = db.select(
+        User.id.label('user_id'),
+        User.name.label('name'),
+        User.photo.label('photo'),
+    ).where(
+        User_Band.band_id == band_id,
+        User_Band.status == 0
+    )
 
     
+
+    result = db.session.execute(request_user).all()
+    return [row._asdict() for row in result]
+
+ 
                             
 
 
