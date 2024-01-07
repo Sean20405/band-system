@@ -97,7 +97,7 @@ const BandRegister = ({url}) => {
                 <div className="bottom"></div>
                 <div className="center">
                 <div className="register">
-                    <h1>Register</h1>
+                    <h1>Band Register</h1>
                     <br></br>
                     <div ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</div>
                     <form onSubmit={handleSubmit}>
