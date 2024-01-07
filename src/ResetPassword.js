@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,24}$/;
 const REGISTER_URL = '/register';
-const ResetPassword = ({forget_user,forget}) => {
+const ResetPassword = ({forget_user,forget,url}) => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -53,7 +53,7 @@ const ResetPassword = ({forget_user,forget}) => {
         let formData = new FormData(); 
         formData.append('id', forget_user.user);  
         formData.append('password', pwd );
-        fetch('http://54.160.85.246:5000/forget_password/' + forget_user.role, {
+        fetch(url+'forget_password/' + forget_user.role, {
             method: 'POST',
             headers:{
                 "ngrok-skip-browser-warning": "69420",
