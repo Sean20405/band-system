@@ -99,7 +99,7 @@ function App() {
                 <ProfilePublic url={url}></ProfilePublic>
               </Route>
               <Route path={"/BandProfilePublic/:id"}>
-                <BandProfilePublic  user={cookies.user} url={url}></BandProfilePublic>
+                <BandProfilePublic  user={cookies.user} role={cookies.role} url={url}></BandProfilePublic>
               </Route>
               <Route path={"/BandRequest"}>
                 <BandRequest user={cookies.user} url={url}/>

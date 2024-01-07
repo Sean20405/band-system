@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import './profile.css'
 import { click } from "@testing-library/user-event/dist/click";
 
-const BandProfilePublic = ({user , url}) => {
+const BandProfilePublic = ({user, role , url}) => {
     const {id} = useParams();
     const [info, setInfo] = useState(null);
     const [photo, setPhoto] = useState(null);
@@ -64,6 +64,9 @@ const BandProfilePublic = ({user , url}) => {
         ).then((data) => {
             console.log(data);
         })
+        .catch(err => {
+            console.log(err);
+        })
     }
     const fetchPhoto = async(filename) => {
         
@@ -113,8 +116,8 @@ const BandProfilePublic = ({user , url}) => {
         "KMN": "金門縣", 
         "LNN": "連江縣"
     };
-    if(fetcherr) return "can't find the band ID";
     if(!info || !photo) return "loading...";
+    if(fetcherr) return "can't find the band ID";
     console.log(info.region)
     return(
         <div className="container emp-profile">     
@@ -126,12 +129,18 @@ const BandProfilePublic = ({user , url}) => {
                         </div>
                     </div>
                     <div class="col-md-6">
-                        {request_send ? (
-                             <p>Request Sended</p>
-                        ):(
-                            <button onClick={click}>Send Request</button> 
-                        )
-                        }
+                        {role=="user" ? (
+                            <>
+                            {request_send ? (
+                                <p>Request Sended</p>
+                                ):(
+                                    <button onClick={click}>Send Request</button> 
+                                )
+                            }
+                            </>
+                        ) : (
+                            <></>
+                        )}
                         
                         <div class="profile-head">
                                     <h1>

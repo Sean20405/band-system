@@ -213,7 +213,8 @@ const BandProfile = ({user,url}) => {
                             </div>
 
                         </div>
-                        <NavLink to="/BandRequest"><i class="fas fa-home"></i>&nbsp;&nbsp;Request</NavLink>
+                        <div class="col-md-2">
+                        <Link to="/BandRequest"><input type="submit" class="profile-edit-btn" name="btnAddMore" value="Request"/></Link></div>
                     </div>
                 </div>           
         </div>

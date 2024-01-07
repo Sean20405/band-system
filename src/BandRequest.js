@@ -35,11 +35,11 @@ const BandRequest = ({user,url}) => {
             res => res.json()
         ).then((data) => {
             console.log(data);
-            history.push('/BandRequest');
             window.location.reload(true);
         })
     }
-    if(isPending) return "loading";
+    if(datas.length==0) return (<h2>No requests</h2>)
+    else if(isPending) return "loading";
     else 
         return(
         <div className='search-result'>
