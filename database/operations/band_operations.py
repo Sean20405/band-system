@@ -131,6 +131,22 @@ def updateBandMembers(new_ids, band_id):
     return
 
 def updateBand(band_id, bio, practice_time, ig, fb, photo, contact_window):
+    if photo == "not Exist":
+        stmt = db.update(
+        Band
+        ).where(
+            Band.id == band_id
+        ).values(
+            bio = bio,
+            practice_time = practice_time,
+            ig = ig,
+            fb = fb,
+            contact_window = contact_window
+        )
+        db.session.execute(stmt)
+        db.session.commit()
+        return
+
     stmt = db.update(
         Band
     ).where(
