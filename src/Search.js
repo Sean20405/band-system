@@ -98,7 +98,7 @@ export function SearchMusician ({url}) {
             <div className="container">
               <ul className="ks-cboxtags">
                 {Instruments.map((instrument, index) => (
-                  <li><input type="checkbox" id={index} value={index} name={instrument} onChange={handleInstrumentChange}/><label for={index}>{instrument}</label></li>
+                  <li><input type="checkbox" id={index} value={index+1} name={instrument} onChange={handleInstrumentChange}/><label for={index}>{instrument}</label></li>
                 ))}
               </ul>
             </div>
@@ -122,7 +122,7 @@ export function SearchMusician ({url}) {
             <div className="container">
               <ul className="ks-cboxtags">
                 {styles.map((style, index) => (
-                  <li><input type="checkbox" id={34 + index} value={index} name={style} onChange={handleStyleChange}/><label for={34 + index}>{style}</label></li>
+                  <li><input type="checkbox" id={34 + index} value={index+1} name={style} onChange={handleStyleChange}/><label for={34 + index}>{style}</label></li>
                 ))}
               </ul>
             </div>
