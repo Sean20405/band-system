@@ -67,7 +67,7 @@
   width: 100%;   
   height: 100%;   
   object-fit: cover;
-  filter: blur(3px);
+  /* filter: blur(1px); */
 }
 
 .home-buttom {
@@ -506,7 +506,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 }
 
 
-.dropdown1 {
+/* .dropdown1 {
   float: right;
   overflow: hidden;
   text-decoration: none;
@@ -548,7 +548,7 @@ ul.ks-cboxtags li input[type="checkbox"] {
 
 .dropdown:hover .dropdown-content {
   display: block;
-}
+} */
 .instructions {
   float: left;
   text-align:left;
