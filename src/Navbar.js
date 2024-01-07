@@ -72,7 +72,6 @@ const Navbar = ({user}) => {
       <div className="container">
         <div className="logo">
           <img src={logo} />
-
         </div>
         <div className={`nav-elements  ${showNavbar && 'active'}`}>
           <ul>
@@ -91,8 +90,8 @@ const Navbar = ({user}) => {
                       </div></>
                   ) : (
                     <><button className="dropbtn">{user.user}</button><div className="dropdown-content">
-                      <Link to="/Profile">Profile</Link>
-                      <Link to="/logout">Logout</Link>
+                        <Link to="/Profile">Profile</Link>
+                        <Link to="/logout">Logout</Link>
                       </div></>
                   )}
               </div>
