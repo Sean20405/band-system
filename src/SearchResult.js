@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export function SearchResultUser({ datas, url }) {
   const [filter, setFilter] = useState("1");
-
+  console.log(datas);
   const handleFilter = value => {
     setFilter(value);
     if(filter === 1){

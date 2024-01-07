@@ -6,6 +6,7 @@ import {
   } from "@fortawesome/free-brands-svg-icons";
 
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from 'react-router-dom'
 
 import useFetch from "./useFetch";
 import { useState, useEffect } from "react";
@@ -17,23 +18,10 @@ const BandProfile = ({user,url}) => {
     const id = user;
     // const role = role;
     const [info, setInfo] = useState(null);
-    const [errMsg, setErrMsg] = useState('1234');
-    const [name, setName] = useState(null);
-    const [practice_time, setPractice_time] = useState(null);
-    const [instrument, setInstrument] = useState(null);
-    const [style, setStyle] = useState(null);
-    const [region, setRegion] = useState(null);
-    const [ig, setIg] = useState(null);
-    const [fb, setFb] = useState(null);
     const [photo, setPhoto] = useState(null);
-    const [contact_window, setContactWindow] = useState(null);
-    const [bio, setBio] = useState(null);
-
-   
 
     useEffect(()=>{
         if(info){
-            console.log(info.photo);
             fetchPhoto(info.photo);
         }
         else {
@@ -74,10 +62,7 @@ const BandProfile = ({user,url}) => {
         console.log(res.status)
         const imageBlob = await res.blob();
         const photoURL = URL.createObjectURL(imageBlob);
-        console.log(photoURL)
         setPhoto(photoURL);
-        console.log(photo)
-        
     }
 
     const styles = ['J-rock', 'Metal', 'J-pop', 'Lo-Fi', 'Jazz', 'Post Rock', 'Math Rock', 'Acoustic', 'Softcore', 'Pop-Punk', 'Country', "Others"];
@@ -109,7 +94,6 @@ const BandProfile = ({user,url}) => {
     };
     
     if(!info || !photo) return "loading";
-    console.log(info.region)
     return(
         <div className="container emp-profile">
                 <div class="row">
@@ -213,10 +197,23 @@ const BandProfile = ({user,url}) => {
                                                 <p  className="mt-1">{info.practice_time}</p>
                                             </div>
                                         </div>
+
+                                        <div class="row border mt-1 rounded">
+                                            <div class="col-md-6">
+                                                <label className="mt-1 mb-2">members</label>
+                                            </div>
+                                            <div class="col-md-6 mt-1 rounded">
+                                                {info.members.map((member_id, index) => (
+                                                    <Link to={"/profilepublic/" + member_id}><p className="mt-1" key={index}>{ member_id }</p></Link>
+                                                ))}
+              
+                                            </div>
+                                        </div>
                                     
                             </div>
 
                         </div>
+                        <NavLink to="/BandRequest"><i class="fas fa-home"></i>&nbsp;&nbsp;Request</NavLink>
                     </div>
                 </div>           
         </div>
