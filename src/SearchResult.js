@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export function SearchResultUser({ datas }) {
   const [filter, setFilter] = useState("1");
-
+  console.log(datas);
   const handleFilter = value => {
     setFilter(value);
     if(filter === 1){
@@ -47,7 +47,8 @@ export function SearchResultBand({ datas }) {
   return(
     <div className='search-result'>
       { datas.map(data => (
-        <SearchCard id={data.band_id} name={data.name} filename={data.photo}/>
+        <Link to={`/BandProfilePublic/${data.band_id}`}>
+        <SearchCard id={data.band_id} name={data.name} filename={data.photo}/></Link>
       )) }
     </div>
   );

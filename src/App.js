@@ -22,7 +22,7 @@ import BandProfile from './BandProfile';
 import ProfilePublic from './ProfilePublic';
 import About from './About';
 import BandProfilePublic from './BandProfilePublic';
-
+import BandRequest from './BandRequest';
 
 function App() {
   const url="http://18.209.225.128:5000/"
@@ -99,7 +99,10 @@ function App() {
                 <ProfilePublic url={url}></ProfilePublic>
               </Route>
               <Route path={"/BandProfilePublic/:id"}>
-                <BandProfilePublic url={url}></BandProfilePublic>
+                <BandProfilePublic  user={cookies.user} url={url}></BandProfilePublic>
+              </Route>
+              <Route path={"/BandRequest"}>
+                <BandRequest user={cookies.user} url={url}/>
               </Route>
               <Route path="/blogs/:id">
                 <BlogDetails />

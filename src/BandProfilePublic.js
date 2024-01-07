@@ -10,13 +10,14 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 import { useState, useEffect } from "react";
 import './profile.css'
+import { click } from "@testing-library/user-event/dist/click";
 
-const BandProfilePublic = ({url}) => {
+const BandProfilePublic = ({user , url}) => {
     const {id} = useParams();
     const [info, setInfo] = useState(null);
     const [photo, setPhoto] = useState(null);
     const [fetcherr, setFetcherr] = useState(false);
-
+    const [request_send, setReq] = useState(false);
     console.log(id);
 
     useEffect(()=>{
@@ -47,7 +48,23 @@ const BandProfilePublic = ({url}) => {
 
     }
     
-
+    
+    const click = async () =>{
+        setReq(true);
+        console.log(id)
+        let formData = new FormData();
+        formData.append('band_id',id);
+        formData.append('user_id',user);
+        fetch( url + 'requestBand', {
+            method: 'POST',
+            headers: { 'ngrok-skip-browser-warning': 'true' },
+            body: formData
+        }).then(
+            res => res.json()
+        ).then((data) => {
+            console.log(data);
+        })
+    }
     const fetchPhoto = async(filename) => {
         
         if(filename == "")
@@ -96,12 +113,11 @@ const BandProfilePublic = ({url}) => {
         "KMN": "金門縣", 
         "LNN": "連江縣"
     };
-    
     if(fetcherr) return "can't find the band ID";
     if(!info || !photo) return "loading...";
     console.log(info.region)
     return(
-        <div className="container emp-profile">
+        <div className="container emp-profile">     
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
@@ -110,6 +126,13 @@ const BandProfilePublic = ({url}) => {
                         </div>
                     </div>
                     <div class="col-md-6">
+                        {request_send ? (
+                             <p>Request Sended</p>
+                        ):(
+                            <button onClick={click}>Send Request</button> 
+                        )
+                        }
+                        
                         <div class="profile-head">
                                     <h1>
                                         {info.name}
@@ -128,7 +151,7 @@ const BandProfilePublic = ({url}) => {
                         <div class="overflow-wrap text-break" >
                             {info.bio}   
                         </div>
-                    </div>
+                    </div>          
                 </div>
                 <div class="row">
                     <div class="col-md-4">
