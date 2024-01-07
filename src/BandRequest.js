@@ -21,6 +21,9 @@ const BandRequest = ({user,url}) => {
             setSearchData(data);
             setIsPending(false);
         })
+        .catch(err => {
+            console.log(err);
+        })
     },[])
     const click = async (e) => {
         console.log(e)
@@ -35,11 +38,11 @@ const BandRequest = ({user,url}) => {
             res => res.json()
         ).then((data) => {
             console.log(data);
-            history.push('/BandRequest');
             window.location.reload(true);
         })
     }
     if(isPending) return "loading";
+    else if(datas.length==0) return (<h2>No requests</h2>)
     else 
         return(
         <div className='search-result'>
@@ -48,9 +51,12 @@ const BandRequest = ({user,url}) => {
           <div className="search-detail">
             { datas.map(data => (
                 <>
-                <Link to={`/ProfilePublic/${data.user_id}`}>
+                <Link to={`/ProfilePublic/${data.user_id}`} className="profile-link">
                 <SearchCard id={data.user_id} name={data.name} filename={data.photo}/></Link>
-                <button onClick={() => {click(data.user_id)}}>Accept</button></>
+                <div class="col-md-7">
+                <div className="login" style={{float: 'left', width: '77.5%',padding: '0px',textDecoration: ''}}>   
+                <button onClick={() => {click(data.user_id)}}>Accept</button></div>
+                </div></>
             )) }
           </div>
           
