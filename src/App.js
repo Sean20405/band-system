@@ -99,7 +99,7 @@ function App() {
                 <ProfilePublic url={url}></ProfilePublic>
               </Route>
               <Route path={"/BandProfilePublic/:id"}>
-                <BandProfilePublic url={url}>1</BandProfilePublic>
+                <BandProfilePublic url={url}></BandProfilePublic>
               </Route>
               <Route path="/blogs/:id">
                 <BlogDetails />
