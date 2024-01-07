@@ -1,15 +1,11 @@
 import Navbar from './Navbar';
 import Home from './Home';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Create from './Create';
-import BlogDetails from './BlogDetails'
 import NotFound from './NotFound';
 import Login from './Login';
 import Register from './Register';
 import { SearchMusician, SearchBand } from './Search';
 import { CookiesProvider, useCookies } from 'react-cookie';
-import Test from './test';
-import WelcomePage from './WelcomePage';
 import Profile from './Profile';
 import Logout from './Logout';
 import BandLogin from './BandLogin'
@@ -103,12 +99,6 @@ function App() {
               </Route>
               <Route path={"/BandRequest"}>
                 <BandRequest user={cookies.user} url={url}/>
-              </Route>
-              <Route path="/blogs/:id">
-                <BlogDetails />
-              </Route>
-              <Route path="/test">
-                <Test />
               </Route>
               <Route path="*">
                 <NotFound />
