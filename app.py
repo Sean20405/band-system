@@ -282,11 +282,11 @@ def user_info():
     fb = request.form.get('fb')
     email = request.form.get('email')
     
-    filename = ""
+    filename = "not Exist"
 
     # Upload Photo
-    if ('photo' in request.files):
-        
+    if 'photo' in request.files:
+        app.logger.info("in")
         photo = request.files.get('photo') 
         if photo and allow_file(photo.filename):
             filename = secure_filename(photo.filename)

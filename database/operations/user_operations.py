@@ -187,6 +187,23 @@ def updateUserStyles(user_id ,new_ids):
 
 
 def updateUser(user_id, name, bio, prefered_time, email, ig, fb, photo):
+    if photo == "not Exist":
+        stmt = db.update(
+            User
+        ).where(
+            User.id == user_id
+        ).values(
+            name = name,
+            bio = bio,
+            prefered_time = prefered_time,
+            email = email,
+            ig = ig,
+            fb = fb
+        )
+        db.session.execute(stmt)
+        db.session.commit()
+        return
+
     stmt = db.update(
         User
     ).where(
