@@ -56,6 +56,15 @@ def find_target():
 @app.route('/image/<file_name>', methods = ['GET'])
 def show_image(file_name):
     image_path = "static/uploads/" + file_name
+    if not os.path.isfile(os.getcwd() + '/' + image_path):
+        resp = jsonify({
+            "message": "photo doesn't exist",
+            "status": "Failed"
+        })
+        resp.status_code = 404
+        return resp
+
+
     part = file_name.split('.')
     type = part[-1]
     resp = send_file(image_path, mimetype='image/'+type)
@@ -229,7 +238,7 @@ def get_user():
             "message": " user_id doesn't exist",
             "status": "Failed"
         })
-        resp.status_code = 400
+        resp.status_code = 404
         return resp
     basic_info, instrument, region, style = get_user_by_id(user_id)
    
@@ -258,11 +267,6 @@ def get_user():
 
 @app.route('/user-edit', methods = ['PUT'])
 def user_info():
-    user_id = request.args.get('user_id')
-    if not userExist(user_id):
-        resp = make_response("id not found")
-        resp.status_code = 404
-        return resp
     if ('user_id' not in request.args):
         resp = jsonify({
             "message": "No user_id input in the request",
@@ -270,6 +274,14 @@ def user_info():
         })
         resp.status_code = 400
         return resp
+
+    user_id = request.args.get('user_id')
+
+    if not userExist(user_id):
+        resp = make_response("id not found")
+        resp.status_code = 404
+        return resp
+    
 
     # User ID
     instruments = request.form.getlist('instrument')
@@ -355,11 +367,23 @@ def add_band():
 
 @app.route('/band')
 def get_band():
+    if ('band_id' not in request.args):
+        resp = jsonify({
+            "message": "No 'band_id' input in the request",
+            "status": "Failed"
+        })
+        resp.status_code = 400
+        return resp
+
+
     band_id = request.args.get('band_id')
+
+
     if not bandExist(band_id):
         resp = make_response("id not found")
         resp.status_code = 404
         return resp
+    
     basic_info, members, region, style = get_band_by_id(band_id)
     name,practice_time,bio,photo,ig,fb,contact_window = basic_info.name, basic_info.practice_time,\
                                                basic_info.bio, basic_info.photo,\
@@ -383,67 +407,60 @@ def get_band():
     return resp
     
 
-@app.route('/band-edit', methods = ['GET', 'PUT'])
+@app.route('/band-edit', methods = ['PUT'])
 def band_info():
-    if (request.method == 'GET'):
-        band_id = request.args.get('band_id')
-        basic_info, members, region, style = get_band_by_id(band_id)
-        name,practice_time,bio,photo,ig,fb,contact_window = basic_info.name, basic_info.practice_time,\
-                                                basic_info.bio, basic_info.photo,\
-                                                basic_info.ig, basic_info.fb, basic_info.contact_window
 
-        resp = make_response( 
-            {
-                "name": name,
-                "practice_time": practice_time,
-                "bio": bio,
-                "photo": photo,
-                "ig": ig,
-                "fb": fb,
-                "contact_window": contact_window,
-                "members": members,
-                "region": region,
-                "style": style
-            }, 200)
-        resp.headers['Access-Control-Allow-Origin'] = '*'
+    if ('band_id' not in request.args):
+        resp = jsonify({
+            "message": "No 'band_id' input in the request",
+            "status": "Failed"
+        })
+        resp.status_code = 400
         return resp
-    
-    elif (request.method == 'PUT'):
-        band_id = request.args.get('band_id')
-        styles = request.form.getlist('style')
-        practice_time = request.form.get('practice_time')
-        bio = request.form.get('bio')
-        ig = request.form.get('ig')
-        fb = request.form.get('fb')
-        contact_window = request.form.get('contact_window')
-        members = request.form.getlist('members')
-        for user in members:
-            if not userExist(user):
-                return f"member {user} doesn't exist"
 
-        filename = ""
-        # Upload Photo
-        if ('photo' in request.files):
-            photo = request.files.get('photo') 
+    band_id = request.args.get('band_id')
 
-            
-            if photo and allow_file(photo.filename):
-                filename = secure_filename(photo.filename)
-                photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            else:
-                resp = jsonify({
-                    "message": "File type is not allowed",
-                    "status": "Failed"
-                })
-                return resp
+    if not bandExist(band_id):
+        resp = make_response("id not found")
+        resp.status_code = 404
+        return resp
+    styles = request.form.getlist('style')
+    regions = request.form.getlist('region')
+    name = request.form.get('name')
+    practice_time = request.form.get('practice_time')
+    bio = request.form.get('bio')
+    ig = request.form.get('ig')
+    fb = request.form.get('fb')
+    contact_window = request.form.get('contact_window')
+    members = request.form.getlist('members')
+    for user in members:
+        if not userExist(user):
+            return f"member {user} doesn't exist"
 
-        updateBandStyles(band_id, styles)
-        updateBandMembers(members, band_id)
-        updateBand(band_id, bio, practice_time, ig, fb, filename, contact_window)
+    filename = "not Exist"
+    # Upload Photo
+    if ('photo' in request.files):
+        photo = request.files.get('photo') 
 
-        db.session.commit()
         
-        return make_response("Success", 200)
+        if photo and allow_file(photo.filename):
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            resp = jsonify({
+                "message": "File type is not allowed",
+                "status": "Failed"
+            })
+            return resp
+
+    updateBandStyles(band_id, styles)
+    updateBandRegions(band_id, regions)
+    updateBandMembers(members, band_id)
+    updateBand(band_id, name, bio, practice_time, ig, fb, filename, contact_window)
+
+    db.session.commit()
+    
+    return make_response("Success", 200)
 
 
 if(__name__ == '__main__'):

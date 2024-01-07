@@ -59,8 +59,8 @@ var/
 *.egg
 
 # Images
-*.png
-*.jpg
-*.jpeg
+# *.png
+# *.jpg
+# *.jpeg
 
 *.pem

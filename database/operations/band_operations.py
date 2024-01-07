@@ -111,6 +111,36 @@ def updateBandStyles(band_id ,new_ids):
     db.session.commit()
     return
 
+def updateBandRegions(band_id ,new_ids):
+    if len(new_ids) == 0:
+        return
+    cur_ids = get_region_by_band(band_id)
+
+    for i in cur_ids:
+        if i not in new_ids:
+            del_stmt = db.delete(
+                Band_Region
+            ).where(
+                Band_Region.c.band_id == band_id
+            ).where(
+                Band_Region.c.region_id == i
+            )
+            db.session.execute(del_stmt)
+
+    for i in new_ids:
+        if i not in cur_ids:
+            ins_stmt = db.insert(
+                Band_Region
+            ).values(
+                band_id = band_id,
+                region_id = i
+            )
+            db.session.execute(ins_stmt)
+    db.session.commit()
+    return
+
+
+
 def updateBandMembers(new_ids, band_id):
     if len(new_ids) == 0:
         return
@@ -140,12 +170,30 @@ def updateBandMembers(new_ids, band_id):
     db.session.commit()
     return
 
-def updateBand(band_id, bio, practice_time, ig, fb, photo, contact_window):
+def updateBand(band_id, name, bio, practice_time, ig, fb, photo, contact_window):
+    if photo == "not Exist":
+        stmt = db.update(
+        Band
+        ).where(
+            Band.id == band_id
+        ).values(
+            name = name,
+            bio = bio,
+            practice_time = practice_time,
+            ig = ig,
+            fb = fb,
+            contact_window = contact_window
+        )
+        db.session.execute(stmt)
+        db.session.commit()
+        return
+
     stmt = db.update(
         Band
     ).where(
         Band.id == band_id
     ).values(
+        name = name,
         bio = bio,
         practice_time = practice_time,
         ig = ig,
