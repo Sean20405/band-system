@@ -94,6 +94,20 @@ def get_member_request(band_id):
 
     return db.session.scalars(query).all()
 
+def getRequestUser(band_id):
+
+    request_user = db.select(
+        User.id.label('user_id'),
+        User.name.label('name'),
+        User.photo.label('photo'),
+    ).where(
+        User_Band.band_id == band_id,
+        User_Band.status == 0
+    )
+
+    result = db.session.execute(request_user).all()
+    return [row._asdict() for row in result]
+
 def updateBandStyles(band_id ,new_ids):
     if len(new_ids) == 0:
         return
@@ -293,21 +307,7 @@ def queryCompatibleBand(regions, styles):
     result = db.session.execute(subq).all()
     return [row._asdict() for row in result]
 
-def queryCompatibleMusician(band_id):
 
-    request_user = db.select(
-        User.id.label('user_id'),
-        User.name.label('name'),
-        User.photo.label('photo'),
-    ).where(
-        User_Band.band_id == band_id,
-        User_Band.status == 0
-    )
-
-    
-
-    result = db.session.execute(request_user).all()
-    return [row._asdict() for row in result]
 
  
                             

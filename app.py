@@ -357,7 +357,7 @@ def get_request_user():
         resp.headers.add('Access-Control-Allow-Origin', '*')
         resp.status_code = 400
         return resp
-    resp = jsonify(getReguestUser(band_id))
+    resp = jsonify(getRequestUser(band_id))
     resp.headers.add('Access-Control-Allow-Origin', '*')
     resp.status_code = 200
     return resp
