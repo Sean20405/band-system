@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/band-system/static/css/main.d00fa16d.css",
+    "main.js": "/band-system/static/js/main.1badc818.js",
+    "static/media/fa-solid-900.svg": "/band-system/static/media/fa-solid-900.45690f4345fd0e303e35.svg",
+    "static/media/fa-brands-400.svg": "/band-system/static/media/fa-brands-400.675f6734fc707ee98601.svg",
+    "static/media/home_background2.jpg": "/band-system/static/media/home_background2.3333b73018f40acd59ab.jpg",
+    "static/media/fa-solid-900.eot": "/band-system/static/media/fa-solid-900.9bbb245e67a133f6e486.eot",
+    "static/media/fa-solid-900.ttf": "/band-system/static/media/fa-solid-900.be9ee23c0c6390141475.ttf",
+    "static/media/fa-regular-400.svg": "/band-system/static/media/fa-regular-400.0772874aec68f8e76656.svg",
+    "static/media/fa-brands-400.eot": "/band-system/static/media/fa-brands-400.23f19bb08961f37aaf69.eot",
+    "static/media/fa-brands-400.ttf": "/band-system/static/media/fa-brands-400.527940b104eb2ea366c8.ttf",
+    "static/media/Band_System.png": "/band-system/static/media/Band_System.6d61131c8a0a346f1956.png",
+    "static/media/fa-solid-900.woff": "/band-system/static/media/fa-solid-900.eeccf4f66002c6f2ba24.woff",
+    "static/media/fa-brands-400.woff": "/band-system/static/media/fa-brands-400.2285773e6b4b172f07d9.woff",
+    "static/media/fa-solid-900.woff2": "/band-system/static/media/fa-solid-900.1551f4f60c37af51121f.woff2",
+    "static/media/fa-brands-400.woff2": "/band-system/static/media/fa-brands-400.d878b0a6a1144760244f.woff2",
+    "static/media/default.jpg": "/band-system/static/media/default.9dc0ef2f1cf84545a3a1.jpg",
+    "static/media/fa-regular-400.eot": "/band-system/static/media/fa-regular-400.77206a6bb316fa0aded5.eot",
+    "static/media/fa-regular-400.ttf": "/band-system/static/media/fa-regular-400.491974d108fe4002b2aa.ttf",
+    "static/media/fa-regular-400.woff": "/band-system/static/media/fa-regular-400.bb58e57c48a3e911f15f.woff",
+    "static/media/fa-regular-400.woff2": "/band-system/static/media/fa-regular-400.7a3337626410ca2f4071.woff2",
+    "index.html": "/band-system/index.html",
+    "main.d00fa16d.css.map": "/band-system/static/css/main.d00fa16d.css.map",
+    "main.1badc818.js.map": "/band-system/static/js/main.1badc818.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d00fa16d.css",
+    "static/js/main.1badc818.js"
+  ]
+}
