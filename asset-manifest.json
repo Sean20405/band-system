@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/band-system/static/css/main.d00fa16d.css",
-    "main.js": "/band-system/static/js/main.6b24ab11.js",
+    "main.css": "/band-system/static/css/main.6066cd95.css",
+    "main.js": "/band-system/static/js/main.7c0c9b99.js",
     "static/media/fa-solid-900.svg": "/band-system/static/media/fa-solid-900.45690f4345fd0e303e35.svg",
     "static/media/fa-brands-400.svg": "/band-system/static/media/fa-brands-400.675f6734fc707ee98601.svg",
     "static/media/home_background2.jpg": "/band-system/static/media/home_background2.3333b73018f40acd59ab.jpg",
@@ -21,11 +21,11 @@
     "static/media/fa-regular-400.woff": "/band-system/static/media/fa-regular-400.bb58e57c48a3e911f15f.woff",
     "static/media/fa-regular-400.woff2": "/band-system/static/media/fa-regular-400.7a3337626410ca2f4071.woff2",
     "index.html": "/band-system/index.html",
-    "main.d00fa16d.css.map": "/band-system/static/css/main.d00fa16d.css.map",
-    "main.6b24ab11.js.map": "/band-system/static/js/main.6b24ab11.js.map"
+    "main.6066cd95.css.map": "/band-system/static/css/main.6066cd95.css.map",
+    "main.7c0c9b99.js.map": "/band-system/static/js/main.7c0c9b99.js.map"
   },
   "entrypoints": [
-    "static/css/main.d00fa16d.css",
-    "static/js/main.6b24ab11.js"
+    "static/css/main.6066cd95.css",
+    "static/js/main.7c0c9b99.js"
   ]
 }
